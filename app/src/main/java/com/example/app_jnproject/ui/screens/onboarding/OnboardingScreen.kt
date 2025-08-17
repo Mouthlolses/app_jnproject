@@ -20,6 +20,8 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -38,6 +40,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.app_jnproject.R
+import com.example.app_jnproject.ui.components.ButtonAllCustomized
 import com.example.app_jnproject.ui.components.OnBoardingButton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.coroutineScope
@@ -109,7 +112,7 @@ fun OnBoardingScreen(
                         .size(if (isSelected) 12.dp else 8.dp)
                         .background(
                             if (isSelected) Color.Black else Color.Gray,
-                            shape = androidx.compose.foundation.shape.CircleShape
+                            shape = CircleShape
                         )
                 )
             }
@@ -120,9 +123,18 @@ fun OnBoardingScreen(
                 .padding(20.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            OnBoardingButton(
+            ButtonAllCustomized(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(56.dp)
+                    .padding(start = 14.dp, end = 14.dp),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Black,
+                    contentColor = Color.White
+                ),
+                elevation = ButtonDefaults.buttonElevation(4.dp),
                 onClick = { navController.navigate("homeScreen") },
-                modifier = Modifier.size(60.dp)
+                text = "Começar"
             )
         }
     }
@@ -313,6 +325,7 @@ fun OnBoardingScreeLayout3() {
         }
     }
 }
+
 
 @Preview(
     name = "api31",
