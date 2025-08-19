@@ -49,6 +49,7 @@ dependencies {
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.foundation)
+    implementation(libs.animation)
     ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.animation)
     implementation(libs.coil.compose)
