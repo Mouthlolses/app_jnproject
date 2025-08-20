@@ -1,5 +1,7 @@
 package com.example.app_jnproject.ui.screens.onboarding
 
+import androidx.annotation.DrawableRes
+import androidx.annotation.StringRes
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
@@ -31,6 +33,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
@@ -54,8 +57,8 @@ fun OnBoardingScreen(
     val pagerState = rememberPagerState(pageCount = { 3 })
     val scope = rememberCoroutineScope()
 
-    LaunchedEffect(pagerState) {
-        while (true) {
+    LaunchedEffect(pagerState.isScrollInProgress) {
+        if (!pagerState.isScrollInProgress) {
             delay(4000)
 
             val nextPage = (pagerState.currentPage + 1) % pagerState.pageCount
@@ -88,9 +91,26 @@ fun OnBoardingScreen(
                 contentAlignment = Alignment.Center
             ) {
                 when (pager) {
-                    0 -> OnBoardingScreeLayout()
-                    1 -> OnBoardingScreeLayout2()
-                    2 -> OnBoardingScreeLayout3()
+                    0 -> OnBoardingScreeLayout(
+                        image = R.drawable.background_person,
+                        image2 = R.drawable.person_2,
+                        title = R.string.title,
+                        subTitle = R.string.subTitle
+                    )
+
+                    1 -> OnBoardingScreeLayout(
+                        image = R.drawable.background_yellow,
+                        image2 = R.drawable.person_3,
+                        title = R.string.title,
+                        subTitle = R.string.subTitle
+                    )
+
+                    2 -> OnBoardingScreeLayout(
+                        image = R.drawable.background_claro,
+                        image2 = R.drawable.person_11,
+                        title = R.string.title,
+                        subTitle = R.string.subTitle
+                    )
                 }
             }
         }
@@ -114,11 +134,10 @@ fun OnBoardingScreen(
                 )
             }
         }
-        Row(
+        Box(
             modifier = Modifier
-                .align(Alignment.BottomEnd)
+                .align(Alignment.BottomCenter)
                 .padding(20.dp),
-            verticalAlignment = Alignment.CenterVertically
         ) {
             ButtonAllCustomized(
                 modifier = Modifier
@@ -131,7 +150,7 @@ fun OnBoardingScreen(
                 ),
                 elevation = ButtonDefaults.buttonElevation(4.dp),
                 onClick = { navController.navigate("homeScreen") },
-                text = "Começar"
+                text = stringResource(R.string.start)
             )
         }
     }
@@ -139,7 +158,12 @@ fun OnBoardingScreen(
 
 
 @Composable
-fun OnBoardingScreeLayout() {
+fun OnBoardingScreeLayout(
+    @DrawableRes image: Int,
+    @DrawableRes image2: Int,
+    @StringRes title: Int,
+    @StringRes subTitle: Int
+) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -147,23 +171,23 @@ fun OnBoardingScreeLayout() {
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(bottom = 80.dp), // deixa espaço pro botão
+                .padding(bottom = 80.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(
                 contentAlignment = Alignment.Center
             ) {
                 Image(
-                    painter = painterResource(R.drawable.background_person),
-                    contentDescription = null,
+                    painter = painterResource(image),
+                    contentDescription = stringResource(R.string.backgroundImageOnbDescription),
                     modifier = Modifier
                         .width(300.dp)
                         .height(300.dp),
                     contentScale = ContentScale.Crop
                 )
                 Image(
-                    painter = painterResource(R.drawable.person_2),
-                    contentDescription = null,
+                    painter = painterResource(image2),
+                    contentDescription = stringResource(R.string.imageOnbDescription),
                     modifier = Modifier
                         .padding(top = 100.dp)
                         .width(200.dp)
@@ -179,139 +203,14 @@ fun OnBoardingScreeLayout() {
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Contra wireframe kit",
+                    text = stringResource(title),
                     fontSize = 26.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "Wireframe is still important for ideation. " +
-                            "It will help you to quickly test idea.",
-                    modifier = Modifier
-                        .padding(16.dp),
-                    fontSize = 24.sp,
-                    color = Color.Black,
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
-    }
-}
-
-
-@Composable
-fun OnBoardingScreeLayout2() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(bottom = 80.dp), // deixa espaço pro botão
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Box(
-                contentAlignment = Alignment.Center
-            ) {
-                Image(
-                    painter = painterResource(R.drawable.background_yellow),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .width(300.dp)
-                        .height(300.dp),
-                    contentScale = ContentScale.Crop
-                )
-                Image(
-                    painter = painterResource(R.drawable.person_3),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .padding(top = 100.dp)
-                        .width(200.dp)
-                        .height(300.dp),
-                    contentScale = ContentScale.Crop
-                )
-            }
-
-            Spacer(modifier = Modifier.height(50.dp))
-
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "Contra wireframe kit",
-                    fontSize = 26.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = "Wireframe is still important for ideation. " +
-                            "It will help you to quickly test idea.",
-                    modifier = Modifier
-                        .padding(16.dp),
-                    fontSize = 24.sp,
-                    color = Color.Black,
-                    textAlign = TextAlign.Center
-                )
-            }
-        }
-    }
-}
-
-
-@Composable
-fun OnBoardingScreeLayout3() {
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(bottom = 80.dp), // deixa espaço pro botão
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Box(
-                contentAlignment = Alignment.Center
-            ) {
-                Image(
-                    painter = painterResource(R.drawable.background_claro),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .width(300.dp)
-                        .height(300.dp),
-                    contentScale = ContentScale.Crop
-                )
-                Image(
-                    painter = painterResource(R.drawable.person_11),
-                    contentDescription = null,
-                    modifier = Modifier
-                        .padding(top = 100.dp)
-                        .width(200.dp)
-                        .height(300.dp),
-                    contentScale = ContentScale.Crop
-                )
-            }
-
-            Spacer(modifier = Modifier.height(50.dp))
-
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                Text(
-                    text = "Contra wireframe kit",
-                    fontSize = 26.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = "Wireframe is still important for ideation. " +
-                            "It will help you to quickly test idea.",
+                    text = stringResource(subTitle),
                     modifier = Modifier
                         .padding(16.dp),
                     fontSize = 24.sp,

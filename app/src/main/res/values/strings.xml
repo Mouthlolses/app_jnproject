@@ -1,7 +1,17 @@
 <resources>
     <string name="app_name">App_jnproject</string>
+    <string name="start">Começar</string>
     <string name="news">Agora</string>
     <string name="home">Início</string>
     <string name="search">Buscar</string>
     <string name="favorites">Favoritos</string>
+    <string name="title">Contra wireframe kit</string>
+    <string name="subTitle">Wireframe is still important for ideation.
+        It will help you to quickly test idea.</string>
+
+
+
+    <!--imageDescriptions-->
+    <string name="backgroundImageOnbDescription">image_backgroundOnboarding</string>
+    <string name="imageOnbDescription">image_forOnboarding</string>
 </resources>
