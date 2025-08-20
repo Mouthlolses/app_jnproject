@@ -12,9 +12,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -25,13 +25,16 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.app_jnproject.ui.screens.home.NewsScreenLayout
+import com.example.app_jnproject.R
+import com.example.app_jnproject.ui.screens.home.HomeScreenLayout
+import com.example.app_jnproject.ui.screens.newscreen.NewsScreenLayout
 
 data class BottomNavItem(
     val route: String,
@@ -47,19 +50,19 @@ fun NavigationGraph(navController: NavHostController, modifier: Modifier = Modif
         modifier = modifier
     ) {
         composable("news") { NewsScreenLayout() }
-        composable("home") { }
-        composable("profile") { }
-        composable("settings") { }
+        composable("home") { HomeScreenLayout() }
+        composable("search") { }
+        composable("favorites") { }
     }
 }
 
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
     val items = listOf(
-        BottomNavItem("news", "News", Icons.Default.Search),
-        BottomNavItem("home", "Home", Icons.Default.Home),
-        BottomNavItem("profile", "Perfil", Icons.Default.Person),
-        BottomNavItem("settings", "Config", Icons.Default.Settings)
+        BottomNavItem("news", stringResource(R.string.news), Icons.Default.Notifications),
+        BottomNavItem("home", stringResource(R.string.home), Icons.Default.Home),
+        BottomNavItem("search", stringResource(R.string.search), Icons.Default.Search),
+        BottomNavItem("favorites", stringResource(R.string.favorites), Icons.Default.Star)
     )
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()

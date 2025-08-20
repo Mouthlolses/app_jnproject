@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">App_jnproject</string>
+    <string name="news">Agora</string>
+    <string name="home">Início</string>
+    <string name="search">Buscar</string>
+    <string name="favorites">Favoritos</string>
 </resources>

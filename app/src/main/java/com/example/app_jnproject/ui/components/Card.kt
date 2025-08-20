@@ -58,7 +58,6 @@ fun EventCard(
         Column(
             modifier = Modifier.fillMaxWidth()
         ) {
-            // PARTE SUPERIOR - IMAGEM OU FUNDO COLORIDO
             Box(
                 modifier = Modifier
                     .fillMaxWidth()

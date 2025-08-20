@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.foundation)
     implementation(libs.animation)
+    implementation(libs.material3)
     ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.animation)
     implementation(libs.coil.compose)
