@@ -41,9 +41,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.app_jnproject.R
 import com.example.app_jnproject.ui.components.ButtonAllCustomized
-import com.example.app_jnproject.ui.components.OnBoardingButton
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
