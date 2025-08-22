@@ -2,6 +2,7 @@ package com.example.app_jnproject.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -43,12 +44,18 @@ fun EventCard(
     location: String = "Milkyway, Mars",
     date: String = "12 March, 2020",
     isFavorite: Boolean = false,
-    onFavoriteClick: () -> Unit = {}
+    onFavoriteClick: () -> Unit = {},
+    onCardClick: () -> Unit = {},
+    cardEnable: Boolean = true
 ) {
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .padding(12.dp),
+            .padding(12.dp)
+            .clickable(
+                enabled = cardEnable,
+                onClick = onCardClick
+            ),
         shape = RoundedCornerShape(16.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
         colors = CardDefaults.cardColors(

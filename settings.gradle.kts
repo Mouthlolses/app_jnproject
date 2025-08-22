@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "App_jnproject"
 include(":app")
+include(":core:network")

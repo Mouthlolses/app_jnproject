@@ -33,8 +33,8 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
-    kotlinOptions {
-        jvmTarget = "11"
+    kotlin {
+        jvmToolchain(11)
     }
     buildFeatures {
         compose = true
@@ -46,10 +46,13 @@ android {
 
 dependencies {
 
+
+    //módulo core-network
+    implementation(project(":core:network"))
+
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.foundation)
-    implementation(libs.animation)
     implementation(libs.material3)
     ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.animation)

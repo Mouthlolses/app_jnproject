@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -61,7 +62,7 @@ fun HomeScreenLayout() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp, start = 16.dp)
+                .padding(start = 12.dp)
         ) {
             Text(
                 text = "Bem Vindo",
@@ -73,15 +74,22 @@ fun HomeScreenLayout() {
                 color = Color.Black
             )
         }
+        Spacer(modifier = Modifier.padding(12.dp))
         LazyColumn(
             modifier = Modifier
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .fillMaxSize(),
             contentPadding = PaddingValues(),
             verticalArrangement = Arrangement.spacedBy(12.dp) // Espaçamento entre os cards
         ) {
             item {
+                Text(
+                    text = "Destaques",
+                    modifier = Modifier
+                        .padding(start = 16.dp)
+                )
                 LazyRow() {
-                    items(5){
+                    items(5) {
                         EventCard(
                             modifier = Modifier
                                 .height(180.dp)
@@ -89,7 +97,7 @@ fun HomeScreenLayout() {
                     }
                 }
             }
-            items(5) {
+            items(1) {
                 EventCard(
                     modifier = Modifier
                         .padding(16.dp)
@@ -97,13 +105,6 @@ fun HomeScreenLayout() {
             }
         }
     }
-}
-
-
-@Preview(name = "preview_geral")
-@Composable
-fun HomeScreenPreview() {
-    HomeScreen()
 }
 
 @Preview(
