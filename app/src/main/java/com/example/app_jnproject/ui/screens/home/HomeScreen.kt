@@ -14,10 +14,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -25,6 +28,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.rememberNavController
 import com.example.app_jnproject.navigation.BottomNavigationBar
 import com.example.app_jnproject.navigation.NavigationGraph
@@ -34,6 +38,8 @@ import com.example.app_jnproject.ui.components.EventCard
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HomeScreen() {
+
+
     val navController = rememberNavController()
 
     Scaffold(
@@ -52,7 +58,10 @@ fun HomeScreen() {
 
 
 @Composable
-fun HomeScreenLayout() {
+fun HomeScreenLayout(viewModel: HomeViewModel = viewModel()) {
+
+    val cityLocation by viewModel.cityLocation.collectAsState()
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -89,18 +98,33 @@ fun HomeScreenLayout() {
                         .padding(start = 16.dp)
                 )
                 LazyRow() {
-                    items(5) {
+                    items(cityLocation) { city ->
                         EventCard(
                             modifier = Modifier
-                                .height(180.dp)
+                                .height(180.dp),
+                            title = city.name,
+                            location = city.location,
+                            date = city.date,
+                            isFavorite = city.isFavorite,
+                            onFavoriteClick = {},
+                            onCardClick = {},
+                            cardEnable = true
                         )
+
                     }
                 }
             }
-            items(1) {
+            items(cityLocation) { city ->
                 EventCard(
                     modifier = Modifier
-                        .padding(16.dp)
+                        .padding(16.dp),
+                    title = city.name,
+                    location = city.location,
+                    date = city.date,
+                    isFavorite = city.isFavorite,
+                    onFavoriteClick = {},
+                    onCardClick = {},
+                    cardEnable = true
                 )
             }
         }

@@ -1,11 +1,30 @@
 package com.example.app_jnproject.ui.screens.home
 
+import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.ViewModel
+import com.example.app_jnproject.R
+import com.example.app_jnproject.data.CityLocation
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
-class HomeViewModel: ViewModel() {
+class HomeViewModel : ViewModel() {
 
+    private val _cityLocation = MutableStateFlow<List<CityLocation>>(emptyList())
+    val cityLocation: StateFlow<List<CityLocation>> = _cityLocation
+
+    init {
+        loadCards()
+    }
+
+    private fun loadCards() {
+        _cityLocation.value = listOf(
+            CityLocation(
+                id = 1,
+                name = "Praça Padre Cicero",
+                location = "Avenida Padre Cicero",
+                date = "20/05/2025",
+                img = R.drawable.person_7
+            )
+        )
+    }
 }
-
-data class HomeUiState(
-    val name: String
-)

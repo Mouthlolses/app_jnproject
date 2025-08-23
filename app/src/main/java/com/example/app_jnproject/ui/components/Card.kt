@@ -36,17 +36,16 @@ import androidx.compose.ui.unit.dp
 import com.example.app_jnproject.R
 
 
-@Preview
 @Composable
 fun EventCard(
-    modifier: Modifier = Modifier,
-    title: String = "DJ Night Hawa",
-    location: String = "Milkyway, Mars",
-    date: String = "12 March, 2020",
-    isFavorite: Boolean = false,
-    onFavoriteClick: () -> Unit = {},
-    onCardClick: () -> Unit = {},
-    cardEnable: Boolean = true
+    modifier: Modifier,
+    title: String,
+    location: String,
+    date: String,
+    isFavorite: Boolean,
+    onFavoriteClick: () -> Unit,
+    onCardClick: () -> Unit,
+    cardEnable: Boolean
 ) {
     Card(
         modifier = modifier
@@ -153,4 +152,19 @@ fun EventCard(
             }
         }
     }
+}
+
+@Preview
+@Composable
+fun CardPreview() {
+    EventCard(
+        modifier = Modifier,
+        title = "DJ Night Hawa",
+        location = "Milkyway, Mars",
+        date = "12 March, 2020",
+        isFavorite = false,
+        onFavoriteClick = {},
+        onCardClick = {},
+        cardEnable = true,
+    )
 }
