@@ -1,6 +1,7 @@
 package com.example.app_jnproject.ui.screens.home
 
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -86,6 +87,7 @@ fun HomeScreenLayout(viewModel: HomeViewModel = viewModel()) {
         Spacer(modifier = Modifier.padding(12.dp))
         LazyColumn(
             modifier = Modifier
+                .background(Color.LightGray)
                 .fillMaxWidth()
                 .fillMaxSize(),
             contentPadding = PaddingValues(),
@@ -102,6 +104,7 @@ fun HomeScreenLayout(viewModel: HomeViewModel = viewModel()) {
                         EventCard(
                             modifier = Modifier
                                 .height(180.dp),
+                            img = city.img,
                             title = city.name,
                             location = city.location,
                             date = city.date,
@@ -118,6 +121,7 @@ fun HomeScreenLayout(viewModel: HomeViewModel = viewModel()) {
                 EventCard(
                     modifier = Modifier
                         .padding(16.dp),
+                    img = city.img,
                     title = city.name,
                     location = city.location,
                     date = city.date,

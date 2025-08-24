@@ -1,6 +1,5 @@
 package com.example.app_jnproject.ui.screens.home
 
-import androidx.compose.ui.res.painterResource
 import androidx.lifecycle.ViewModel
 import com.example.app_jnproject.R
 import com.example.app_jnproject.data.CityLocation
@@ -24,6 +23,14 @@ class HomeViewModel : ViewModel() {
                 location = "Avenida Padre Cicero",
                 date = "20/05/2025",
                 img = R.drawable.person_7
+            ),
+
+            CityLocation(
+                id = 2,
+                name = "Horto",
+                location = "Horto",
+                date = "20/05/2025",
+                img = R.drawable.person_2
             )
         )
     }

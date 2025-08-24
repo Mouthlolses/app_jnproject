@@ -1,5 +1,6 @@
 package com.example.app_jnproject.ui.components
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -39,6 +40,7 @@ import com.example.app_jnproject.R
 @Composable
 fun EventCard(
     modifier: Modifier,
+    @DrawableRes img: Int,
     title: String,
     location: String,
     date: String,
@@ -68,11 +70,11 @@ fun EventCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(140.dp)
-                    .background(Color(0xFFFF5A36)), // Cor laranja igual ao exemplo
+                    .background(Color(0xFFFF5A36)),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.person_2), // coloque sua imagem aqui
+                    painter = painterResource(img),
                     contentDescription = "Event image",
                     contentScale = ContentScale.Fit,
                     modifier = Modifier.size(120.dp)
@@ -159,6 +161,7 @@ fun EventCard(
 fun CardPreview() {
     EventCard(
         modifier = Modifier,
+        img = R.drawable.person_2,
         title = "DJ Night Hawa",
         location = "Milkyway, Mars",
         date = "12 March, 2020",
