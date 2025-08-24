@@ -22,7 +22,8 @@ class HomeViewModel : ViewModel() {
                 name = "Praça Padre Cicero",
                 location = "Avenida Padre Cicero",
                 date = "20/05/2025",
-                img = R.drawable.person_7
+                img = R.drawable.person_7,
+                isFavorite = false
             ),
 
             CityLocation(
@@ -30,7 +31,8 @@ class HomeViewModel : ViewModel() {
                 name = "Horto",
                 location = "Horto",
                 date = "20/05/2025",
-                img = R.drawable.person_2
+                img = R.drawable.person_2,
+                isFavorite = false
             )
         )
     }
