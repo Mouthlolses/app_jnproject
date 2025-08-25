@@ -103,7 +103,7 @@ fun HomeScreenLayout(viewModel: HomeViewModel = viewModel()) {
                     items(cityLocation) { city ->
                         EventCard(
                             modifier = Modifier
-                                .height(180.dp),
+                                .height(230.dp),
                             img = city.img,
                             title = city.name,
                             location = city.location,
@@ -120,7 +120,7 @@ fun HomeScreenLayout(viewModel: HomeViewModel = viewModel()) {
             items(cityLocation) { city ->
                 EventCard(
                     modifier = Modifier
-                        .padding(16.dp),
+                        .padding(4.dp),
                     img = city.img,
                     title = city.name,
                     location = city.location,
