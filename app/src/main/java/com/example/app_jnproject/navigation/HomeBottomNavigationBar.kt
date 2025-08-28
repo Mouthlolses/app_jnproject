@@ -105,7 +105,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                         modifier = Modifier
                             .size(45.dp)
                             .background(
-                                color = Color(0xFFFFF2CC),
+                                color = Color(0xFFF6E2B0),
                                 shape = MaterialTheme.shapes.large
                             ),
                         contentAlignment = Alignment.Center
