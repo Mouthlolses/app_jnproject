@@ -20,6 +20,7 @@ data class Document(
 @Serializable
 data class EventFields(
     val date: FirestoreString,
+    val favorite: FirestoreBoolean,
     val img: FirestoreString,
     val location: FirestoreString,
     val title: FirestoreString
@@ -28,4 +29,9 @@ data class EventFields(
 @Serializable
 data class FirestoreString(
     val stringValue: String = ""
+)
+
+@Serializable
+data class FirestoreBoolean(
+    val booleanValue: Boolean
 )
