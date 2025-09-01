@@ -1,5 +1,6 @@
 package com.example.app_jnproject.ui.screens.newscreen
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +20,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Star
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -35,6 +38,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
@@ -61,7 +66,34 @@ fun NewsScreenLayout(
         }
 
         uiState.error != null -> {
-            Text("Erro: ${uiState.error}")
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Image(
+                        painter = painterResource(com.example.network.R.drawable.mascot_sf),
+                        contentDescription = "mascot"
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                        uiState.error!!,
+                        color = Color.Black,
+                        textAlign = TextAlign.Center
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Button(
+                        onClick = { viewModel.fetchEvents() },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(0xFFFFA500) // cor de destaque
+                        )
+                    ) {
+                        Text(text = "Recarregar", color = Color.White)
+                    }
+                }
+            }
         }
 
         else -> {
@@ -78,7 +110,7 @@ fun NewsScreenLayout(
                         Column(Modifier.padding(16.dp)) {
                             AsyncImage(
                                 model = doc.fields.img.stringValue,
-                                contentDescription = "image_praça",
+                                contentDescription = "image_praca",
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .height(200.dp)

@@ -20,18 +20,19 @@ class NewsViewModel(
 
     fun fetchEvents() {
         viewModelScope.launch {
-            _events.value = _events.value.copy(isLoading = true)
+            _events.value = _events.value.copy(isLoading = true, error = null)
             try {
-                repository.getEvents().collectLatest { eventList ->
-                    _events.value = _events.value.copy(
+                repository.getEvents().collectLatest { resultList ->
+                    _events.value = FetchEventsUiState(
                         isLoading = false,
-                        events = eventList
+                        events = resultList,
+                        error = null
                     )
                 }
             } catch (e: Exception) {
                 _events.value = _events.value.copy(
                     isLoading = false,
-                    error = e.message
+                    error = "Erro inesperado! Vamos tentar de novo?"
                 )
             }
         }
