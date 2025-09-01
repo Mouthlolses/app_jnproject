@@ -43,6 +43,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
+import com.example.network.R
 
 
 @Composable
@@ -74,7 +75,7 @@ fun NewsScreenLayout(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
-                        painter = painterResource(com.example.network.R.drawable.mascot_sf),
+                        painter = painterResource(com.example.app_jnproject.R.drawable.mascot_sf),
                         contentDescription = "mascot"
                     )
                     Spacer(modifier = Modifier.height(16.dp))
@@ -105,18 +106,27 @@ fun NewsScreenLayout(
                         ),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(8.dp)
+                            .padding(8.dp),
+                        shape = RoundedCornerShape(16.dp),
+                        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
                     ) {
                         Column(Modifier.padding(16.dp)) {
-                            AsyncImage(
-                                model = doc.fields.img.stringValue,
-                                contentDescription = "image_praca",
+                            Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(200.dp)
-                                    .clip(RoundedCornerShape(16.dp)),
-                                contentScale = ContentScale.Crop
-                            )
+                                    .height(140.dp),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                AsyncImage(
+                                    model = doc.fields.img.stringValue,
+                                    contentDescription = "image_praca",
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .height(200.dp)
+                                        .clip(RoundedCornerShape(16.dp)),
+                                    contentScale = ContentScale.Crop
+                                )
+                            }
                             Spacer(modifier = Modifier.height(8.dp))
                             HorizontalDivider(
                                 color = Color.Black

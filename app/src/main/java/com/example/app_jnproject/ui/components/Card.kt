@@ -75,12 +75,11 @@ fun EventCard(
             ) {
                 Image(
                     painter = painterResource(img),
-                    contentDescription = "Event image",
+                    contentDescription = "Eventimage",
                     contentScale = ContentScale.Fit,
                     modifier = Modifier.size(120.dp)
                 )
             }
-
             // PARTE INFERIOR - CONTEÚDO
             Row(
                 modifier = Modifier
@@ -133,7 +132,6 @@ fun EventCard(
                         )
                     }
                 }
-
                 // BOTÃO DE FAVORITO
                 IconButton(
                     onClick = onFavoriteClick,
