@@ -34,6 +34,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
@@ -101,15 +102,15 @@ fun OnBoardingScreen(
                     1 -> OnBoardingScreeLayout(
                         image = R.drawable.background_yellow,
                         image2 = R.drawable.person_3,
-                        title = R.string.title,
-                        subTitle = R.string.subTitle
+                        title = R.string.title2,
+                        subTitle = R.string.subTitle2
                     )
 
                     2 -> OnBoardingScreeLayout(
                         image = R.drawable.background_claro,
                         image2 = R.drawable.person_11,
-                        title = R.string.title,
-                        subTitle = R.string.subTitle
+                        title = R.string.title3,
+                        subTitle = R.string.subTitle3
                     )
                 }
             }
@@ -204,6 +205,9 @@ fun OnBoardingScreeLayout(
             ) {
                 Text(
                     text = stringResource(title),
+                    modifier = Modifier
+                        .padding(8.dp),
+                    textAlign = TextAlign.Center,
                     fontSize = 26.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
@@ -212,10 +216,11 @@ fun OnBoardingScreeLayout(
                 Text(
                     text = stringResource(subTitle),
                     modifier = Modifier
-                        .padding(16.dp),
+                        .padding(start = 16.dp, end = 16.dp, top = 16.dp),
+                    textAlign = TextAlign.Center,
                     fontSize = 24.sp,
+                    fontStyle = FontStyle.Normal,
                     color = Color.Black,
-                    textAlign = TextAlign.Center
                 )
             }
         }

@@ -5,9 +5,12 @@
     <string name="home">Início</string>
     <string name="search">Buscar</string>
     <string name="favorites">Favoritos</string>
-    <string name="title">Contra wireframe kit</string>
-    <string name="subTitle">Wireframe is still important for ideation.
-        It will help you to quickly test idea.</string>
+    <string name="title">Descubra tudo o que está rolando perto de você</string>
+    <string name="title2">Sua agenda de eventos do Cariri, em um só lugar</string>
+    <string name="title3">Conheça os lugares que contam a história da nossa região</string>
+    <string name="subTitle">O Cariri Fest te mantém atualizado sobre tudo que está rolando na região.</string>
+    <string name="subTitle2">Explore o Cariri de um jeito simples e prático, direto no app.</string>
+    <string name="subTitle3">Mergulhe na arte, na tradição e na energia do Cariri.</string>
 
 
     <!--imageDescriptions-->
