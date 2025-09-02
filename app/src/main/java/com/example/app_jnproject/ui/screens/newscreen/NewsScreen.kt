@@ -106,7 +106,7 @@ fun NewsScreenLayout(
                         ),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(start = 16.dp, end = 16.dp, bottom = 18.dp),
+                            .padding(start = 16.dp, end = 16.dp, bottom = 20.dp),
                         shape = RoundedCornerShape(16.dp),
                         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
                     ) {

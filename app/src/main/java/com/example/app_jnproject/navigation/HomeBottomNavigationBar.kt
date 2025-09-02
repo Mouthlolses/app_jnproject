@@ -72,8 +72,7 @@ fun BottomNavigationBar(navController: NavHostController) {
     NavigationBar(
         tonalElevation = 8.dp,
         modifier = Modifier
-            .height(125.dp)
-            .background(Color.Black),
+            .height(125.dp),
         containerColor = Color.White
     ) {
         items.forEach { item ->
