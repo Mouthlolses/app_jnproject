@@ -172,7 +172,7 @@ fun OnBoardingScreeLayout(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(bottom = 80.dp),
+                .padding(bottom = 75.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Box(

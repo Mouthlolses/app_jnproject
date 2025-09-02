@@ -25,9 +25,9 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -39,11 +39,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
-import com.example.network.R
 
 
 @Composable
@@ -106,15 +106,18 @@ fun NewsScreenLayout(
                         ),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(8.dp),
+                            .padding(start = 16.dp, end = 16.dp, bottom = 18.dp),
                         shape = RoundedCornerShape(16.dp),
                         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
                     ) {
-                        Column(Modifier.padding(16.dp)) {
+                        Column(
+                            Modifier
+                                .fillMaxWidth()
+                        ) {
                             Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(140.dp),
+                                    .height(200.dp),
                                 contentAlignment = Alignment.Center
                             ) {
                                 AsyncImage(
@@ -127,52 +130,82 @@ fun NewsScreenLayout(
                                     contentScale = ContentScale.Crop
                                 )
                             }
-                            Spacer(modifier = Modifier.height(8.dp))
-                            HorizontalDivider(
-                                color = Color.Black
-                            )
-                            Spacer(modifier = Modifier.height(8.dp))
-                            Text(text = doc.fields.title.stringValue)
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Icon(
-                                    imageVector = Icons.Default.Place,
-                                    contentDescription = "Location",
-                                    tint = Color.Gray,
-                                    modifier = Modifier.size(18.dp)
-                                )
-                                Spacer(modifier = Modifier.width(6.dp))
-                                Text(text = doc.fields.location.stringValue)
-                            }
-                            Row(verticalAlignment = Alignment.CenterVertically) {
-                                Icon(
-                                    imageVector = Icons.Default.DateRange,
-                                    contentDescription = "Date",
-                                    tint = Color.Gray,
-                                    modifier = Modifier.size(18.dp)
-                                )
-                                Spacer(modifier = Modifier.width(6.dp))
-                                Text(text = doc.fields.date.stringValue)
-                            }
-                            IconButton(
-                                onClick = { doc.fields.favorite.booleanValue },
-                                modifier = Modifier
-                                    .size(42.dp)
-                                    .background(
-                                        color = Color(0xFFF5F5F5),
-                                        shape = CircleShape
-                                    )
-                            ) {
-                                Icon(
-                                    imageVector = (if (doc.fields.favorite.booleanValue) Icons.Default.Star else Icons.Default.Star),
-                                    contentDescription = "Favorite",
-                                    tint = if (doc.fields.favorite.booleanValue) Color(0xFFFFA500) else Color.Gray,
-                                    modifier = Modifier.size(22.dp)
-                                )
+                            Spacer(modifier = Modifier.height(16.dp))
 
+                            Row(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .padding(horizontal = 16.dp, vertical = 12.dp),
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Column(
+                                    modifier = Modifier.weight(1f)
+                                ) {
+                                    Text(
+                                        text = doc.fields.title.stringValue,
+                                        style = MaterialTheme.typography.titleMedium.copy(
+                                            fontWeight = FontWeight.Bold
+                                        ),
+                                        color = Color.Black
+                                    )
+
+                                    Spacer(modifier = Modifier.height(6.dp))
+
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Icon(
+                                            imageVector = Icons.Default.Place,
+                                            contentDescription = "Location",
+                                            tint = Color.Gray,
+                                            modifier = Modifier.size(18.dp)
+                                        )
+                                        Spacer(modifier = Modifier.width(6.dp))
+                                        Text(
+                                            text = doc.fields.location.stringValue,
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = Color.Gray
+                                        )
+                                    }
+
+                                    Spacer(modifier = Modifier.height(4.dp))
+
+                                    Row(verticalAlignment = Alignment.CenterVertically) {
+                                        Icon(
+                                            imageVector = Icons.Default.DateRange,
+                                            contentDescription = "Date",
+                                            tint = Color.Gray,
+                                            modifier = Modifier.size(18.dp)
+                                        )
+                                        Spacer(modifier = Modifier.width(6.dp))
+                                        Text(
+                                            text = doc.fields.date.stringValue,
+                                            style = MaterialTheme.typography.bodySmall,
+                                            color = Color.Gray
+                                        )
+                                    }
+                                }
+                                IconButton(
+                                    onClick = { doc.fields.favorite.booleanValue },
+                                    modifier = Modifier
+                                        .size(42.dp)
+                                        .background(
+                                            color = Color(0xFFF5F5F5),
+                                            shape = CircleShape
+                                        )
+                                ) {
+                                    Icon(
+                                        imageVector = (if (doc.fields.favorite.booleanValue) Icons.Default.Star else Icons.Default.Star),
+                                        contentDescription = "Favorite",
+                                        tint = if (doc.fields.favorite.booleanValue) Color(
+                                            0xFFFFA500
+                                        ) else Color.Gray,
+                                        modifier = Modifier.size(22.dp)
+                                    )
+
+                                }
                             }
+
                         }
                     }
-
                 }
             }
         }

@@ -87,7 +87,6 @@ fun HomeScreenLayout(viewModel: HomeViewModel = viewModel()) {
         Spacer(modifier = Modifier.padding(12.dp))
         LazyColumn(
             modifier = Modifier
-                .background(Color.LightGray)
                 .fillMaxWidth()
                 .fillMaxSize(),
             contentPadding = PaddingValues(),
