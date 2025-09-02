@@ -102,7 +102,7 @@ fun NewsScreenLayout(
                 items(uiState.events) { doc ->
                     Card(
                         colors = CardDefaults.cardColors(
-                            containerColor = Color(0xFFF6E2B0)
+                            containerColor = Color.White
                         ),
                         modifier = Modifier
                             .fillMaxWidth()

@@ -22,18 +22,41 @@ class HomeViewModel : ViewModel() {
                 name = "Praça Padre Cicero",
                 location = "Avenida Padre Cicero",
                 date = "20/05/2025",
-                img = R.drawable.person_7,
+                img = R.drawable.hortoimg1,
                 isFavorite = false
             ),
-
             CityLocation(
                 id = 2,
                 name = "Horto",
                 location = "Horto",
                 date = "20/05/2025",
-                img = R.drawable.person_2,
+                img = R.drawable.hortoimg1,
                 isFavorite = false
-            )
+            ),
+            CityLocation(
+                id = 1,
+                name = "Praça Padre Cicero",
+                location = "Avenida Padre Cicero",
+                date = "20/05/2025",
+                img = R.drawable.hortoimg1,
+                isFavorite = false
+            ),
+            CityLocation(
+                id = 1,
+                name = "Praça Padre Cicero",
+                location = "Avenida Padre Cicero",
+                date = "20/05/2025",
+                img = R.drawable.hortoimg1,
+                isFavorite = false
+            ),
+            CityLocation(
+                id = 1,
+                name = "Praça Padre Cicero",
+                location = "Avenida Padre Cicero",
+                date = "20/05/2025",
+                img = R.drawable.hortoimg1,
+                isFavorite = false
+            ),
         )
     }
 }

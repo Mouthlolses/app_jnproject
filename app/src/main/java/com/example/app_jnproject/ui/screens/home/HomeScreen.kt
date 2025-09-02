@@ -1,7 +1,6 @@
 package com.example.app_jnproject.ui.screens.home
 
 import androidx.compose.animation.ExperimentalAnimationApi
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -10,11 +9,9 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -92,34 +89,10 @@ fun HomeScreenLayout(viewModel: HomeViewModel = viewModel()) {
             contentPadding = PaddingValues(),
             verticalArrangement = Arrangement.spacedBy(12.dp) // Espaçamento entre os cards
         ) {
-            item {
-                Text(
-                    text = "Destaques",
-                    modifier = Modifier
-                        .padding(start = 16.dp)
-                )
-                LazyRow() {
-                    items(cityLocation) { city ->
-                        EventCard(
-                            modifier = Modifier
-                                .height(230.dp),
-                            img = city.img,
-                            title = city.name,
-                            location = city.location,
-                            date = city.date,
-                            isFavorite = city.isFavorite,
-                            onFavoriteClick = {},
-                            onCardClick = {},
-                            cardEnable = true
-                        )
-
-                    }
-                }
-            }
             items(cityLocation) { city ->
                 EventCard(
                     modifier = Modifier
-                        .padding(4.dp),
+                        .padding(start = 24.dp, end = 24.dp),
                     img = city.img,
                     title = city.name,
                     location = city.location,
