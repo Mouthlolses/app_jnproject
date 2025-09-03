@@ -80,7 +80,6 @@ fun OnBoardingScreen(
             .fillMaxSize()
             .statusBarsPadding()
             .navigationBarsPadding()
-            .background(color = Color.White)
     ) {
         HorizontalPager(
             state = pagerState,
@@ -107,7 +106,7 @@ fun OnBoardingScreen(
                     )
 
                     2 -> OnBoardingScreeLayout(
-                        image = R.drawable.background_claro,
+                         image = R.drawable.background_claro,
                         image2 = R.drawable.person_11,
                         title = R.string.title3,
                         subTitle = R.string.subTitle3
@@ -120,7 +119,7 @@ fun OnBoardingScreen(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .align(Alignment.BottomCenter)
-                .padding(bottom = 110.dp)
+                .padding(bottom = 100.dp)
         ) {
             repeat(3) { index ->
                 val isSelected = pagerState.currentPage == index
@@ -218,7 +217,7 @@ fun OnBoardingScreeLayout(
                     modifier = Modifier
                         .padding(start = 16.dp, end = 16.dp, top = 16.dp),
                     textAlign = TextAlign.Center,
-                    fontSize = 24.sp,
+                    fontSize = 22.sp,
                     fontStyle = FontStyle.Normal,
                     color = Color.Black,
                 )
@@ -228,6 +227,13 @@ fun OnBoardingScreeLayout(
 }
 
 
+
+@Preview(
+    name = "api30",
+    showBackground = true,
+    showSystemUi = true,
+    apiLevel = 30
+)
 @Preview(
     name = "api31",
     showBackground = true,

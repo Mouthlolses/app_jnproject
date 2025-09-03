@@ -37,7 +37,6 @@ import com.example.app_jnproject.ui.components.EventCard
 @Composable
 fun HomeScreen() {
 
-
     val navController = rememberNavController()
 
     Scaffold(
