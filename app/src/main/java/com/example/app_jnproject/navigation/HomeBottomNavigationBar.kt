@@ -1,5 +1,6 @@
 package com.example.app_jnproject.navigation
 
+import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.tween
@@ -26,6 +27,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -43,6 +45,18 @@ data class BottomNavItem(
     val icon: androidx.compose.ui.graphics.vector.ImageVector
 )
 
+enum class NavItems(
+    @StringRes val title: Int,
+    val icon: ImageVector,
+    val route: String
+) {
+    NEWS(R.string.news, Icons.Default.Notifications, "news"),
+    HOME(R.string.home, Icons.Default.Home, "home"),
+    SEARCH(R.string.search, Icons.Default.Search, "search"),
+    FAVORITES(R.string.favorites, Icons.Default.Star, "favorites")
+
+}
+
 @Composable
 fun NavigationGraph(navController: NavHostController, modifier: Modifier = Modifier) {
     NavHost(
@@ -50,20 +64,36 @@ fun NavigationGraph(navController: NavHostController, modifier: Modifier = Modif
         startDestination = "news",
         modifier = modifier
     ) {
-        composable("news") { NewsScreenLayout() }
-        composable("home") { HomeScreenLayout() }
-        composable("search") { }
-        composable("favorites") { }
+        composable(NavItems.NEWS.route) { NewsScreenLayout() }
+        composable(NavItems.HOME.route) { HomeScreenLayout() }
+        composable(NavItems.SEARCH.route) { }
+        composable(NavItems.FAVORITES.route) { }
     }
 }
 
 @Composable
 fun BottomNavigationBar(navController: NavHostController) {
     val items = listOf(
-        BottomNavItem("news", stringResource(R.string.news), Icons.Default.Notifications),
-        BottomNavItem("home", stringResource(R.string.home), Icons.Default.Home),
-        BottomNavItem("search", stringResource(R.string.search), Icons.Default.Search),
-        BottomNavItem("favorites", stringResource(R.string.favorites), Icons.Default.Star)
+        BottomNavItem(
+            NavItems.NEWS.route,
+            stringResource(NavItems.NEWS.title),
+            NavItems.NEWS.icon
+        ),
+        BottomNavItem(
+            NavItems.HOME.route,
+            stringResource(NavItems.HOME.title),
+            NavItems.HOME.icon
+        ),
+        BottomNavItem(
+            NavItems.SEARCH.route,
+            stringResource(NavItems.SEARCH.title),
+            NavItems.SEARCH.icon
+        ),
+        BottomNavItem(
+            NavItems.FAVORITES.route,
+            stringResource(NavItems.FAVORITES.title),
+            NavItems.FAVORITES.icon
+        )
     )
 
     val navBackStackEntry by navController.currentBackStackEntryAsState()
