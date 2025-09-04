@@ -272,10 +272,14 @@ fun OnBoardingScreeLayout(
 )
 @Preview(
     name = "pixel_5",
+    showBackground = true,
+    showSystemUi = true,
     device = "id:pixel_5"
 )
 @Preview(
     name = "Tablet",
+    showBackground = true,
+    showSystemUi = true,
     device = Devices.TABLET
 )
 @Composable
