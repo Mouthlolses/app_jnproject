@@ -50,6 +50,8 @@ dependencies {
     //módulo core-network
     implementation(project(":core:network"))
 
+    implementation(libs.android.sdk)
+
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.foundation)

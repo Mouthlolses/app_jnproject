@@ -37,6 +37,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.app_jnproject.R
 import com.example.app_jnproject.ui.screens.home.HomeScreenLayout
+import com.example.app_jnproject.ui.screens.home.details.DetailsScreen
 import com.example.app_jnproject.ui.screens.newscreen.NewsScreenLayout
 
 data class BottomNavItem(
@@ -60,12 +61,18 @@ enum class NavItems(
 @Composable
 fun NavigationGraph(navController: NavHostController, modifier: Modifier = Modifier) {
     NavHost(
-        navController,
-        startDestination = "news",
+        navController = navController,
+        startDestination = NavItems.NEWS.route,
         modifier = modifier
     ) {
         composable(NavItems.NEWS.route) { NewsScreenLayout() }
-        composable(NavItems.HOME.route) { HomeScreenLayout() }
+        composable(NavItems.HOME.route) { HomeScreenLayout(navController = navController) }
+        composable("detailsScreen/{cityId}") { backStackEntry ->
+            val cityId = backStackEntry.arguments?.getString("cityId")?.toIntOrNull()
+            if(cityId != null){
+                DetailsScreen(cityId = cityId)
+            }
+        }
         composable(NavItems.SEARCH.route) { }
         composable(NavItems.FAVORITES.route) { }
     }

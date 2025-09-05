@@ -1,5 +1,6 @@
 [versions]
 agp = "8.12.0"
+androidSdk = "11.13.1"
 animation = "1.9.0"
 firebaseBom = "34.1.0"
 kotlin = "2.2.0"
@@ -28,6 +29,7 @@ appcompat = "1.7.1"
 material = "1.12.0"
 
 [libraries]
+android-sdk = { module = "org.maplibre.gl:android-sdk", version.ref = "androidSdk" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
