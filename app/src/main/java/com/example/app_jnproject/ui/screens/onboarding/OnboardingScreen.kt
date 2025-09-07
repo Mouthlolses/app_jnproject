@@ -51,10 +51,9 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingScreen(
+fun OnBoardingScreen( 
     navController: NavHostController
 ) {
-
     val pagerState = rememberPagerState(pageCount = { 3 })
     val scope = rememberCoroutineScope()
 
@@ -106,7 +105,7 @@ fun OnBoardingScreen(
                     )
 
                     2 -> OnBoardingScreeLayout(
-                         image = R.drawable.background_claro,
+                        image = R.drawable.background_claro,
                         image2 = R.drawable.person_11,
                         title = R.string.title3,
                         subTitle = R.string.subTitle3
@@ -227,25 +226,6 @@ fun OnBoardingScreeLayout(
 }
 
 
-
-@Preview(
-    name = "api30",
-    showBackground = true,
-    showSystemUi = true,
-    apiLevel = 30
-)
-@Preview(
-    name = "api31",
-    showBackground = true,
-    showSystemUi = true,
-    apiLevel = 31
-)
-@Preview(
-    name = "api32",
-    showBackground = true,
-    showSystemUi = true,
-    apiLevel = 32
-)
 @Preview(
     name = "api33",
     showBackground = true,

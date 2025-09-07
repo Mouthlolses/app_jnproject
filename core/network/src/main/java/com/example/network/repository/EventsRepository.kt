@@ -15,7 +15,7 @@ class EventsRepository(
         try {
             emit(response.body()?.documents ?: emptyList())
         } catch (e: Exception) {
-            Log.e("callError", "Erro : ${e.message}")
+            Log.e("callError", "Error : ${e.message}")
         }
     }
 }

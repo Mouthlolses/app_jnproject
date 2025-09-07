@@ -110,13 +110,3 @@ fun HomeScreenLayout(
         }
     }
 }
-
-//@Preview(
-//    name = "preview_homescreen",
-//    showBackground = true,
-//    showSystemUi = true
-//)
-//@Composable
-//fun HomeScreenLayoutPreview() {
-//    HomeScreenLayout()
-//}

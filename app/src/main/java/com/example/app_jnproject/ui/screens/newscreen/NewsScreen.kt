@@ -102,7 +102,7 @@ fun NewsScreenLayout(
         else -> {
             LazyColumn(
                 modifier = Modifier
-                    .padding(8.dp)
+                    .fillMaxSize()
                     .statusBarsPadding()
                     .navigationBarsPadding()
             ) {
@@ -113,7 +113,7 @@ fun NewsScreenLayout(
                         ),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(start = 16.dp, end = 16.dp, bottom = 20.dp),
+                            .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp),
                         shape = RoundedCornerShape(16.dp),
                         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
                     ) {

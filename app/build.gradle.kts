@@ -46,6 +46,8 @@ android {
 
 dependencies {
 
+    implementation(libs.androidx.datastore.preferences)
+
 
     //módulo core-network
     implementation(project(":core:network"))

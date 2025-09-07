@@ -1,5 +1,6 @@
 package com.example.app_jnproject.ui.screens.newscreen
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.network.data.Document
@@ -30,6 +31,7 @@ class NewsViewModel(
                     )
                 }
             } catch (e: Exception) {
+                Log.e("errorFetchEvents", "Error: ${e.message}")
                 _events.value = _events.value.copy(
                     isLoading = false,
                     error = "Erro inesperado! Vamos tentar de novo?"
