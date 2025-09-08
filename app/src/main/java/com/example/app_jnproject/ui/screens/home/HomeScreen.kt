@@ -33,6 +33,14 @@ import com.example.app_jnproject.navigation.NavigationGraph
 import com.example.app_jnproject.ui.components.EventCard
 
 
+//Banner do Evento da Semana (no topo)
+//
+//Eventos em Alta (carrossel horizontal)
+//
+//Próximos Eventos (lista vertical com data)
+//
+//Curiosidades do Cariri (pequenos cards no final)
+
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HomeScreen() {
@@ -85,16 +93,13 @@ fun HomeScreenLayout(
         }
         Spacer(modifier = Modifier.padding(12.dp))
         LazyColumn(
-            modifier = Modifier
-                .fillMaxWidth()
-                .fillMaxSize(),
+            modifier = Modifier,
             contentPadding = PaddingValues(),
-            verticalArrangement = Arrangement.spacedBy(12.dp) // Espaçamento entre os cards
+            verticalArrangement = Arrangement.spacedBy(6.dp)
         ) {
             items(cityLocation) { city ->
                 EventCard(
-                    modifier = Modifier
-                        .padding(start = 24.dp, end = 24.dp),
+                    modifier = Modifier ,
                     img = city.img,
                     title = city.name,
                     location = city.location,
@@ -102,7 +107,7 @@ fun HomeScreenLayout(
                     isFavorite = city.isFavorite,
                     onFavoriteClick = {},
                     onCardClick = {
-                        navController.navigate("detailsScreen/${city.id}")
+                        navController.navigate("detailsScreen")
                     },
                     cardEnable = true
                 )

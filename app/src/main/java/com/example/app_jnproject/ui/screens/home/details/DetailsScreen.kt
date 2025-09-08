@@ -1,92 +1,181 @@
 package com.example.app_jnproject.ui.screens.home.details
 
+import android.graphics.Bitmap
+import android.net.http.SslError
+import android.webkit.SslErrorHandler
+import android.webkit.WebChromeClient
+import android.webkit.WebResourceError
+import android.webkit.WebResourceRequest
+import android.webkit.WebResourceResponse
+import android.webkit.WebSettings
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme.typography
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.DisposableEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.app_jnproject.ui.screens.home.HomeViewModel
-import org.maplibre.android.MapLibre
-import org.maplibre.android.camera.CameraPosition
-import org.maplibre.android.geometry.LatLng
-import org.maplibre.android.maps.MapView
 
 @Composable
-fun DetailsScreen(
-    cityId: Int,
-    viewModel: HomeViewModel = viewModel()
-) {
-    val context = LocalContext.current
-    val cityList by viewModel.cityLocation.collectAsState()
-    val city = cityList.find { it.id == cityId }
+fun DetailsScreen() {
 
-    Column(
+    var progress by remember { mutableIntStateOf(0) }
+    var hasError by remember { mutableStateOf(false) }
+    var errorMessage by remember { mutableStateOf("") }
+    var shouldReload by remember { mutableStateOf(false) }
+
+    val url =
+        "https://www.buskaza.com.br/blog/guia-de-cidades/juazeiro-do-norte-ceara-por-que-voce-vai-se-encantar-pela-capital-da-fe/"
+
+    Box(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp)
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
     ) {
-        // Título do local
-        Text(
-            text = city?.name ?: "Local não encontrado",
-            style = typography.headlineMedium,
-            fontWeight = FontWeight.Bold
-        )
+        if (hasError) {
+            // Tela de erro personalizada
+            Box(
+                modifier = Modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Image(
+                        painter = painterResource(com.example.app_jnproject.R.drawable.mascot_sf),
+                        contentDescription = "mascot"
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Text(
+                       errorMessage,
+                        color = Color.Black,
+                        textAlign = TextAlign.Center
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Button(
+                        onClick = {
+                            hasError = false
+                            progress = 0
+                            shouldReload = true
+                        },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(0xFFFFA500) // cor de destaque
+                        )
+                    ) {
+                        Text(text = "Recarregar", color = Color.White)
+                    }
+                }
+            }
+        } else {
+            AndroidView(
+                factory = { context ->
+                    WebView(context).apply {
+                        settings.javaScriptEnabled = true
+                        settings.domStorageEnabled = true
+                        settings.cacheMode = WebSettings.LOAD_DEFAULT
+                        settings.mixedContentMode = WebSettings.MIXED_CONTENT_ALWAYS_ALLOW
 
-        Spacer(modifier = Modifier.height(12.dp))
+                        webViewClient = object : WebViewClient() {
+                            override fun onPageStarted(
+                                view: WebView?,
+                                url: String?,
+                                favicon: Bitmap?
+                            ) {
+                                hasError = false
+                                progress = 0
+                            }
 
-        // Inicializa o MapLibre ANTES de criar o MapView
-        remember {
-            MapLibre.getInstance(
-                context,
-                "",
-                org.maplibre.android.WellKnownTileServer.MapLibre
+                            override fun onPageFinished(view: WebView?, url: String?) {
+                                // Se terminar e não tiver erro → progresso = 100%
+                                if (!hasError) progress = 100
+                            }
+
+                            override fun onReceivedError(
+                                view: WebView?,
+                                request: WebResourceRequest?,
+                                error: WebResourceError?
+                            ) {
+                                if (request?.isForMainFrame == true) {
+                                    hasError = true
+                                    errorMessage =
+                                        "Não foi possível carregar a página.\nVerifique sua conexão."
+                                }
+                            }
+
+                            override fun onReceivedHttpError(
+                                view: WebView?,
+                                request: WebResourceRequest?,
+                                errorResponse: WebResourceResponse?
+                            ) {
+                                if (request?.isForMainFrame == true) {
+                                    hasError = true
+                                    errorMessage =
+                                        "Erro ao carregar a página: ${errorResponse?.statusCode}"
+                                }
+                            }
+
+                            override fun onReceivedSslError(
+                                view: WebView?,
+                                handler: SslErrorHandler?,
+                                error: SslError?
+                            ) {
+                                hasError = true
+                                errorMessage = "Erro de certificado SSL"
+                                handler?.cancel()
+                            }
+                        }
+
+
+                        webChromeClient = object : WebChromeClient() {
+                            override fun onProgressChanged(view: WebView?, newProgress: Int) {
+                                super.onProgressChanged(view, newProgress)
+                                progress = newProgress
+                            }
+                        }
+                        loadUrl(url)
+                    }
+                },
+                update = { webView ->
+                    if (shouldReload) {
+                        webView.loadUrl(url)
+                        shouldReload = false
+                    }
+                },
+                modifier = Modifier.fillMaxSize()
             )
-        }
 
-        val mapView = remember { MapView(context) }
-
-        DisposableEffect(Unit) {
-            mapView.onStart()
-            onDispose {
-                mapView.onStop()
-                mapView.onDestroy()
+            if (progress in 1..99) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(16.dp),
+                    contentAlignment = Alignment.Center
+                ) {
+                    CircularProgressIndicator()
+                }
             }
         }
-
-        // Exibe o mapa
-        AndroidView(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(250.dp),
-            factory = { mapView }
-        ) { view ->
-            view.getMapAsync { map ->
-                map.setStyle("https://demotiles.maplibre.org/style.json")
-                map.cameraPosition = CameraPosition.Builder()
-                    .target(LatLng(0.0, 0.0)) // depois vamos colocar latitude real
-                    .build()
-            }
-        }
-
-        Spacer(modifier = Modifier.height(12.dp))
-
-        // Exibe informações do local
-        Text(text = "📍 ${city?.location ?: "Endereço indisponível"}")
-        Text(text = "📅 ${city?.date ?: "Data não informada"}")
     }
 }
 

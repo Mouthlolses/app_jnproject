@@ -67,12 +67,7 @@ fun NavigationGraph(navController: NavHostController, modifier: Modifier = Modif
     ) {
         composable(NavItems.NEWS.route) { NewsScreenLayout() }
         composable(NavItems.HOME.route) { HomeScreenLayout(navController = navController) }
-        composable("detailsScreen/{cityId}") { backStackEntry ->
-            val cityId = backStackEntry.arguments?.getString("cityId")?.toIntOrNull()
-            if (cityId != null) {
-                DetailsScreen(cityId = cityId)
-            }
-        }
+        composable("detailsScreen") { DetailsScreen() }
         composable(NavItems.SEARCH.route) { }
         composable(NavItems.FAVORITES.route) { }
     }
