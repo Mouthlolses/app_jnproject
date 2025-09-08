@@ -27,8 +27,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.app_jnproject.navigation.BottomNavigationBar
+import com.example.app_jnproject.navigation.NavItems
 import com.example.app_jnproject.navigation.NavigationGraph
 import com.example.app_jnproject.ui.components.EventCard
 
@@ -44,12 +46,24 @@ import com.example.app_jnproject.ui.components.EventCard
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HomeScreen() {
-
     val navController = rememberNavController()
+    val navBackStackEntry by navController.currentBackStackEntryAsState()
+    val currentRoute = navBackStackEntry?.destination?.route
+
+    // Defina as rotas que devem mostrar o BottomBar
+    val bottomBarRoutes = listOf(
+        NavItems.NEWS.route,
+        NavItems.HOME.route,
+        NavItems.SEARCH.route,
+        NavItems.FAVORITES.route
+    )
+
 
     Scaffold(
         bottomBar = {
-            BottomNavigationBar(navController)
+            if (currentRoute in bottomBarRoutes) {
+                BottomNavigationBar(navController)
+            }
         }
     ) { innerPadding ->
         NavigationGraph(
@@ -99,7 +113,7 @@ fun HomeScreenLayout(
         ) {
             items(cityLocation) { city ->
                 EventCard(
-                    modifier = Modifier ,
+                    modifier = Modifier,
                     img = city.img,
                     title = city.name,
                     location = city.location,
@@ -107,7 +121,7 @@ fun HomeScreenLayout(
                     isFavorite = city.isFavorite,
                     onFavoriteClick = {},
                     onCardClick = {
-                        navController.navigate("detailsScreen")
+                        navController.navigate("detailsScreen/${city.id}")
                     },
                     cardEnable = true
                 )

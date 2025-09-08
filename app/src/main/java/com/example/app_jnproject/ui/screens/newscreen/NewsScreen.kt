@@ -108,12 +108,12 @@ fun NewsScreenLayout(
             ) {
                 items(uiState.events) { doc ->
                     Card(
-                        colors = CardDefaults.cardColors(
-                            containerColor = Color.White
-                        ),
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp),
+                        colors = CardDefaults.cardColors(
+                            containerColor = Color.White
+                        ),
                         shape = RoundedCornerShape(16.dp),
                         elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
                     ) {

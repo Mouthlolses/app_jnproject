@@ -11,7 +11,6 @@ import android.webkit.WebSettings
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -21,7 +20,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -36,17 +34,19 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
+import com.example.app_jnproject.data.CityLocation
 
 @Composable
-fun DetailsScreen() {
+fun DetailsScreen(
+    city: CityLocation,
+) {
 
     var progress by remember { mutableIntStateOf(0) }
     var hasError by remember { mutableStateOf(false) }
     var errorMessage by remember { mutableStateOf("") }
     var shouldReload by remember { mutableStateOf(false) }
 
-    val url =
-        "https://www.buskaza.com.br/blog/guia-de-cidades/juazeiro-do-norte-ceara-por-que-voce-vai-se-encantar-pela-capital-da-fe/"
+    val url = city.url
 
     Box(
         modifier = Modifier
@@ -68,7 +68,7 @@ fun DetailsScreen() {
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                       errorMessage,
+                        errorMessage,
                         color = Color.Black,
                         textAlign = TextAlign.Center
                     )

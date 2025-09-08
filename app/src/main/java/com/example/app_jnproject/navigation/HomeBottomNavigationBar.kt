@@ -23,6 +23,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,6 +31,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -37,6 +39,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.app_jnproject.R
 import com.example.app_jnproject.ui.screens.home.HomeScreenLayout
+import com.example.app_jnproject.ui.screens.home.HomeViewModel
 import com.example.app_jnproject.ui.screens.home.details.DetailsScreen
 import com.example.app_jnproject.ui.screens.newscreen.NewsScreenLayout
 
@@ -67,7 +70,14 @@ fun NavigationGraph(navController: NavHostController, modifier: Modifier = Modif
     ) {
         composable(NavItems.NEWS.route) { NewsScreenLayout() }
         composable(NavItems.HOME.route) { HomeScreenLayout(navController = navController) }
-        composable("detailsScreen") { DetailsScreen() }
+        composable("detailsScreen/{cityId}") { backStackEntry ->
+            val viewModel: HomeViewModel = viewModel()
+            val cityId = backStackEntry.arguments?.getString("cityId")?.toIntOrNull()
+            val city = viewModel.cityLocation.collectAsState().value.find { it.id == cityId }
+            if (city != null) {
+                DetailsScreen(city = city)
+            }
+        }
         composable(NavItems.SEARCH.route) { }
         composable(NavItems.FAVORITES.route) { }
     }

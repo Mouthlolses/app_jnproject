@@ -7,6 +7,7 @@ data class CityLocation(
     val name: String,
     val location: String,
     val date: String,
+    val url: String,
     val isFavorite: Boolean,
     @param:DrawableRes val img: Int
 )

@@ -19,18 +19,20 @@ class HomeViewModel : ViewModel() {
         _cityLocation.value = listOf(
             CityLocation(
                 id = 1,
-                name = "Praça Padre Cicero",
-                location = "Avenida Padre Cicero",
+                name = "Juazeiro do Norte",
+                location = "Juazeiro do Norte - CE",
                 date = "20/05/2025",
                 img = R.drawable.hortoimg1,
+                url = "https://www.buskaza.com.br/blog/guia-de-cidades/juazeiro-do-norte-ceara-por-que-voce-vai-se-encantar-pela-capital-da-fe/",
                 isFavorite = false
             ),
             CityLocation(
                 id = 2,
                 name = "Horto",
-                location = "Horto",
+                location = "Juazeiro do Norte - CE",
                 date = "20/05/2025",
                 img = R.drawable.hortoimg1,
+                url = "https://hortodopadrecicero.net.br/historia-2/",
                 isFavorite = false
             ),
             CityLocation(
@@ -39,6 +41,7 @@ class HomeViewModel : ViewModel() {
                 location = "Avenida Padre Cicero",
                 date = "20/05/2025",
                 img = R.drawable.hortoimg1,
+                url = "",
                 isFavorite = false
             ),
             CityLocation(
@@ -47,6 +50,7 @@ class HomeViewModel : ViewModel() {
                 location = "Avenida Padre Cicero",
                 date = "20/05/2025",
                 img = R.drawable.hortoimg1,
+                url = "",
                 isFavorite = false
             ),
             CityLocation(
@@ -55,6 +59,7 @@ class HomeViewModel : ViewModel() {
                 location = "Avenida Padre Cicero",
                 date = "20/05/2025",
                 img = R.drawable.hortoimg1,
+                url = "",
                 isFavorite = false
             ),
         )
