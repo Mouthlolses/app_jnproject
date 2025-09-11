@@ -49,7 +49,7 @@ import com.example.app_jnproject.ui.screens.home.details.DetailsScreen
 import com.example.app_jnproject.ui.screens.newscreen.NewsScreenLayout
 import com.example.app_jnproject.ui.screens.newscreen.NewsViewModel
 import com.example.app_jnproject.ui.screens.newscreen.details.NewsDetailsLayout
-import com.example.app_jnproject.ui.screens.newscreen.details.NewsViewModelFactory
+import com.example.app_jnproject.ui.screens.newscreen.NewsViewModelFactory
 import com.example.data.datasource.repository.EventsRepository
 
 data class BottomNavItem(

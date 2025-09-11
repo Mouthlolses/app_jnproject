@@ -21,6 +21,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Button
@@ -47,7 +48,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
-import com.example.app_jnproject.ui.screens.newscreen.details.NewsViewModelFactory
+import com.example.app_jnproject.ui.screens.newscreen.NewsViewModelFactory
 import com.example.data.datasource.repository.EventsRepository
 
 
@@ -209,7 +210,7 @@ fun NewsScreenLayout(
                                         )
                                 ) {
                                     Icon(
-                                        imageVector = (if (doc.fields.favorite.booleanValue) Icons.Default.Star else Icons.Default.Star),
+                                        imageVector = (if (doc.fields.favorite.booleanValue) Icons.Default.Favorite else Icons.Default.Favorite),
                                         contentDescription = "Favorite",
                                         tint = if (doc.fields.favorite.booleanValue) Color(
                                             0xFFFFA500

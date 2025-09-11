@@ -1,8 +1,7 @@
-package com.example.app_jnproject.ui.screens.newscreen.details
+package com.example.app_jnproject.ui.screens.newscreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.app_jnproject.ui.screens.newscreen.NewsViewModel
 import com.example.data.datasource.repository.EventsRepository
 
 class NewsViewModelFactory(

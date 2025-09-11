@@ -3,9 +3,11 @@ package com.example.app_jnproject.ui.screens.newscreen.details
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -14,110 +16,102 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.compose.AsyncImage
+import com.example.app_jnproject.ui.components.ShareButton
 import com.example.network.model.Document
 import com.example.network.model.EventFields
 import com.example.network.model.FirestoreBoolean
 import com.example.network.model.FirestoreString
-import com.mapbox.geojson.Point
-import com.mapbox.maps.extension.compose.MapboxMap
-import com.mapbox.maps.extension.compose.animation.viewport.rememberMapViewportState
 
 
 @Composable
 fun NewsDetailsLayout(
     event: Document
 ) {
-
-    Box(
+    Column(
         modifier = Modifier
             .statusBarsPadding()
             .fillMaxSize()
             .background(Color.White)
     ) {
-        MapboxMap(
+        // Imagem com botão sobreposto
+        Box(
             modifier = Modifier
-                .padding(horizontal = 16.dp, vertical = 16.dp)
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(16.dp))
-                .height(300.dp),
-            mapViewportState = rememberMapViewportState {
-                setCameraOptions {
-                    zoom(2.0)
-                    center(Point.fromLngLat(-98.0, 39.5))
-                    pitch(0.0)
-                    bearing(0.0)
-//                    zoom(12.0)
-//                    center(Point.fromLngLat(-39.3156, -7.2139))
-//                    pitch(0.0)
-//                    bearing(0.0)
-                }
-            }
-        )
-    }
+                .height(230.dp)
+                .padding(top = 16.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            AsyncImage(
+                model = event.fields.img.stringValue,
+                contentDescription = "image_screen",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(400.dp),
+                contentScale = ContentScale.Crop
+            )
 
-    // DIVISOR
-    Column(
-        modifier = Modifier.padding(top = 400.dp)
-    ) {
-        HorizontalDivider(
-            Modifier
-                .padding(horizontal = 16.dp)
-                .height(6.dp),
-            color = DividerDefaults.color
-        )
+            // Botão sobreposto no final da imagem
+            ShareButton(
+                onClick = { /* ação de compartilhar */ },
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .offset(y = 24.dp) // faz ele "sair" um pouco da imagem
+            )
+        }
 
-        // TÍTULO DO EVENTO
+        Column(modifier = Modifier.padding(top = 40.dp)) {
+            HorizontalDivider(
+                Modifier
+                    .padding(horizontal = 16.dp)
+                    .height(6.dp),
+                color = DividerDefaults.color
+            )
 
-        Text(
-            text = event.fields.title.stringValue,
-            style = MaterialTheme.typography.titleLarge,
-            color = Color.Black,
-            modifier = Modifier
-                .padding(16.dp)
-                .fillMaxWidth(),
-            textAlign = TextAlign.Center
-        )
+            Text(
+                text = event.fields.title.stringValue,
+                style = MaterialTheme.typography.titleLarge,
+                color = Color.Black,
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                textAlign = TextAlign.Center
+            )
 
+            Text(
+                text = event.fields.desc.stringValue,
+                style = MaterialTheme.typography.bodyLarge,
+                color = Color.DarkGray,
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 8.dp)
+                    .fillMaxWidth(),
+                textAlign = TextAlign.Start
+            )
 
+            Text(
+                text = "📍 Local: ${event.fields.location.stringValue}",
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.Gray,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
+            )
 
-        Text(
-            text = event.fields.desc.stringValue,
-            style = MaterialTheme.typography.bodyLarge,
-            color = Color.DarkGray,
-            modifier = Modifier
-                .padding(horizontal = 16.dp, vertical = 8.dp)
-                .fillMaxWidth(),
-            textAlign = TextAlign.Start
-        )
-
-
-        // LOCAL
-
-        Text(
-            text = "📍 Local: ${event.fields.location.stringValue}",
-            style = MaterialTheme.typography.bodyMedium,
-            color = Color.Gray,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
-        )
-
-
-        // DATA
-
-        Text(
-            text = "📅 Data: ${event.fields.date.stringValue}",
-            style = MaterialTheme.typography.bodyMedium,
-            color = Color.Gray,
-            modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
-        )
+            Text(
+                text = "📅 Data: ${event.fields.date.stringValue}",
+                style = MaterialTheme.typography.bodyMedium,
+                color = Color.Gray,
+                modifier = Modifier.padding(horizontal = 16.dp, vertical = 4.dp)
+            )
+        }
     }
 }
-
 
 @Preview
 @Composable
