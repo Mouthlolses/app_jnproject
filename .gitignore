@@ -14,5 +14,8 @@
 .cxx
 local.properties
 
+# Token Access
+/app/src/main/res/values/mapbox-access-token.xml
+
 # Firebase config
 /core/network/google-services.json

@@ -5,11 +5,12 @@ import com.example.app_jnproject.R
 import com.example.app_jnproject.data.CityLocation
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class HomeViewModel : ViewModel() {
 
     private val _cityLocation = MutableStateFlow<List<CityLocation>>(emptyList())
-    val cityLocation: StateFlow<List<CityLocation>> = _cityLocation
+    val cityLocation: StateFlow<List<CityLocation>> = _cityLocation.asStateFlow()
 
     init {
         loadCards()

@@ -1,12 +1,13 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    id("com.google.gms.google-services")
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.2.10"
+    id("kotlin-parcelize")
+    id("com.google.devtools.ksp")
+
 }
 
 android {
-    namespace = "com.example.network"
+    namespace = "com.example.data"
     compileSdk = 36
 
     defaultConfig {
@@ -35,6 +36,8 @@ android {
 
 dependencies {
 
+    implementation(project(":core:network"))
+
     // Retrofit
     implementation(libs.retrofit)
 
@@ -50,10 +53,12 @@ dependencies {
     // Interceptor de Log (para depuração)
     implementation(libs.logging.interceptor)
 
-    implementation(platform(libs.firebase.bom))
 
-    implementation(libs.firebase.analytics)
 
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.rxjava3)
+    ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

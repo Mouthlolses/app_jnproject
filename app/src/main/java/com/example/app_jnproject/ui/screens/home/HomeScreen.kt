@@ -33,6 +33,7 @@ import com.example.app_jnproject.navigation.BottomNavigationBar
 import com.example.app_jnproject.navigation.NavItems
 import com.example.app_jnproject.navigation.NavigationGraph
 import com.example.app_jnproject.ui.components.EventCard
+import com.example.data.datasource.repository.EventsRepository
 
 
 //Banner do Evento da Semana (no topo)
@@ -45,7 +46,7 @@ import com.example.app_jnproject.ui.components.EventCard
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(repository: EventsRepository) {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
@@ -67,6 +68,7 @@ fun HomeScreen() {
         }
     ) { innerPadding ->
         NavigationGraph(
+            repository = repository,
             navController = navController,
             modifier = Modifier
                 .padding(innerPadding)

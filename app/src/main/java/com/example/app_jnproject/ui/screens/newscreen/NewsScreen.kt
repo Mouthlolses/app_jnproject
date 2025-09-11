@@ -2,6 +2,7 @@ package com.example.app_jnproject.ui.screens.newscreen
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -32,7 +33,6 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -45,18 +45,23 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.example.app_jnproject.ui.screens.newscreen.details.NewsViewModelFactory
+import com.example.data.datasource.repository.EventsRepository
 
 
 @Composable
 fun NewsScreenLayout(
-    viewModel: NewsViewModel = viewModel()
+    navController: NavHostController,
+    repository: EventsRepository
 ) {
-    val uiState by viewModel.events.collectAsState()
 
-    LaunchedEffect(Unit) {
-        viewModel.fetchEvents()
-    }
+    val viewModel: NewsViewModel = viewModel(
+        factory = NewsViewModelFactory(repository)
+    )
+
+    val uiState by viewModel.events.collectAsState()
 
     when {
         uiState.isLoading -> {
@@ -88,7 +93,7 @@ fun NewsScreenLayout(
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     Button(
-                        onClick = { viewModel.fetchEvents() },
+                        onClick = { viewModel.refreshEvents() },
                         colors = ButtonDefaults.buttonColors(
                             containerColor = Color(0xFFFFA500) // cor de destaque
                         )
@@ -110,7 +115,11 @@ fun NewsScreenLayout(
                     Card(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp),
+                            .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp)
+                            .clickable(
+                                onClick = { navController.navigate("newsDetailsScreen/${doc.id}") },
+                                enabled = true,
+                            ),
                         colors = CardDefaults.cardColors(
                             containerColor = Color.White
                         ),

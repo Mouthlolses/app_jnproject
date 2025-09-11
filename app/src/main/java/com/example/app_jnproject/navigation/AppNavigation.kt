@@ -6,9 +6,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.app_jnproject.ui.screens.home.HomeScreen
 import com.example.app_jnproject.ui.screens.onboarding.OnBoardingScreen
+import com.example.data.datasource.repository.EventsRepository
 
 @Composable
-fun AppNavigation() {
+fun AppNavigation(repository: EventsRepository) {
 
     val navController = rememberNavController()
 
@@ -26,7 +27,7 @@ fun AppNavigation() {
         composable(
             "homeScreen"
         ) {
-            HomeScreen()
+            HomeScreen(repository = repository)
         }
     }
 }

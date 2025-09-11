@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.app_jnproject"
-        minSdk = 33
+        minSdk = 31
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
@@ -30,11 +30,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
     kotlin {
-        jvmToolchain(11)
+        jvmToolchain(21)
     }
     buildFeatures {
         compose = true
@@ -48,11 +48,22 @@ dependencies {
 
     implementation(libs.androidx.datastore.preferences)
 
+    //MapBoxSDK
+    implementation(libs.android.ndk27)
+    implementation(libs.maps.compose.ndk27)
 
     //módulo core-network
     implementation(project(":core:network"))
+    //módulo core-data
+    implementation(project(":core:data"))
 
     implementation(libs.android.sdk)
+
+
+    ksp(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.room.ktx)
+    implementation(libs.androidx.room.rxjava3)
 
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
@@ -62,10 +73,6 @@ dependencies {
     implementation(libs.androidx.animation)
     implementation(libs.coil.compose)
     implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.room.runtime)
-    implementation(libs.androidx.room.ktx)
-    implementation(libs.androidx.room.rxjava3)
-    ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.profileinstaller)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

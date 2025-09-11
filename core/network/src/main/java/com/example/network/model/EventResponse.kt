@@ -1,4 +1,4 @@
-package com.example.network.data
+package com.example.network.model
 
 import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
@@ -15,11 +15,15 @@ data class EventResponse(
 data class Document(
     val name: String,
     val fields: EventFields
-)
+){
+    val id: String
+        get() = name.substringAfterLast("/")
+}
 
 @Serializable
 data class EventFields(
     val date: FirestoreString,
+    val desc: FirestoreString,
     val favorite: FirestoreBoolean,
     val img: FirestoreString,
     val location: FirestoreString,
