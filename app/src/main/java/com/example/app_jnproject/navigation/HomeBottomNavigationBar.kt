@@ -2,7 +2,7 @@ package com.example.app_jnproject.navigation
 
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -12,16 +12,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.Notifications
-import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
@@ -32,8 +25,9 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -46,41 +40,60 @@ import com.example.app_jnproject.R
 import com.example.app_jnproject.ui.screens.home.HomeScreenLayout
 import com.example.app_jnproject.ui.screens.home.HomeViewModel
 import com.example.app_jnproject.ui.screens.home.details.DetailsScreen
-import com.example.app_jnproject.ui.screens.newscreen.NewsScreenLayout
-import com.example.app_jnproject.ui.screens.newscreen.NewsViewModel
-import com.example.app_jnproject.ui.screens.newscreen.details.NewsDetailsLayout
-import com.example.app_jnproject.ui.screens.newscreen.NewsViewModelFactory
+import com.example.app_jnproject.ui.screens.news.NewsScreenLayout
+import com.example.app_jnproject.ui.screens.news.NewsViewModel
+import com.example.app_jnproject.ui.screens.news.NewsViewModelFactory
+import com.example.app_jnproject.ui.screens.news.details.NewsDetailsLayout
+import com.example.app_jnproject.ui.screens.search.SearchScreen
 import com.example.data.datasource.repository.EventsRepository
 
 data class BottomNavItem(
     val route: String,
     val label: String,
-    val icon: androidx.compose.ui.graphics.vector.ImageVector
+    val icon: Int
 )
 
 enum class NavItems(
     @StringRes val title: Int,
-    val icon: ImageVector,
+    val icon: Int,
     val route: String
 ) {
-    NEWS(R.string.news, Icons.Default.Star, "news"),
-    HOME(R.string.home, Icons.Default.Info, "home"),
-    SEARCH(R.string.search, Icons.Default.Search, "search"),
-    FAVORITES(R.string.favorites, Icons.Default.Favorite, "favorites")
+    NEWS(R.string.news, R.drawable.ic_action_news, "news"),
+    HOME(R.string.home, R.drawable.ic_icon_regionalnews, "home"),
+    SEARCH(R.string.search, R.drawable.ic_icon_mapsearch, "search"),
+    FAVORITES(R.string.favorites, R.drawable.ic_action_sell, "favorites")
 
 }
 
 @Composable
-fun NavigationGraph(navController: NavHostController, modifier: Modifier = Modifier, repository: EventsRepository) {
+fun NavigationGraph(
+    navController: NavHostController,
+    modifier: Modifier = Modifier,
+    repository: EventsRepository
+) {
     NavHost(
         navController = navController,
         startDestination = NavItems.NEWS.route,
-        modifier = modifier
+        modifier = modifier,
+        enterTransition = {
+            slideIntoContainer(
+                AnimatedContentTransitionScope.SlideDirection.Start,
+                animationSpec = tween(400)
+            ) + fadeIn(animationSpec = tween(400))
+        },
+        exitTransition = {
+            slideOutOfContainer(
+                AnimatedContentTransitionScope.SlideDirection.End,
+                animationSpec = tween(400)
+            ) + fadeOut(animationSpec = tween(400))
+        }
     ) {
-        composable(NavItems.NEWS.route) { NewsScreenLayout(
-            navController = navController,
-            repository = repository
-        ) }
+        composable(NavItems.NEWS.route) {
+            NewsScreenLayout(
+                navController = navController,
+                repository = repository
+            )
+        }
         composable(NavItems.HOME.route) { HomeScreenLayout(navController = navController) }
 
         composable("detailsScreen/{cityId}") { backStackEntry ->
@@ -128,7 +141,9 @@ fun NavigationGraph(navController: NavHostController, modifier: Modifier = Modif
             }
 
         }
-        composable(NavItems.SEARCH.route) { }
+        composable(NavItems.SEARCH.route) {
+            SearchScreen()
+        }
         composable(NavItems.FAVORITES.route) { }
     }
 }
@@ -170,16 +185,6 @@ fun BottomNavigationBar(navController: NavHostController) {
         items.forEach { item ->
             val selected = currentRoute == item.route
 
-            val backgroundColor by animateColorAsState(
-                targetValue = if (selected) MaterialTheme.colorScheme.primary.copy(alpha = 0.15f) else Color.Transparent,
-                animationSpec = tween(durationMillis = 300), label = ""
-            )
-
-            val contentColor by animateColorAsState(
-                targetValue = if (selected) MaterialTheme.colorScheme.primary else Color.Gray,
-                animationSpec = tween(durationMillis = 300), label = ""
-            )
-
             NavigationBarItem(
                 selected = selected,
                 onClick = {
@@ -194,15 +199,13 @@ fun BottomNavigationBar(navController: NavHostController) {
                 icon = {
                     Box(
                         modifier = Modifier
-                            .size(48.dp)
-                            .background(
-                                color = Color(0xFFF6E2B0),
-                                shape = MaterialTheme.shapes.large
-                            ),
+                            .size(50.dp)
+                            .clip(RoundedCornerShape(16.dp))
+                            .background(Color(0xFFFFEDE6)),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
-                            imageVector = item.icon,
+                            painter = painterResource(id = item.icon),
                             contentDescription = item.label,
                             tint = Color(0xFFFF5733),
                             modifier = Modifier.size(26.dp)
@@ -218,7 +221,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                         }, label = ""
                     ) {
                         if (it) {
-                            Text(item.label, color = contentColor)
+                            Text(item.label, color = Color(0xFF333333))
                         }
                     }
                 },

@@ -1,4 +1,4 @@
-package com.example.app_jnproject.ui.screens.newscreen.details
+package com.example.app_jnproject.ui.screens.news.details
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

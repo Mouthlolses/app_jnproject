@@ -1,4 +1,4 @@
-package com.example.app_jnproject.ui.screens.newscreen
+package com.example.app_jnproject.ui.screens.news
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
