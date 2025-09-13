@@ -56,7 +56,7 @@ fun HomeScreen(repository: EventsRepository) {
         NavItems.NEWS.route,
         NavItems.HOME.route,
         NavItems.SEARCH.route,
-        NavItems.FAVORITES.route
+        NavItems.OFFER.route
     )
 
 

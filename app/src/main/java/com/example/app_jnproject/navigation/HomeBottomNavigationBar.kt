@@ -44,6 +44,7 @@ import com.example.app_jnproject.ui.screens.news.NewsScreenLayout
 import com.example.app_jnproject.ui.screens.news.NewsViewModel
 import com.example.app_jnproject.ui.screens.news.NewsViewModelFactory
 import com.example.app_jnproject.ui.screens.news.details.NewsDetailsLayout
+import com.example.app_jnproject.ui.screens.offers.OfferScreen
 import com.example.app_jnproject.ui.screens.search.SearchScreen
 import com.example.data.datasource.repository.EventsRepository
 
@@ -61,7 +62,7 @@ enum class NavItems(
     NEWS(R.string.news, R.drawable.ic_action_news, "news"),
     HOME(R.string.home, R.drawable.ic_icon_regionalnews, "home"),
     SEARCH(R.string.search, R.drawable.ic_icon_mapsearch, "search"),
-    FAVORITES(R.string.favorites, R.drawable.ic_action_sell, "favorites")
+    OFFER(R.string.favorites, R.drawable.ic_action_sell, "offer")
 
 }
 
@@ -144,7 +145,9 @@ fun NavigationGraph(
         composable(NavItems.SEARCH.route) {
             SearchScreen()
         }
-        composable(NavItems.FAVORITES.route) { }
+        composable(NavItems.OFFER.route) {
+            OfferScreen()
+        }
     }
 }
 
@@ -167,9 +170,9 @@ fun BottomNavigationBar(navController: NavHostController) {
             NavItems.SEARCH.icon
         ),
         BottomNavItem(
-            NavItems.FAVORITES.route,
-            stringResource(NavItems.FAVORITES.title),
-            NavItems.FAVORITES.icon
+            NavItems.OFFER.route,
+            stringResource(NavItems.OFFER.title),
+            NavItems.OFFER.icon
         )
     )
 
