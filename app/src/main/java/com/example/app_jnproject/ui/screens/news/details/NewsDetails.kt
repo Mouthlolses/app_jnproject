@@ -1,5 +1,6 @@
 package com.example.app_jnproject.ui.screens.news.details
 
+import android.graphics.drawable.BitmapDrawable
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,30 +10,44 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DividerDefaults
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import coil.ImageLoader
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import com.example.app_jnproject.shared.shareContent
 import com.example.app_jnproject.ui.components.ShareButton
 import com.example.network.model.Document
 import com.example.network.model.EventFields
 import com.example.network.model.FirestoreBoolean
 import com.example.network.model.FirestoreString
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 @Composable
 fun NewsDetailsLayout(
     event: Document
 ) {
+    val scope = rememberCoroutineScope()
+    val loading: @Composable () -> Unit = { CircularProgressIndicator() }
+    val context = LocalContext.current
+    val imageLoader = ImageLoader(context)
+
     Column(
         modifier = Modifier
             .statusBarsPadding()
@@ -58,7 +73,39 @@ fun NewsDetailsLayout(
 
             // Botão sobreposto no final da imagem
             ShareButton(
-                onClick = { /* ação de compartilhar */ },
+                onClick = {
+                    scope.launch {
+                        val text = buildString {
+                            appendLine("🎉 ${event.fields.title.stringValue}")
+                            appendLine("📝 ${event.fields.desc.stringValue}")
+                            appendLine("📍 Local: ${event.fields.location.stringValue}")
+                            appendLine("📅 Data: ${event.fields.date.stringValue}")
+                            appendLine()
+                            appendLine("📲 Descubra mais eventos no Cariri com o app Cariri Fest!")
+                            appendLine("👉 Baixe grátis: https://play.google.com/store/apps/details?id=seu.package")
+                        }
+
+                        //carrega a imagem via Coil
+                        val request = ImageRequest.Builder(context)
+                            .data(event.fields.img.stringValue)
+                            .allowHardware(false)
+                            .build()
+
+                        val result = withContext(Dispatchers.IO) {
+                            loading
+                            imageLoader.execute(request)
+                        }
+
+                        val drawable = result.drawable
+                        val bitmap = (drawable as BitmapDrawable).bitmap
+
+                        // chama função utilitária
+                        withContext(Dispatchers.Main) {
+                            shareContent(context, bitmap, text)
+                        }
+
+                    }
+                },
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
                     .offset(y = 24.dp) // faz ele "sair" um pouco da imagem
