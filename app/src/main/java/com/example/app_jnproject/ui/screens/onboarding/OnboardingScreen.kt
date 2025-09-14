@@ -32,18 +32,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.datastore.preferences.core.edit
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.app_jnproject.R
+import com.example.app_jnproject.datastore.PreferencesKey
+import com.example.app_jnproject.datastore.dataStore
 import com.example.app_jnproject.ui.components.ButtonAllCustomized
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -51,11 +54,12 @@ import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingScreen( 
+fun OnBoardingScreen(
     navController: NavHostController
 ) {
     val pagerState = rememberPagerState(pageCount = { 3 })
     val scope = rememberCoroutineScope()
+    val context = LocalContext.current
 
     LaunchedEffect(pagerState.isScrollInProgress) {
         if (!pagerState.isScrollInProgress) {
@@ -94,21 +98,18 @@ fun OnBoardingScreen(
                         image = R.drawable.background_person,
                         image2 = R.drawable.person_2,
                         title = R.string.title,
-                        subTitle = R.string.subTitle
                     )
 
                     1 -> OnBoardingScreeLayout(
                         image = R.drawable.background_yellow,
                         image2 = R.drawable.person_3,
                         title = R.string.title2,
-                        subTitle = R.string.subTitle2
                     )
 
                     2 -> OnBoardingScreeLayout(
                         image = R.drawable.background_claro,
                         image2 = R.drawable.person_11,
                         title = R.string.title3,
-                        subTitle = R.string.subTitle3
                     )
                 }
             }
@@ -148,7 +149,14 @@ fun OnBoardingScreen(
                     contentColor = Color.White
                 ),
                 elevation = ButtonDefaults.buttonElevation(4.dp),
-                onClick = { navController.navigate("homeScreen") },
+                onClick = {
+                    navController.navigate("homeScreen")
+                    scope.launch {
+                        context.dataStore.edit { prefs ->
+                            prefs[PreferencesKey.ONBOARDING_SHOWN] = true
+                        }
+                    }
+                },
                 text = stringResource(R.string.start)
             )
         }
@@ -160,8 +168,7 @@ fun OnBoardingScreen(
 fun OnBoardingScreeLayout(
     @DrawableRes image: Int,
     @DrawableRes image2: Int,
-    @StringRes title: Int,
-    @StringRes subTitle: Int
+    @StringRes title: Int
 ) {
     Box(
         modifier = Modifier
@@ -209,16 +216,6 @@ fun OnBoardingScreeLayout(
                     fontSize = 26.sp,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
-                )
-                Spacer(modifier = Modifier.height(16.dp))
-                Text(
-                    text = stringResource(subTitle),
-                    modifier = Modifier
-                        .padding(start = 16.dp, end = 16.dp, top = 16.dp),
-                    textAlign = TextAlign.Center,
-                    fontSize = 22.sp,
-                    fontStyle = FontStyle.Normal,
-                    color = Color.Black,
                 )
             }
         }
