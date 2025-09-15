@@ -31,9 +31,9 @@ fun ShareButton(
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(
             containerColor = Color.White, // Fundo branco
-            contentColor = Color(0xFF2196F3) // Azul do ícone e texto
+            contentColor = Color(0xFFFF5733)
         ),
-        shape = RoundedCornerShape(50), // Deixa bem arredondado (pill)
+        shape = RoundedCornerShape(50),
         elevation = ButtonDefaults.buttonElevation(
             defaultElevation = 12.dp,
             pressedElevation = 6.dp
@@ -41,9 +41,9 @@ fun ShareButton(
         contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp)
     ) {
         Icon(
-            imageVector = Icons.Default.Share, // ou outro ícone mais parecido
+            imageVector = Icons.Default.Share,
             contentDescription = "Compartilhar",
-            tint = Color(0xFF2196F3),
+            tint = Color(0xFFFF5733),
             modifier = Modifier.size(20.dp)
         )
         Spacer(modifier = Modifier.width(8.dp))
@@ -51,7 +51,7 @@ fun ShareButton(
             text = "COMPARTILHAR",
             fontSize = 14.sp,
             fontWeight = FontWeight.Bold,
-            color = Color(0xFF2196F3)
+            color = Color(0xFFFF5733)
         )
     }
 }

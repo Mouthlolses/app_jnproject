@@ -7,12 +7,10 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -25,7 +23,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -130,7 +127,10 @@ fun NavigationGraph(
                 }
             } else if (event != null) {
                 // Exibe os detalhes do evento
-                NewsDetailsLayout(event = event)
+                NewsDetailsLayout(
+                    event = event,
+                    navController = navController
+                )
             } else {
                 // Exibe mensagem se não encontrar o evento
                 Box(
@@ -140,7 +140,6 @@ fun NavigationGraph(
                     Text("Evento não encontrado!")
                 }
             }
-
         }
         composable(NavItems.SEARCH.route) {
             SearchScreen()
@@ -200,20 +199,12 @@ fun BottomNavigationBar(navController: NavHostController) {
                     }
                 },
                 icon = {
-                    Box(
-                        modifier = Modifier
-                            .size(50.dp)
-                            .clip(RoundedCornerShape(16.dp))
-                            .background(Color(0xFFFFEDE6)),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Icon(
-                            painter = painterResource(id = item.icon),
-                            contentDescription = item.label,
-                            tint = Color(0xFFFF5733),
-                            modifier = Modifier.size(26.dp)
-                        )
-                    }
+                    Icon(
+                        painter = painterResource(id = item.icon),
+                        contentDescription = item.label,
+                        tint = Color(0xFFFF5733),
+                        modifier = Modifier.size(26.dp)
+                    )
                 },
                 label = {
                     AnimatedContent(

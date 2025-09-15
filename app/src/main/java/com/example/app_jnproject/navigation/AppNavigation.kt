@@ -1,22 +1,23 @@
 package com.example.app_jnproject.navigation
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.app_jnproject.ui.screens.SplashScreen
 import com.example.app_jnproject.datastore.PreferencesKey
 import com.example.app_jnproject.datastore.dataStore
 import com.example.app_jnproject.ui.screens.home.HomeScreen
 import com.example.app_jnproject.ui.screens.onboarding.OnBoardingScreen
 import com.example.data.datasource.repository.EventsRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.map
 
 @Composable
@@ -29,18 +30,22 @@ fun AppNavigation(repository: EventsRepository) {
         .map { prefs -> prefs[PreferencesKey.ONBOARDING_SHOWN] ?: false }
         .collectAsState(initial = null)
 
-    when (onBoardingShown) {
-        null -> {
-            // Enquanto não sabe → mostra Splash/Loading
-            Box(
-                modifier = Modifier.fillMaxSize(),
-                contentAlignment = Alignment.Center
-            ) {
-                CircularProgressIndicator()
-            }
+    var showSplash by remember { mutableStateOf(true) }
+
+    LaunchedEffect(onBoardingShown) {
+        if (onBoardingShown != null) {
+            delay(2000)
+            showSplash = false
+        }
+    }
+
+    when {
+        onBoardingShown == null || showSplash -> {
+            // Mostra Splash animada
+            SplashScreen()
         }
 
-        true -> {
+        onBoardingShown == true -> {
             NavHost(
                 navController = navController,
                 startDestination = "homeScreen"
@@ -54,7 +59,7 @@ fun AppNavigation(repository: EventsRepository) {
             }
         }
 
-        false -> {
+        onBoardingShown == false -> {
             NavHost(
                 navController = navController,
                 startDestination = "onBoardingScreen"
@@ -67,6 +72,5 @@ fun AppNavigation(repository: EventsRepository) {
                 }
             }
         }
-
     }
 }
