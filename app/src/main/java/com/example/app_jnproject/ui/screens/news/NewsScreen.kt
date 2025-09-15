@@ -1,7 +1,6 @@
 package com.example.app_jnproject.ui.screens.news
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,19 +16,17 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -47,9 +44,11 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.example.app_jnproject.ui.components.Tag
 import com.example.data.datasource.repository.EventsRepository
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewsScreenLayout(
     navController: NavHostController,
@@ -104,6 +103,7 @@ fun NewsScreenLayout(
         }
 
         else -> {
+
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
@@ -145,7 +145,7 @@ fun NewsScreenLayout(
                                     contentScale = ContentScale.Crop
                                 )
                             }
-                            Spacer(modifier = Modifier.height(16.dp))
+                            Spacer(modifier = Modifier.height(14.dp))
 
                             Row(
                                 modifier = Modifier
@@ -164,7 +164,7 @@ fun NewsScreenLayout(
                                         color = Color.Black
                                     )
 
-                                    Spacer(modifier = Modifier.height(6.dp))
+                                    Spacer(modifier = Modifier.height(14.dp))
 
                                     Row(verticalAlignment = Alignment.CenterVertically) {
                                         Icon(
@@ -198,27 +198,13 @@ fun NewsScreenLayout(
                                         )
                                     }
                                 }
-                                IconButton(
-                                    onClick = { doc.fields.favorite.booleanValue },
-                                    modifier = Modifier
-                                        .size(42.dp)
-                                        .background(
-                                            color = Color(0xFFF5F5F5),
-                                            shape = CircleShape
-                                        )
-                                ) {
-                                    Icon(
-                                        imageVector = (if (doc.fields.favorite.booleanValue) Icons.Default.Favorite else Icons.Default.Favorite),
-                                        contentDescription = "Favorite",
-                                        tint = if (doc.fields.favorite.booleanValue) Color(
-                                            0xFFFFA500
-                                        ) else Color.Gray,
-                                        modifier = Modifier.size(22.dp)
-                                    )
+                                val isFavorite = doc.fields.favorite.booleanValue
 
-                                }
+                                Tag(
+                                    text = if (isFavorite) "Disponível" else "Esgotado",
+                                    backgroundColor = if (isFavorite) Color(0xFF4CAF50) else Color(0xFF9E9E9E)
+                                )
                             }
-
                         }
                     }
                 }
