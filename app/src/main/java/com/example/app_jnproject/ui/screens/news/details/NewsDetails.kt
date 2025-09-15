@@ -65,7 +65,7 @@ fun NewsDetailsLayout(
             CenterAlignedTopAppBar(
                 title = {
                     Image(
-                        painter = painterResource(R.drawable.caririfestlogo3true),
+                        painter = painterResource(R.drawable.caririfestlogo1),
                         contentDescription = "logo",
                         modifier = Modifier.size(120.dp)
                     )

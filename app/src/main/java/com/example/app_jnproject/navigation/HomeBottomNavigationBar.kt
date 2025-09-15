@@ -202,7 +202,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                     Icon(
                         painter = painterResource(id = item.icon),
                         contentDescription = item.label,
-                        tint = Color(0xFFFF5733),
+                        tint = Color(0xFFFF6D00),
                         modifier = Modifier.size(26.dp)
                     )
                 },

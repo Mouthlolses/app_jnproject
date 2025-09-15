@@ -69,7 +69,7 @@ fun SplashScreen() {
             exit = fadeOut()
         ) {
             Image(
-                painter = painterResource(id = R.drawable.caririfestlogo3true),
+                painter = painterResource(id = R.drawable.caririfestlogo1),
                 contentDescription = "Logo",
                 modifier = Modifier
                     .size(500.dp)
