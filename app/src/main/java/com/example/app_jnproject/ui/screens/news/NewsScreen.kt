@@ -201,7 +201,9 @@ fun NewsScreenLayout(
 
                                 Tag(
                                     text = if (isFavorite) "Disponível" else "Esgotado",
-                                    backgroundColor = if (isFavorite) Color(0xFF4CAF50) else Color(0xFF9E9E9E)
+                                    backgroundColor = if (isFavorite) Color(0xFF4CAF50) else Color(
+                                        0xFF9E9E9E
+                                    )
                                 )
                             }
                         }

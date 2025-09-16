@@ -46,11 +46,21 @@ android {
 
 dependencies {
 
+
     implementation(libs.androidx.datastore.preferences)
 
     //MapBoxSDK
     implementation(libs.android.ndk27)
     implementation(libs.maps.compose.ndk27)
+//    implementation(libs.autofill.ndk27)
+//    implementation(libs.discover.ndk27)
+//    implementation(libs.place.autocomplete.ndk27)
+//    implementation(libs.offline.ndk27)
+//    implementation(libs.mapbox.search.android.ndk27)
+//    implementation(libs.mapbox.search.android.ui.ndk27)
+
+
+
 
     //módulo core-network
     implementation(project(":core:network"))
@@ -63,6 +73,7 @@ dependencies {
     implementation(libs.androidx.work.runtime.ktx)
     //GCMNetworkManager support
     implementation(libs.androidx.work.gcm)
+    implementation(libs.places)
     // optional - Test helpers
     androidTestImplementation(libs.androidx.work.testing)
     // optional - Multiprocess support

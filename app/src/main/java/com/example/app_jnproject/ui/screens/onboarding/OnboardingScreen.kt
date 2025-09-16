@@ -47,6 +47,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.app_jnproject.R
 import com.example.app_jnproject.datastore.PreferencesKey
 import com.example.app_jnproject.datastore.dataStore
+import com.example.app_jnproject.font.poppinsFamily
 import com.example.app_jnproject.ui.components.ButtonAllCustomized
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -214,6 +215,7 @@ fun OnBoardingScreeLayout(
                         .padding(8.dp),
                     textAlign = TextAlign.Center,
                     fontSize = 26.sp,
+                    fontFamily = poppinsFamily,
                     fontWeight = FontWeight.Bold,
                     color = Color.Black
                 )
