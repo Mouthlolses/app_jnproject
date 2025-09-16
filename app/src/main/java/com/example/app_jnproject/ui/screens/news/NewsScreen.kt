@@ -44,6 +44,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.example.app_jnproject.font.poppinsFamily
 import com.example.app_jnproject.ui.components.Tag
 import com.example.data.datasource.repository.EventsRepository
 
@@ -158,9 +159,8 @@ fun NewsScreenLayout(
                                 ) {
                                     Text(
                                         text = doc.fields.title.stringValue,
-                                        style = MaterialTheme.typography.titleMedium.copy(
-                                            fontWeight = FontWeight.Bold
-                                        ),
+                                        fontFamily = poppinsFamily,
+                                        fontWeight = FontWeight.Bold,
                                         color = Color.Black
                                     )
 
@@ -168,31 +168,30 @@ fun NewsScreenLayout(
 
                                     Row(verticalAlignment = Alignment.CenterVertically) {
                                         Icon(
-                                            imageVector = Icons.Default.Place,
-                                            contentDescription = "Location",
-                                            tint = Color.Gray,
+                                            imageVector = Icons.Default.DateRange,
+                                            contentDescription = "Date",
+                                            tint = Color.DarkGray,
                                             modifier = Modifier.size(18.dp)
                                         )
-                                        Spacer(modifier = Modifier.width(6.dp))
+                                        Spacer(modifier = Modifier.width(4.dp))
                                         Text(
-                                            text = doc.fields.location.stringValue,
+                                            text = doc.fields.date.stringValue,
                                             style = MaterialTheme.typography.bodySmall,
                                             color = Color.Gray
                                         )
                                     }
-
-                                    Spacer(modifier = Modifier.height(4.dp))
+                                    Spacer(modifier = Modifier.height(8.dp))
 
                                     Row(verticalAlignment = Alignment.CenterVertically) {
                                         Icon(
-                                            imageVector = Icons.Default.DateRange,
-                                            contentDescription = "Date",
-                                            tint = Color.Gray,
+                                            imageVector = Icons.Default.Place,
+                                            contentDescription = "Location",
+                                            tint = Color.Red,
                                             modifier = Modifier.size(18.dp)
                                         )
-                                        Spacer(modifier = Modifier.width(6.dp))
+                                        Spacer(modifier = Modifier.width(2.dp))
                                         Text(
-                                            text = doc.fields.date.stringValue,
+                                            text = doc.fields.location.stringValue,
                                             style = MaterialTheme.typography.bodySmall,
                                             color = Color.Gray
                                         )
