@@ -5,8 +5,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
+import androidx.work.OneTimeWorkRequestBuilder
+import androidx.work.WorkManager
 import com.example.app_jnproject.navigation.AppNavigation
 import com.example.app_jnproject.ui.theme.App_jnprojectTheme
+import com.example.app_jnproject.workmanager.CuriosidadeWorker
+import com.example.app_jnproject.workmanager.requestNotificationPermission
+import com.example.app_jnproject.workmanager.scheduleCuriosidadeWorker
 import com.example.data.datasource.database.AppDatabase
 import com.example.data.datasource.repository.EventsRepository
 import com.example.network.data.EventsApi
@@ -21,10 +26,13 @@ class MainActivity : ComponentActivity() {
             api = EventsApi.retrofitService,
             eventDao = db.eventDao()
         )
+
+        requestNotificationPermission(this, this)
+        scheduleCuriosidadeWorker(this)
+
         setContent { App_jnprojectTheme { AppJnToday(repository = repository) } }
     }
 }
-
 
 @Composable
 fun AppJnToday(repository: EventsRepository) {

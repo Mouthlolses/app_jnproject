@@ -59,6 +59,16 @@ dependencies {
 
     implementation(libs.android.sdk)
 
+    //WorkManager
+    implementation(libs.androidx.work.runtime.ktx)
+    //GCMNetworkManager support
+    implementation(libs.androidx.work.gcm)
+    // optional - Test helpers
+    androidTestImplementation(libs.androidx.work.testing)
+    // optional - Multiprocess support
+    implementation(libs.androidx.work.multiprocess)
+
+
 
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.runtime)
