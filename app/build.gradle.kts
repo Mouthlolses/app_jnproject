@@ -45,8 +45,7 @@ android {
 }
 
 dependencies {
-
-
+    //datastore
     implementation(libs.androidx.datastore.preferences)
 
     //MapBoxSDK
@@ -58,8 +57,6 @@ dependencies {
 //    implementation(libs.offline.ndk27)
 //    implementation(libs.mapbox.search.android.ndk27)
 //    implementation(libs.mapbox.search.android.ui.ndk27)
-
-
 
 
     //módulo core-network
@@ -80,13 +77,14 @@ dependencies {
     implementation(libs.androidx.work.multiprocess)
 
 
-
     ksp(libs.androidx.room.compiler)
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.room.ktx)
     implementation(libs.androidx.room.rxjava3)
+
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
+
     implementation(libs.androidx.foundation)
     implementation(libs.material3)
     ksp(libs.hilt.android.compiler)

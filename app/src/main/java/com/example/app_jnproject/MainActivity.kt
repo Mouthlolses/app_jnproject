@@ -25,6 +25,7 @@ class MainActivity : ComponentActivity() {
             api = EventsApi.retrofitService,
             eventDao = db.eventDao()
         )
+
         requestNotificationPermission(this, this)
         scheduleCuriosidadeWorker(this)
         NotificationManagerCompat.from(this).cancel(NOTIFICATION_ID)
