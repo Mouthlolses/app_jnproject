@@ -11,9 +11,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.app_jnproject.ui.screens.SplashScreen
 import com.example.app_jnproject.datastore.PreferencesKey
 import com.example.app_jnproject.datastore.dataStore
+import com.example.app_jnproject.ui.screens.SplashScreen
 import com.example.app_jnproject.ui.screens.home.HomeScreen
 import com.example.app_jnproject.ui.screens.onboarding.OnBoardingScreen
 import com.example.data.datasource.repository.EventsRepository

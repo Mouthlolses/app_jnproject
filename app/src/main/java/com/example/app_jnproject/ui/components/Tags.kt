@@ -20,7 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.app_jnproject.R
-import com.mapbox.maps.extension.style.expressions.dsl.generated.id
 
 
 @Preview
