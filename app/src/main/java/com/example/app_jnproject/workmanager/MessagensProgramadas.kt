@@ -4,7 +4,6 @@ package com.example.app_jnproject.workmanager
 
 object CuriositiesRepositoryTitle {
     val scheduledMessagesTitles = listOf(
-        "Curiosidade do Cariri Fest",
         "Fique por dentro!",
         "Dica do dia",
         "Novidade chegando",
