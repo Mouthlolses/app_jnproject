@@ -43,6 +43,9 @@ class OfferViewModel() : ViewModel() {
                 img = R.drawable.logoshopee2,
                 titleOffer = "Ofertas Shopee",
                 cuponOffer = "Cupons de oferta:",
+                link = "https://s.shopee.com.br/5AjB41ziAU",
+                tags = listOf("Tag1", "Tag2"),
+                tagColor = Color(0xFF4CAF50)
             ),
             OffersData(
                 id = 4,
@@ -51,6 +54,7 @@ class OfferViewModel() : ViewModel() {
                 titleOffer = "Ofertas BoaSorte Online",
                 cuponOffer = "Cupons de oferta:",
                 link = "https://tidd.ly/46r3pz2",
+                qrCode = R.drawable.awin_qrcode,
                 tags = listOf("Tag1", "Tag2"),
                 tagColor = Color(0xFF4CAF50)
             )
@@ -65,7 +69,7 @@ data class OffersData(
     val titleOffer: String = "",
     val cuponOffer: String = "",
     val link: String = "",
-    val qrCode: String = "",
+    val qrCode: Int? = null,
     @param:DrawableRes val tagIcon: Int = R.drawable.ic_action_sell,
     val tags: List<String> = emptyList(),
     val tagColor: Color = Color(0xFF4CAF50)
