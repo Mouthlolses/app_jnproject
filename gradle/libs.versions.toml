@@ -1,36 +1,36 @@
 [versions]
-agp = "8.12.0"
+agp = "8.12.3"
 androidNdk27 = "11.14.4"
 androidSdk = "11.13.1"
-animation = "1.9.0"
+animation = "1.9.1"
 autofillNdk27 = "2.14.0"
 datastorePreferences = "1.1.7"
-firebaseBom = "34.1.0"
+firebaseBomVersion = "34.2.0"
 kotlin = "2.2.0"
-hiltAndroid = "2.57"
-hiltAndroidCompiler = "2.57"
-hiltNavigationCompose = "1.2.0"
-coreKtx = "1.16.0"
+hiltAndroid = "2.57.1"
+hiltAndroidCompiler = "2.57.1"
+hiltNavigationCompose = "1.3.0"
+coreKtx = "1.17.0"
 junit = "4.13.2"
 junitVersion = "1.3.0"
 espressoCore = "3.7.0"
 kotlinxSerializationJson = "1.9.0"
-lifecycleRuntimeKtx = "2.9.2"
-activityCompose = "1.10.1"
-composeBom = "2025.07.00"
+lifecycleRuntimeKtx = "2.9.3"
+activityCompose = "1.11.0"
+composeBom = "2025.09.00"
 coil = "2.7.0"
 loggingInterceptor = "5.1.0"
 mapsComposeNdk27 = "11.14.4"
-navigation = "2.9.3"
+navigation = "2.9.4"
 okhttp = "5.1.0"
 retrofit = "3.0.0"
 retrofit2KotlinxSerializationConverter = "1.0.0"
-room = "2.7.2"
+room = "2.8.0"
 profile = "1.4.1"
-foundation = "1.9.0"
+foundation = "1.9.1"
 material3 = "1.3.2"
 appcompat = "1.7.1"
-material = "1.12.0"
+material = "1.13.0"
 workRuntimeKtx = "2.10.4"
 places = "4.4.1"
 
@@ -45,9 +45,9 @@ androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version
 androidx-work-testing = { module = "androidx.work:work-testing", version.ref = "workRuntimeKtx" }
 autofill-ndk27 = { module = "com.mapbox.search:autofill-ndk27", version.ref = "autofillNdk27" }
 discover-ndk27 = { module = "com.mapbox.search:discover-ndk27", version.ref = "autofillNdk27" }
-firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
-firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-bom-v3222 = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBomVersion" }
 firebase-crashlytics-ndk = { module = "com.google.firebase:firebase-crashlytics-ndk" }
+google-firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 androidx-animation = { module = "androidx.compose.animation:animation", version.ref = "animation" }

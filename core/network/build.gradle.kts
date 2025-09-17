@@ -1,8 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    id("com.google.gms.google-services")
-    id("org.jetbrains.kotlin.plugin.serialization") version "2.2.10"
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.2.20"
 }
 
 android {
@@ -50,9 +49,7 @@ dependencies {
     // Interceptor de Log (para depuração)
     implementation(libs.logging.interceptor)
 
-    implementation(platform(libs.firebase.bom))
-
-    implementation(libs.firebase.analytics)
+    implementation(platform(libs.firebase.bom.v3222))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)

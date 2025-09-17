@@ -4,6 +4,8 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id("kotlin-parcelize")
     id("com.google.devtools.ksp")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -45,6 +47,13 @@ android {
 }
 
 dependencies {
+
+    //firebase
+    implementation(platform(libs.firebase.bom.v3222))
+    implementation(libs.firebase.crashlytics.ndk)
+    implementation(libs.google.firebase.analytics)
+
+
     //datastore
     implementation(libs.androidx.datastore.preferences)
 
