@@ -21,7 +21,7 @@ class HomeViewModel : ViewModel() {
             CityLocation(
                 id = 1,
                 name = "Juazeiro do Norte",
-                img = R.drawable.hortoimg1,
+                img = R.drawable.banner_juazeiro,
                 url = "https://www.buskaza.com.br/blog/guia-de-cidades/juazeiro-do-norte-ceara-por-que-voce-vai-se-encantar-pela-capital-da-fe/",
             ),
             CityLocation(

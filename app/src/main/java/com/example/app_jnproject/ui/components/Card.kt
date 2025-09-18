@@ -71,8 +71,8 @@ fun EventCard(
                 Image(
                     painter = painterResource(img),
                     contentDescription = "eventimage",
-                    contentScale = ContentScale.Fit,
-                    modifier = Modifier
+                    contentScale = ContentScale.Crop,
+                    modifier = modifier
                         .size(300.dp)
                 )
             }
