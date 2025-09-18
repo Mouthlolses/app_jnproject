@@ -22,6 +22,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Text
@@ -61,7 +62,6 @@ fun OfferScreen(
 
     var selectedOffer by remember { mutableStateOf<OffersData?>(null) }
 
-    // Estado do BottomSheet
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
 
@@ -141,6 +141,7 @@ fun OfferScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                 )
+                HorizontalDivider()
                 Spacer(Modifier.height(24.dp))
                 Text(
                     text = stringResource(R.string.cupons),
@@ -171,7 +172,11 @@ fun OfferScreen(
                                 context.startActivity(intent)
                             },
                             modifier = Modifier
+                                .height(44.dp)
                                 .fillMaxWidth(),
+                            elevation = ButtonDefaults.buttonElevation(
+                                8.dp
+                            ),
                             colors = ButtonDefaults.buttonColors(
                                 Color(0xFFFF5733),
                                 Color.White
