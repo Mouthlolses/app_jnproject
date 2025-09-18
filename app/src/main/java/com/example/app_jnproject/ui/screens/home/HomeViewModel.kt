@@ -21,43 +21,57 @@ class HomeViewModel : ViewModel() {
             CityLocation(
                 id = 1,
                 name = "Juazeiro do Norte",
-                location = "Juazeiro do Norte - CE",
-                date = "20/05/2025",
                 img = R.drawable.hortoimg1,
                 url = "https://www.buskaza.com.br/blog/guia-de-cidades/juazeiro-do-norte-ceara-por-que-voce-vai-se-encantar-pela-capital-da-fe/",
             ),
             CityLocation(
                 id = 2,
-                name = "Horto",
-                location = "Juazeiro do Norte - CE",
-                date = "20/05/2025",
+                name = "Crato",
                 img = R.drawable.hortoimg1,
                 url = "https://hortodopadrecicero.net.br/historia-2/",
             ),
             CityLocation(
                 id = 3,
-                name = "Praça Padre Cicero",
-                location = "Avenida Padre Cicero",
-                date = "20/05/2025",
+                name = "Barbalha",
                 img = R.drawable.hortoimg1,
                 url = "",
             ),
             CityLocation(
                 id = 4,
-                name = "Praça Padre Cicero",
-                location = "Avenida Padre Cicero",
-                date = "20/05/2025",
+                name = "Caririaçu",
                 img = R.drawable.hortoimg1,
                 url = "",
             ),
             CityLocation(
                 id = 5,
-                name = "Praça Padre Cicero",
-                location = "Avenida Padre Cicero",
-                date = "20/05/2025",
+                name = "Missão Velha",
                 img = R.drawable.hortoimg1,
                 url = "",
-            )
+            ),
+            CityLocation(
+                id = 6,
+                name = "Jardim",
+                img = R.drawable.hortoimg1,
+                url = "",
+            ),
+            CityLocation(
+                id = 7,
+                name = "Santana do Cariri",
+                img = R.drawable.hortoimg1,
+                url = ""
+            ),
+            CityLocation(
+                id = 8,
+                name = "Nova Olinda",
+                img = R.drawable.hortoimg1,
+                url = ""
+            ),
+            CityLocation(
+                id = 9,
+                name = "Farias Brito",
+                img = R.drawable.hortoimg1,
+                url = ""
+            ),
         )
     }
 }
@@ -66,8 +80,6 @@ class HomeViewModel : ViewModel() {
 data class CityLocation(
     val id: Int,
     val name: String,
-    val location: String,
-    val date: String,
     val url: String,
     @param:DrawableRes val img: Int
 )
