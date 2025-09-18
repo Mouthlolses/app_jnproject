@@ -1,10 +1,38 @@
 <resources>
+    <!--titleApp-->
     <string name="app_name">Cariri Fest</string>
-    <string name="start">Começar</string>
+
+
+    <!--bottomNavigationBar-->
     <string name="news">Agora</string>
     <string name="home">Em Breve</string>
     <string name="search">Explorar</string>
     <string name="favorites">Ofertas</string>
+
+
+    <!--OfferScreen-->
+    <string name="offers">Tudo em Oferta</string>
+    <string name="cupons">Cupons</string>
+    <string name="accessOffers">Acesse suas ofertas</string>
+    <string name="accessQrCode">Acesse também via QrCode:</string>
+
+    <!--NewsScreen-->
+    <string name="mascot">MascotForApp</string>
+    <string name="recharge">Recarregar</string>
+    <string name="imageEvents">imageEvents</string>
+    <string name="date">Date</string>
+    <string name="location">Location</string>
+    <string name="available">Disponível</string>
+    <string name="exhausted">Esgotado</string>
+
+    <!--NewsDetailsScreen-->
+    <string name="back">voltar</string>
+    <string name="logo">logo</string>
+    <string name="buyTicket">Comprar Ingressos</string>
+
+
+    <!--onboardingScreen-->
+    <string name="start">Começar</string>
     <string name="title">Descubra tudo o que está rolando perto de você</string>
     <string name="title2">Sua agenda de eventos do Cariri, em um só lugar</string>
     <string name="title3">Conheça os lugares que contam a história da nossa região</string>

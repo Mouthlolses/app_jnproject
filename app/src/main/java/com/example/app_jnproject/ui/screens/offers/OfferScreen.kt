@@ -37,6 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,6 +45,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.net.toUri
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.app_jnproject.R
 import com.example.app_jnproject.font.interFamily
 import com.example.app_jnproject.font.poppinsFamily
 import com.example.app_jnproject.font.robotoFamily
@@ -71,7 +73,7 @@ fun OfferScreen(
     ) {
 
         Text(
-            text = "Tudo em Oferta",
+            text = stringResource(R.string.offers),
             style = MaterialTheme.typography.headlineLarge.copy(
                 fontFamily = poppinsFamily,
                 fontWeight = FontWeight.Bold,
@@ -141,7 +143,7 @@ fun OfferScreen(
                 )
                 Spacer(Modifier.height(24.dp))
                 Text(
-                    text = "Cupons",
+                    text = stringResource(R.string.cupons),
                     fontFamily = interFamily,
                     fontWeight = FontWeight.Medium,
                     color = Color.Black,
@@ -176,7 +178,7 @@ fun OfferScreen(
                             )
                         ) {
                             Text(
-                                text = "Acesse suas ofertas"
+                                text = stringResource(R.string.accessOffers)
                             )
                         }
                         Spacer(Modifier.height(16.dp))
@@ -185,7 +187,7 @@ fun OfferScreen(
                     if (offer.qrCode != null) {
                         Spacer(Modifier.height(24.dp))
                         Text(
-                            text = "Acesse também via QRCode:",
+                            text = stringResource(R.string.accessQrCode),
                             textAlign = TextAlign.Center,
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -193,7 +195,7 @@ fun OfferScreen(
                         Spacer(Modifier.height(16.dp))
                         Image(
                             painter = painterResource(offer.qrCode),
-                            contentDescription = "qr_code",
+                            contentDescription = stringResource(R.string.accessQrCode),
                             modifier = Modifier
                                 .align(Alignment.CenterHorizontally)
                         )

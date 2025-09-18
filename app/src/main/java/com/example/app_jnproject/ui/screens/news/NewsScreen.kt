@@ -38,12 +38,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
+import com.example.app_jnproject.R
 import com.example.app_jnproject.font.poppinsFamily
 import com.example.app_jnproject.ui.components.Tag
 import com.example.data.datasource.repository.EventsRepository
@@ -81,8 +83,8 @@ fun NewsScreenLayout(
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Image(
-                        painter = painterResource(com.example.app_jnproject.R.drawable.mascot_sf),
-                        contentDescription = "mascot"
+                        painter = painterResource(R.drawable.mascot_sf),
+                        contentDescription = stringResource(R.string.mascot)
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
@@ -94,10 +96,13 @@ fun NewsScreenLayout(
                     Button(
                         onClick = { viewModel.refreshEvents() },
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFFFA500) // cor de destaque
+                            containerColor = Color(0xFFFFA500)
                         )
                     ) {
-                        Text(text = "Recarregar", color = Color.White)
+                        Text(
+                            text = stringResource(R.string.recharge),
+                            color = Color.White
+                        )
                     }
                 }
             }
@@ -138,7 +143,7 @@ fun NewsScreenLayout(
                             ) {
                                 AsyncImage(
                                     model = doc.fields.img.stringValue,
-                                    contentDescription = "image_praca",
+                                    contentDescription = stringResource(R.string.imageEvents),
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .height(200.dp)
@@ -169,7 +174,7 @@ fun NewsScreenLayout(
                                     Row(verticalAlignment = Alignment.CenterVertically) {
                                         Icon(
                                             imageVector = Icons.Default.DateRange,
-                                            contentDescription = "Date",
+                                            contentDescription = stringResource(R.string.date),
                                             tint = Color.DarkGray,
                                             modifier = Modifier.size(18.dp)
                                         )
@@ -185,7 +190,7 @@ fun NewsScreenLayout(
                                     Row(verticalAlignment = Alignment.CenterVertically) {
                                         Icon(
                                             imageVector = Icons.Default.Place,
-                                            contentDescription = "Location",
+                                            contentDescription = stringResource(R.string.location),
                                             tint = Color.Red,
                                             modifier = Modifier.size(18.dp)
                                         )
@@ -200,7 +205,11 @@ fun NewsScreenLayout(
                                 val isFavorite = doc.fields.favorite.booleanValue
 
                                 Tag(
-                                    text = if (isFavorite) "Disponível" else "Esgotado",
+                                    text =
+                                        if (isFavorite)
+                                            stringResource(R.string.available)
+                                        else
+                                            stringResource(R.string.exhausted),
                                     backgroundColor = if (isFavorite) Color(0xFF4CAF50) else Color(
                                         0xFF9E9E9E
                                     )

@@ -43,6 +43,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -85,7 +86,7 @@ fun NewsDetailsLayout(
                 title = {
                     Image(
                         painter = painterResource(R.drawable.caririfestlogo1),
-                        contentDescription = "logo",
+                        contentDescription = stringResource(R.string.logo),
                         modifier = Modifier.size(120.dp)
                     )
                 },
@@ -93,7 +94,7 @@ fun NewsDetailsLayout(
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             painter = painterResource(R.drawable.ic_arrow_back),
-                            contentDescription = "Voltar",
+                            contentDescription = stringResource(R.string.back),
                             tint = Color(0xFFFF5733)
                         )
                     }
@@ -136,7 +137,7 @@ fun NewsDetailsLayout(
                     }
                 ) {
                     Text(
-                        text = "Comprar ingressos",
+                        text = stringResource(R.string.buyTicket),
                         style = typography.bodyLarge,
                         fontFamily = FontFamily.SansSerif,
                         fontWeight = FontWeight.Bold
@@ -152,7 +153,6 @@ fun NewsDetailsLayout(
                 .verticalScroll(scrollState)
                 .fillMaxSize()
         ) {
-            // Imagem com botão sobreposto
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -169,7 +169,6 @@ fun NewsDetailsLayout(
                     contentScale = ContentScale.Crop
                 )
 
-                // Botão sobreposto no final da imagem
                 ShareButton(
                     onClick = {
                         scope.launch {
@@ -197,7 +196,6 @@ fun NewsDetailsLayout(
                             val drawable = result.drawable
                             val bitmap = (drawable as BitmapDrawable).bitmap
 
-                            // chama função utilitária
                             withContext(Dispatchers.Main) {
                                 shareContent(context, bitmap, text)
                             }
@@ -206,7 +204,7 @@ fun NewsDetailsLayout(
                     },
                     modifier = Modifier
                         .align(Alignment.BottomCenter)
-                        .offset(y = 24.dp) // faz ele "sair" um pouco da imagem
+                        .offset(y = 24.dp)
                 )
             }
 
@@ -231,7 +229,7 @@ fun NewsDetailsLayout(
                 ) {
                     Icon(
                         imageVector = Icons.Default.DateRange,
-                        contentDescription = "Location",
+                        contentDescription = stringResource(R.string.location),
                         tint = Color.DarkGray,
                         modifier = Modifier.size(18.dp)
                     )
@@ -253,7 +251,7 @@ fun NewsDetailsLayout(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Place,
-                        contentDescription = "Location",
+                        contentDescription = stringResource(R.string.location),
                         tint = Color.Red,
                         modifier = Modifier.size(18.dp)
                     )
@@ -275,8 +273,14 @@ fun NewsDetailsLayout(
                     item {
                         Tag(
                             icon = R.drawable.ic_action_sell,
-                            text = if (event.fields.favorite.booleanValue) "Disponível" else "Esgotado",
-                            backgroundColor = if (event.fields.favorite.booleanValue) Color(0xFF4CAF50) else Color(0xFF9E9E9E),
+                            text =
+                                if (event.fields.favorite.booleanValue)
+                                    stringResource(R.string.available)
+                                else
+                                    stringResource(R.string.exhausted),
+                            backgroundColor = if (event.fields.favorite.booleanValue) Color(
+                                0xFF4CAF50
+                            ) else Color(0xFF9E9E9E),
                             modifier = Modifier
                                 .padding(start = 16.dp)
                         )
