@@ -1,8 +1,8 @@
 package com.example.app_jnproject.ui.screens.home
 
+import androidx.annotation.DrawableRes
 import androidx.lifecycle.ViewModel
 import com.example.app_jnproject.R
-import com.example.app_jnproject.data.CityLocation
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -25,7 +25,6 @@ class HomeViewModel : ViewModel() {
                 date = "20/05/2025",
                 img = R.drawable.hortoimg1,
                 url = "https://www.buskaza.com.br/blog/guia-de-cidades/juazeiro-do-norte-ceara-por-que-voce-vai-se-encantar-pela-capital-da-fe/",
-                isFavorite = false
             ),
             CityLocation(
                 id = 2,
@@ -34,7 +33,6 @@ class HomeViewModel : ViewModel() {
                 date = "20/05/2025",
                 img = R.drawable.hortoimg1,
                 url = "https://hortodopadrecicero.net.br/historia-2/",
-                isFavorite = false
             ),
             CityLocation(
                 id = 3,
@@ -43,7 +41,6 @@ class HomeViewModel : ViewModel() {
                 date = "20/05/2025",
                 img = R.drawable.hortoimg1,
                 url = "",
-                isFavorite = false
             ),
             CityLocation(
                 id = 4,
@@ -52,7 +49,6 @@ class HomeViewModel : ViewModel() {
                 date = "20/05/2025",
                 img = R.drawable.hortoimg1,
                 url = "",
-                isFavorite = false
             ),
             CityLocation(
                 id = 5,
@@ -61,8 +57,18 @@ class HomeViewModel : ViewModel() {
                 date = "20/05/2025",
                 img = R.drawable.hortoimg1,
                 url = "",
-                isFavorite = false
-            ),
+            )
         )
     }
 }
+
+
+data class CityLocation(
+    val id: Int,
+    val name: String,
+    val location: String,
+    val date: String,
+    val url: String,
+    @param:DrawableRes val img: Int
+)
+

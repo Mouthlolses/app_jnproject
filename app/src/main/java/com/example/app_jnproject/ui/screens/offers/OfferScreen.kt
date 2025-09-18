@@ -109,9 +109,7 @@ fun OfferScreen(
                         },
                     elevation = CardDefaults.cardElevation(defaultElevation = 4.dp)
                 ) {
-                    Column(
-                        modifier = Modifier
-                    ) {
+                    Column {
                         Image(
                             painter = painterResource(offer.img),
                             contentDescription = offer.titleOffer

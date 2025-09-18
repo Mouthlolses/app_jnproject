@@ -34,7 +34,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
-import com.example.app_jnproject.data.CityLocation
+import com.example.app_jnproject.ui.screens.home.CityLocation
 
 @Composable
 fun DetailsScreen(

@@ -112,8 +112,6 @@ fun HomeScreenLayout(
                     title = city.name,
                     location = city.location,
                     date = city.date,
-                    isFavorite = city.isFavorite,
-                    onFavoriteClick = {},
                     onCardClick = {
                         navController.navigate("detailsScreen/${city.id}")
                     },

@@ -14,17 +14,14 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Place
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -48,8 +45,6 @@ fun EventCard(
     title: String,
     location: String,
     date: String,
-    isFavorite: Boolean,
-    onFavoriteClick: () -> Unit,
     onCardClick: () -> Unit,
     cardEnable: Boolean
 ) {
@@ -139,23 +134,6 @@ fun EventCard(
                         )
                     }
                 }
-                // BOTÃO DE FAVORITO
-                IconButton(
-                    onClick = onFavoriteClick,
-                    modifier = Modifier
-                        .size(42.dp)
-                        .background(
-                            color = Color(0xFFF5F5F5),
-                            shape = CircleShape
-                        )
-                ) {
-                    Icon(
-                        imageVector = (if (isFavorite) Icons.Default.Star else Icons.Default.Star),
-                        contentDescription = "Favorite",
-                        tint = if (isFavorite) Color(0xFFFFA500) else Color.Gray,
-                        modifier = Modifier.size(22.dp)
-                    )
-                }
             }
         }
     }
@@ -170,8 +148,6 @@ fun CardPreview() {
         title = "DJ Night Hawa",
         location = "Milkyway, Mars",
         date = "12 March, 2020",
-        isFavorite = false,
-        onFavoriteClick = {},
         onCardClick = {},
         cardEnable = true,
     )
