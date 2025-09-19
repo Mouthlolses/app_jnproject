@@ -19,6 +19,7 @@ import kotlinx.coroutines.launch
 class NewsViewModel(
     private val repository: EventsRepository
 ) : ViewModel() {
+
     val events: StateFlow<FetchEventsUiState> =
         repository.getEventsFlow()
             .map { list ->

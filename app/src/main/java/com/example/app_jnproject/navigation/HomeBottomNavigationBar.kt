@@ -111,7 +111,9 @@ fun NavigationGraph(
             route = "newsDetailsScreen/{eventId}"
         ) { backStackEntry ->
             val viewModel: NewsViewModel = viewModel(
-                factory = NewsViewModelFactory(repository)
+                factory = NewsViewModelFactory(
+                    repository
+                )
             )
             val eventId = backStackEntry.arguments?.getString("eventId") ?: ""
             val uiState = viewModel.events.collectAsState().value

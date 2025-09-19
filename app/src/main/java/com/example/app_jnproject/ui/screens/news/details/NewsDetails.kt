@@ -80,6 +80,7 @@ fun NewsDetailsLayout(
     val imageLoader = ImageLoader(context)
     val scrollState = rememberScrollState()
 
+
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -278,9 +279,10 @@ fun NewsDetailsLayout(
                                     stringResource(R.string.available)
                                 else
                                     stringResource(R.string.exhausted),
-                            backgroundColor = if (event.fields.favorite.booleanValue) Color(
-                                0xFF4CAF50
-                            ) else Color(0xFF9E9E9E),
+                            backgroundColor =
+                                if (event.fields.favorite.booleanValue) Color(
+                                    0xFF4CAF50
+                                ) else Color(0xFF9E9E9E),
                             modifier = Modifier
                                 .padding(start = 16.dp)
                         )
@@ -323,6 +325,6 @@ fun NewsDetailsLayoutPreview() {
 
     NewsDetailsLayout(
         event = fakeEvent,
-        navController = rememberNavController()
+        navController = rememberNavController(),
     )
 }
