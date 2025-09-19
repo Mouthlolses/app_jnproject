@@ -49,6 +49,9 @@ android {
 
 dependencies {
 
+    //permission
+    implementation(libs.accompanist.permissions)
+
     //firebase
     implementation(platform(libs.firebase.bom.v3222))
     implementation(libs.firebase.crashlytics.ndk)
@@ -60,12 +63,7 @@ dependencies {
     //MapBoxSDK
     implementation(libs.android.ndk27)
     implementation(libs.maps.compose.ndk27)
-//    implementation(libs.autofill.ndk27)
-//    implementation(libs.discover.ndk27)
-//    implementation(libs.place.autocomplete.ndk27)
-//    implementation(libs.offline.ndk27)
-//    implementation(libs.mapbox.search.android.ndk27)
-//    implementation(libs.mapbox.search.android.ui.ndk27)
+    implementation(libs.navigationcore.android.ndk27)
 
 
     //módulo core-network
