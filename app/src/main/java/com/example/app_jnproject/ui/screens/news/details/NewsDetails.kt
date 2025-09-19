@@ -34,6 +34,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -49,6 +51,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.ImageLoader
@@ -59,6 +62,7 @@ import com.example.app_jnproject.font.montserratFamily
 import com.example.app_jnproject.shared.shareContent
 import com.example.app_jnproject.ui.components.ShareButton
 import com.example.app_jnproject.ui.components.Tag
+import com.example.app_jnproject.ui.screens.news.NewsViewModel
 import com.example.network.model.Document
 import com.example.network.model.EventFields
 import com.example.network.model.FirestoreBoolean
@@ -72,6 +76,7 @@ import kotlinx.coroutines.withContext
 @Composable
 fun NewsDetailsLayout(
     event: Document,
+    viewModel: NewsViewModel = hiltViewModel(),
     navController: NavHostController
 ) {
     val scope = rememberCoroutineScope()
@@ -79,6 +84,7 @@ fun NewsDetailsLayout(
     val context = LocalContext.current
     val imageLoader = ImageLoader(context)
     val scrollState = rememberScrollState()
+    val isConnected by viewModel.isConnected.collectAsState()
 
 
     Scaffold(
@@ -125,17 +131,11 @@ fun NewsDetailsLayout(
                         .fillMaxWidth()
                         .height(46.dp),
                     shape = RoundedCornerShape(36.dp),
-                    colors = if (event.fields.favorite.booleanValue) {
-                        ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFF00C853),
-                            contentColor = Color.White
-                        )
-                    } else {
-                        ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFF9E9E9E),
-                            contentColor = Color.White
-                        )
-                    }
+                    enabled = event.fields.favorite.booleanValue,
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFF00C853),
+                        contentColor = Color.White
+                    )
                 ) {
                     Text(
                         text = stringResource(R.string.buyTicket),

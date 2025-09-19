@@ -4,17 +4,26 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkRequest
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
 
-class ConnectivityObserver(context: Context) {
+
+interface ConnectivityObserver {
+    val isConnected: StateFlow<Boolean>
+}
+
+class NetworkConnectivityObserver @Inject constructor(
+    @ApplicationContext context: Context
+) : ConnectivityObserver {
 
     private val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
 
     private val _isConnected = MutableStateFlow(true)
-    val isConnected: StateFlow<Boolean> = _isConnected.asStateFlow()
+    override val isConnected: StateFlow<Boolean> = _isConnected.asStateFlow()
 
 
     private val networkCallback = object : ConnectivityManager.NetworkCallback() {

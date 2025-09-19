@@ -30,6 +30,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
@@ -43,11 +44,9 @@ import com.example.app_jnproject.ui.screens.home.HomeViewModel
 import com.example.app_jnproject.ui.screens.home.details.DetailsScreen
 import com.example.app_jnproject.ui.screens.news.NewsScreenLayout
 import com.example.app_jnproject.ui.screens.news.NewsViewModel
-import com.example.app_jnproject.ui.screens.news.NewsViewModelFactory
 import com.example.app_jnproject.ui.screens.news.details.NewsDetailsLayout
 import com.example.app_jnproject.ui.screens.offers.OfferScreen
 import com.example.app_jnproject.ui.screens.search.SearchScreen
-import com.example.data.datasource.repository.EventsRepository
 
 data class BottomNavItem(
     val route: String,
@@ -70,8 +69,7 @@ enum class NavItems(
 @Composable
 fun NavigationGraph(
     navController: NavHostController,
-    modifier: Modifier = Modifier,
-    repository: EventsRepository
+    modifier: Modifier = Modifier
 ) {
     NavHost(
         navController = navController,
@@ -92,8 +90,7 @@ fun NavigationGraph(
     ) {
         composable(NavItems.NEWS.route) {
             NewsScreenLayout(
-                navController = navController,
-                repository = repository
+                navController = navController
             )
         }
         composable(NavItems.HOME.route) { HomeScreenLayout(navController = navController) }
@@ -110,11 +107,8 @@ fun NavigationGraph(
         composable(
             route = "newsDetailsScreen/{eventId}"
         ) { backStackEntry ->
-            val viewModel: NewsViewModel = viewModel(
-                factory = NewsViewModelFactory(
-                    repository
-                )
-            )
+            val viewModel: NewsViewModel = hiltViewModel()
+
             val eventId = backStackEntry.arguments?.getString("eventId") ?: ""
             val uiState = viewModel.events.collectAsState().value
             val event = uiState.events.find { it.id == eventId }

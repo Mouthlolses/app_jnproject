@@ -65,13 +65,13 @@ fun EventCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(140.dp)
-                    .background(Color(0xFF28025D)),
+                    .background(Color(0xFFFFD600)),
                 contentAlignment = Alignment.Center
             ) {
                 Image(
                     painter = painterResource(img),
                     contentDescription = "eventimage",
-                    contentScale = ContentScale.Crop,
+                    contentScale = ContentScale.Fit,
                     modifier = modifier
                         .size(300.dp)
                 )

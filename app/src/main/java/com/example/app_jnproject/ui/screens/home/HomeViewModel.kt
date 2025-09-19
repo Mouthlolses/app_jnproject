@@ -21,55 +21,61 @@ class HomeViewModel : ViewModel() {
             CityLocation(
                 id = 1,
                 name = "Juazeiro do Norte",
-                img = R.drawable.banner_juazeiro,
-                url = "https://www.buskaza.com.br/blog/guia-de-cidades/juazeiro-do-norte-ceara-por-que-voce-vai-se-encantar-pela-capital-da-fe/",
+                img = R.drawable.caririfestlogo1,
+                url = "",
             ),
             CityLocation(
                 id = 2,
                 name = "Crato",
-                img = R.drawable.hortoimg1,
-                url = "https://hortodopadrecicero.net.br/historia-2/",
+                img = R.drawable.caririfestlogo1,
+                url = "",
             ),
             CityLocation(
                 id = 3,
                 name = "Barbalha",
-                img = R.drawable.hortoimg1,
+                img = R.drawable.caririfestlogo1,
                 url = "",
             ),
             CityLocation(
                 id = 4,
-                name = "Caririaçu",
-                img = R.drawable.hortoimg1,
+                name = "Em Breve",
+                futureImpl = "Caririaçu",
+                img = R.drawable.caririfestlogo1,
                 url = "",
             ),
             CityLocation(
                 id = 5,
-                name = "Missão Velha",
-                img = R.drawable.hortoimg1,
+                name = "Em Breve",
+                futureImpl = "Missão Velha",
+                img = R.drawable.caririfestlogo1,
                 url = "",
             ),
             CityLocation(
                 id = 6,
-                name = "Jardim",
-                img = R.drawable.hortoimg1,
+                name = "Em Breve",
+                futureImpl = "Jardim",
+                img = R.drawable.caririfestlogo1,
                 url = "",
             ),
             CityLocation(
                 id = 7,
-                name = "Santana do Cariri",
-                img = R.drawable.hortoimg1,
+                name = "Em Breve",
+                futureImpl = "Santana do Cariri",
+                img = R.drawable.caririfestlogo1,
                 url = ""
             ),
             CityLocation(
                 id = 8,
-                name = "Nova Olinda",
-                img = R.drawable.hortoimg1,
+                name = "Em Breve",
+                futureImpl = "Nova Olinda",
+                img = R.drawable.caririfestlogo1,
                 url = ""
             ),
             CityLocation(
                 id = 9,
-                name = "Farias Brito",
-                img = R.drawable.hortoimg1,
+                name = "Em Breve",
+                futureImpl = "Farias Brito",
+                img = R.drawable.caririfestlogo1,
                 url = ""
             ),
         )
@@ -80,6 +86,7 @@ class HomeViewModel : ViewModel() {
 data class CityLocation(
     val id: Int,
     val name: String,
+    val futureImpl: String = "",
     val url: String,
     @param:DrawableRes val img: Int
 )

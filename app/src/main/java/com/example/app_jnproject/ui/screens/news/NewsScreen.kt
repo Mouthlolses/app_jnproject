@@ -42,25 +42,20 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.example.app_jnproject.R
 import com.example.app_jnproject.font.poppinsFamily
 import com.example.app_jnproject.ui.components.Tag
-import com.example.data.datasource.repository.EventsRepository
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NewsScreenLayout(
     navController: NavHostController,
-    repository: EventsRepository
+    viewModel: NewsViewModel = hiltViewModel()
 ) {
-
-    val viewModel: NewsViewModel = viewModel(
-        factory = NewsViewModelFactory(repository)
-    )
 
     val uiState by viewModel.events.collectAsState()
 

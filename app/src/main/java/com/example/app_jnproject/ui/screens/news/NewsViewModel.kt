@@ -3,22 +3,29 @@ package com.example.app_jnproject.ui.screens.news
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.app_jnproject.connect.ConnectivityObserver
 import com.example.data.datasource.model.EventEntity
 import com.example.data.datasource.repository.EventsRepository
 import com.example.network.model.Document
 import com.example.network.model.EventFields
 import com.example.network.model.FirestoreBoolean
 import com.example.network.model.FirestoreString
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class NewsViewModel(
-    private val repository: EventsRepository
+@HiltViewModel
+class NewsViewModel @Inject constructor(
+    private val repository: EventsRepository,
+    connectivityObserver: ConnectivityObserver
 ) : ViewModel() {
+
+    val isConnected: StateFlow<Boolean> = connectivityObserver.isConnected
 
     val events: StateFlow<FetchEventsUiState> =
         repository.getEventsFlow()

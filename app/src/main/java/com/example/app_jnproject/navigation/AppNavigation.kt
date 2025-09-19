@@ -16,12 +16,11 @@ import com.example.app_jnproject.datastore.dataStore
 import com.example.app_jnproject.ui.screens.SplashScreen
 import com.example.app_jnproject.ui.screens.home.HomeScreen
 import com.example.app_jnproject.ui.screens.onboarding.OnBoardingScreen
-import com.example.data.datasource.repository.EventsRepository
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.map
 
 @Composable
-fun AppNavigation(repository: EventsRepository) {
+fun AppNavigation() {
 
     val navController = rememberNavController()
     val context = LocalContext.current
@@ -41,7 +40,6 @@ fun AppNavigation(repository: EventsRepository) {
 
     when {
         onBoardingShown == null || showSplash -> {
-            // Mostra Splash animada
             SplashScreen()
         }
 
@@ -54,7 +52,7 @@ fun AppNavigation(repository: EventsRepository) {
                     OnBoardingScreen(navController = navController)
                 }
                 composable("homeScreen") {
-                    HomeScreen(repository = repository)
+                    HomeScreen()
                 }
             }
         }
@@ -68,7 +66,7 @@ fun AppNavigation(repository: EventsRepository) {
                     OnBoardingScreen(navController = navController)
                 }
                 composable("homeScreen") {
-                    HomeScreen(repository = repository)
+                    HomeScreen()
                 }
             }
         }

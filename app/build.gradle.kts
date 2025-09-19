@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id("kotlin-parcelize")
     id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
 }
@@ -53,7 +54,6 @@ dependencies {
     implementation(libs.firebase.crashlytics.ndk)
     implementation(libs.google.firebase.analytics)
 
-
     //datastore
     implementation(libs.androidx.datastore.preferences)
 
@@ -93,10 +93,10 @@ dependencies {
 
     implementation(libs.hilt.android)
     implementation(libs.androidx.hilt.navigation.compose)
+    ksp(libs.hilt.android.compiler)
 
     implementation(libs.androidx.foundation)
     implementation(libs.material3)
-    ksp(libs.hilt.android.compiler)
     implementation(libs.androidx.animation)
     implementation(libs.coil.compose)
     implementation(libs.androidx.navigation.compose)
