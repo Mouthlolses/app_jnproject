@@ -89,7 +89,7 @@ fun HomeScreenLayout(
                     onCardClick = {
                         navController.navigate("detailsScreen/${city.id}")
                     },
-                    cardEnable = true
+                    cardEnable = false
                 )
             }
         }
