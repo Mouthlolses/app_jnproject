@@ -57,6 +57,16 @@ class OfferViewModel() : ViewModel() {
                 qrCode = R.drawable.awin_qrcode,
                 tags = listOf("Tag1", "Tag2"),
                 tagColor = Color(0xFF4CAF50)
+            ),
+            OffersData(
+                id = 5,
+                tagIcon = R.drawable.ic_action_sell,
+                img = R.drawable.logo_mercadolivre,
+                titleOffer = "Ofertas Mercado Livre",
+                cuponOffer = "Cupons de oferta:",
+                link = "https://tidd.ly/46r3pz2",
+                tags = listOf("Tag1", "Tag2"),
+                tagColor = Color(0xFF4CAF50)
             )
         )
     }
