@@ -1,5 +1,6 @@
 package com.example.app_jnproject.ui.screens.news.details
 
+import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -51,6 +52,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -125,7 +127,10 @@ fun NewsDetailsLayout(
                 }
             ) {
                 Button(
-                    onClick = { /* ação do botão */ },
+                    onClick = {
+                        val intent = Intent(Intent.ACTION_VIEW, event.fields.link.stringValue.toUri())
+                        context.startActivity(intent)
+                    },
                     modifier = Modifier
                         .padding(horizontal = 16.dp, vertical = 8.dp)
                         .fillMaxWidth()
@@ -317,7 +322,8 @@ fun NewsDetailsLayoutPreview() {
             date = FirestoreString("10/09/2025"),
             location = FirestoreString("Praça Padre Cícero, Juazeiro do Norte"),
             img = FirestoreString("https://fakeimage.com/event.jpg"),
-            favorite = FirestoreBoolean(false)
+            favorite = FirestoreBoolean(false),
+            link = FirestoreString("https://www.sympla.com.br/evento/gloria-tour-re-nascido-juazeiro-do-norte-25-10/3116330")
         )
     )
 

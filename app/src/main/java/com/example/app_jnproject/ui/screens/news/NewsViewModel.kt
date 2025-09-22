@@ -68,7 +68,8 @@ private fun EventEntity.toDocument(): Document {
             date = FirestoreString(this.date),
             img = FirestoreString(this.img),
             location = FirestoreString(this.location),
-            favorite = FirestoreBoolean(this.favorite)
+            favorite = FirestoreBoolean(this.favorite),
+            link = FirestoreString(this.link)
         )
     )
 }

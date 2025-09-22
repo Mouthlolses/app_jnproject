@@ -61,7 +61,7 @@ class OfferViewModel() : ViewModel() {
                 img = R.drawable.logo_mercadolivre,
                 titleOffer = "Ofertas Mercado Livre",
                 cuponOffer = "Cupons de oferta:",
-                link = "https://tidd.ly/46r3pz2",
+                link = "https://mercadolivre.com/sec/2qYUXYR",
                 tags = listOf("Tag1", "Tag2"),
                 tagColor = Color(0xFF4CAF50)
             )
