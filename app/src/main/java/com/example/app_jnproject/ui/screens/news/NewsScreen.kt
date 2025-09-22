@@ -20,8 +20,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Place
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -87,18 +85,6 @@ fun NewsScreenLayout(
                         color = Color.Black,
                         textAlign = TextAlign.Center
                     )
-                    Spacer(modifier = Modifier.height(16.dp))
-                    Button(
-                        onClick = { viewModel.refreshEvents() },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = Color(0xFFFFA500)
-                        )
-                    ) {
-                        Text(
-                            text = stringResource(R.string.recharge),
-                            color = Color.White
-                        )
-                    }
                 }
             }
         }

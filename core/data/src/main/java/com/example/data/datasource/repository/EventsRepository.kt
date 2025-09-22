@@ -22,7 +22,7 @@ class EventsRepository(
             // Quando a coleta começar, verifica se há atualização da API.
             refreshEventsIfNeeded()
         }
-        .catch { emit(emptyList()) } // Em caso de erro, emite lista vazia.
+        .catch { e -> throw e } // Em caso de erro
 
 
     // Função privada para atualizar o banco a partir da API.
@@ -43,6 +43,7 @@ class EventsRepository(
             }
         } catch (e: Exception) {
             Log.e("EventRepository", "Erro ao atualizar eventos: ${e.message}")
+            throw e
         }
     }
 

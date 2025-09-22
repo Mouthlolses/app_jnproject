@@ -159,8 +159,8 @@ fun OfferScreen(
                     ) {
                         items(offer.tags) { tag ->
                             Tag(
-                                icon = offer.tagIcon,
                                 text = tag,
+                                painter = painterResource(offer.tagIcon)
                             )
                         }
                     }

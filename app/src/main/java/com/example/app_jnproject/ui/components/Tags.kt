@@ -1,6 +1,5 @@
 package com.example.app_jnproject.ui.components
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -14,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
@@ -25,10 +25,10 @@ import com.example.app_jnproject.R
 @Preview
 @Composable
 fun Tag(
-    @DrawableRes icon: Int = R.drawable.ic_action_sell,
     text: String = "Disponível",
     modifier: Modifier = Modifier,
-    backgroundColor: Color = Color(0xFF4CAF50)
+    backgroundColor: Color = Color(0xFF4CAF50),
+    painter: Painter = painterResource(R.drawable.icon_ticket3)
 ) {
     Row(
         modifier = modifier
@@ -40,7 +40,7 @@ fun Tag(
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
-            painter = painterResource(icon),
+            painter = painter,
             contentDescription = "Cartão",
             tint = Color.White,
             modifier = Modifier.size(16.dp)

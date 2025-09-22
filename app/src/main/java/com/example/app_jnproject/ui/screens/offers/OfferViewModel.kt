@@ -21,7 +21,6 @@ class OfferViewModel() : ViewModel() {
         _uiState.value = listOf(
             OffersData(
                 id = 1,
-                tagIcon = R.drawable.ic_action_sell,
                 img = R.drawable.magazineluizalogo,
                 titleOffer = "Ofertas Magazine Luiza",
                 cuponOffer = "Cupons de oferta:",
@@ -49,7 +48,6 @@ class OfferViewModel() : ViewModel() {
             ),
             OffersData(
                 id = 4,
-                tagIcon = R.drawable.ic_action_sell,
                 img = R.drawable.sorte_logo,
                 titleOffer = "Ofertas BoaSorte Online",
                 cuponOffer = "Cupons de oferta:",
@@ -60,7 +58,6 @@ class OfferViewModel() : ViewModel() {
             ),
             OffersData(
                 id = 5,
-                tagIcon = R.drawable.ic_action_sell,
                 img = R.drawable.logo_mercadolivre,
                 titleOffer = "Ofertas Mercado Livre",
                 cuponOffer = "Cupons de oferta:",
@@ -80,7 +77,7 @@ data class OffersData(
     val cuponOffer: String = "",
     val link: String = "",
     val qrCode: Int? = null,
-    @param:DrawableRes val tagIcon: Int = R.drawable.ic_action_sell,
+    val tagIcon: Int = R.drawable.icon_cupon,
     val tags: List<String> = emptyList(),
     val tagColor: Color = Color(0xFF4CAF50)
 )

@@ -40,7 +40,7 @@ class NewsViewModel @Inject constructor(
                     FetchEventsUiState(
                         isLoading = false,
                         events = emptyList(),
-                        error = "Erro inesperado! Vamos tentar de novo?"
+                        error = "Sem conexão com a Internet! Vamos tentar novamente?"
                     )
                 )
                 Log.e("NewsViewModel", "Error collecting events: ${e.message}")

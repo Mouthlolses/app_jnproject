@@ -273,7 +273,6 @@ fun NewsDetailsLayout(
                 ) {
                     item {
                         Tag(
-                            icon = R.drawable.ic_action_sell,
                             text =
                                 if (event.fields.favorite.booleanValue)
                                     stringResource(R.string.available)
