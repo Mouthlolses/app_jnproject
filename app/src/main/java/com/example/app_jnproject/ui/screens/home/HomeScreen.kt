@@ -51,7 +51,6 @@ fun HomeScreen() {
                 in bottomBarRoutes -> {
                     BottomNavigationBar(navController)
                 }
-
                 "newsDetailsScreen/{eventId}" -> {
                     BuyTicketButtonBar(
                         onClick = { }

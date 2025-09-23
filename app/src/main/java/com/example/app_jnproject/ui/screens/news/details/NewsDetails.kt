@@ -42,7 +42,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.ImageLoader
@@ -53,7 +52,6 @@ import com.example.app_jnproject.font.montserratFamily
 import com.example.app_jnproject.shared.shareContent
 import com.example.app_jnproject.ui.components.ShareButton
 import com.example.app_jnproject.ui.components.Tag
-import com.example.app_jnproject.ui.screens.news.NewsViewModel
 import com.example.network.model.Document
 import com.example.network.model.EventFields
 import com.example.network.model.FirestoreBoolean
@@ -67,7 +65,6 @@ import kotlinx.coroutines.withContext
 @Composable
 fun NewsDetailsLayout(
     event: Document,
-    viewModel: NewsViewModel = hiltViewModel(),
     navController: NavHostController
 ) {
     val scope = rememberCoroutineScope()

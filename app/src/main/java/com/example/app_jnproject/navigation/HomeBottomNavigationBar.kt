@@ -17,7 +17,6 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -112,10 +111,6 @@ fun NavigationGraph(
             val eventId = backStackEntry.arguments?.getString("eventId") ?: ""
             val uiState = viewModel.events.collectAsState().value
             val event = uiState.events.find { it.id == eventId }
-
-            LaunchedEffect(Unit) {
-                viewModel.refreshEvents()
-            }
 
             if (uiState.isLoading) {
                 // Exibe um loading se ainda estiver carregando

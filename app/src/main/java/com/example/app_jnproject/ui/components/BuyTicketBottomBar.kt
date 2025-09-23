@@ -18,41 +18,38 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.app_jnproject.R
 
-@Preview
 @Composable
 fun BuyTicketButtonBar(
-    onClick: () -> Unit = { },
-    enabled: Boolean = true
-
+    onClick: () -> Unit = { }
 ) {
     Surface(
         tonalElevation = 26.dp,
         shadowElevation = 26.dp,
         color = Color.White,
-        modifier = Modifier.drawBehind {
-            val strokeWidth = 1.dp.toPx()
-            val y = 0f + strokeWidth / 200
-            drawLine(
-                color = Color.LightGray,
-                start = Offset(0f, y),
-                end = Offset(size.width, y),
-                strokeWidth = strokeWidth
-            )
-        }
+        modifier = Modifier
+            .drawBehind {
+                val strokeWidth = 1.dp.toPx()
+                val y = 0f + strokeWidth / 200
+                drawLine(
+                    color = Color.LightGray,
+                    start = Offset(0f, y),
+                    end = Offset(size.width, y),
+                    strokeWidth = strokeWidth
+                )
+            }
             .navigationBarsPadding()
     ) {
         Button(
-            onClick = { onClick() },
+            onClick = { onClick },
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 8.dp)
                 .fillMaxWidth()
                 .height(46.dp),
             shape = RoundedCornerShape(36.dp),
-            enabled = enabled,
+            enabled = true,
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF00C853),
                 contentColor = Color.White

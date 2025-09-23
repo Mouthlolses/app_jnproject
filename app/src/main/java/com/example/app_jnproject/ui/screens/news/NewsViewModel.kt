@@ -16,12 +16,11 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class NewsViewModel @Inject constructor(
-    private val repository: EventsRepository,
+    repository: EventsRepository,
     connectivityObserver: ConnectivityObserver
 ) : ViewModel() {
 
@@ -50,12 +49,6 @@ class NewsViewModel @Inject constructor(
                 SharingStarted.Lazily,
                 FetchEventsUiState(isLoading = true)
             )
-
-    fun refreshEvents() {
-        viewModelScope.launch {
-            repository.refreshEventsManually()
-        }
-    }
 }
 
 

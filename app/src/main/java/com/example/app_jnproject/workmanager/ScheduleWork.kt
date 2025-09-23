@@ -4,8 +4,6 @@ import android.content.Context
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import java.time.Duration
-import java.time.LocalTime
 import java.util.concurrent.TimeUnit
 
 fun scheduleCuriosidadeWorker(context: Context) {

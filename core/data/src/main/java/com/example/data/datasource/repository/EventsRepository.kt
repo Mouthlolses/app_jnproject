@@ -8,6 +8,7 @@ import com.example.network.data.EventsApi
 import com.example.network.data.EventsApiService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.onStart
 
@@ -16,13 +17,12 @@ class EventsRepository(
     private val eventDao: EventDao
 ) {
 
-    // Minha Source of Truth: sempre retorna Flow do Room.
     fun getEventsFlow(): Flow<List<EventEntity>> = eventDao.getAllEvents()
         .onStart {
-            // Quando a coleta começar, verifica se há atualização da API.
             refreshEventsIfNeeded()
+            emitAll(eventDao.getAllEvents())
         }
-        .catch { emit(emptyList()) } // Em caso de erro
+        .catch { e -> throw e }
 
 
     // Função privada para atualizar o banco a partir da API.
@@ -43,12 +43,10 @@ class EventsRepository(
             }
         } catch (e: Exception) {
             Log.e("EventRepository", "Erro ao atualizar eventos: ${e.message}")
+            throw e
         }
     }
 
-    suspend fun refreshEventsManually() {
-        refreshEventsIfNeeded()
-    }
 
 
 }
