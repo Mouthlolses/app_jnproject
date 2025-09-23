@@ -1,6 +1,5 @@
 package com.example.app_jnproject.ui.screens.news.details
 
-import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -18,13 +17,10 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Place
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -32,27 +28,20 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.core.net.toUri
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -86,7 +75,6 @@ fun NewsDetailsLayout(
     val context = LocalContext.current
     val imageLoader = ImageLoader(context)
     val scrollState = rememberScrollState()
-    val isConnected by viewModel.isConnected.collectAsState()
 
 
     Scaffold(
@@ -109,47 +97,6 @@ fun NewsDetailsLayout(
                     }
                 }
             )
-        },
-        bottomBar = {
-            Surface(
-                tonalElevation = 26.dp,
-                shadowElevation = 26.dp,
-                color = Color.White,
-                modifier = Modifier.drawBehind {
-                    val strokeWidth = 1.dp.toPx()
-                    val y = 0f + strokeWidth / 200
-                    drawLine(
-                        color = Color.LightGray,
-                        start = Offset(0f, y),
-                        end = Offset(size.width, y),
-                        strokeWidth = strokeWidth
-                    )
-                }
-            ) {
-                Button(
-                    onClick = {
-                        val intent = Intent(Intent.ACTION_VIEW, event.fields.link.stringValue.toUri())
-                        context.startActivity(intent)
-                    },
-                    modifier = Modifier
-                        .padding(horizontal = 16.dp, vertical = 8.dp)
-                        .fillMaxWidth()
-                        .height(46.dp),
-                    shape = RoundedCornerShape(36.dp),
-                    enabled = event.fields.favorite.booleanValue,
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = Color(0xFF00C853),
-                        contentColor = Color.White
-                    )
-                ) {
-                    Text(
-                        text = stringResource(R.string.buyTicket),
-                        style = typography.bodyLarge,
-                        fontFamily = FontFamily.SansSerif,
-                        fontWeight = FontWeight.Bold
-                    )
-                }
-            }
         }
     ) { innerPadding ->
         Column(

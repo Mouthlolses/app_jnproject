@@ -26,6 +26,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.app_jnproject.navigation.BottomNavigationBar
 import com.example.app_jnproject.navigation.NavItems
 import com.example.app_jnproject.navigation.NavigationGraph
+import com.example.app_jnproject.ui.components.BuyTicketButtonBar
 import com.example.app_jnproject.ui.components.EventCard
 
 
@@ -46,9 +47,18 @@ fun HomeScreen() {
 
     Scaffold(
         bottomBar = {
-            if (currentRoute in bottomBarRoutes) {
-                BottomNavigationBar(navController)
+            when (currentRoute) {
+                in bottomBarRoutes -> {
+                    BottomNavigationBar(navController)
+                }
+
+                "newsDetailsScreen/{eventId}" -> {
+                    BuyTicketButtonBar(
+                        onClick = { }
+                    )
+                }
             }
+
         }
     ) { innerPadding ->
         NavigationGraph(
