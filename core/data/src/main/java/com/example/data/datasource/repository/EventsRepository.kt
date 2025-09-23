@@ -6,11 +6,12 @@ import com.example.data.datasource.model.EventEntity
 import com.example.data.datasource.model.toEventEntity
 import com.example.network.data.EventsApi
 import com.example.network.data.EventsApiService
+import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.launch
 
 class EventsRepository(
     private val api: EventsApiService = EventsApi.retrofitService,
@@ -19,10 +20,13 @@ class EventsRepository(
 
     fun getEventsFlow(): Flow<List<EventEntity>> = eventDao.getAllEvents()
         .onStart {
-            refreshEventsIfNeeded()
+            coroutineScope {
+                launch {
+                    refreshEventsIfNeeded()
+                }
+            }
             emitAll(eventDao.getAllEvents())
         }
-        .catch { e -> throw e }
 
 
     // Função privada para atualizar o banco a partir da API.
@@ -46,7 +50,4 @@ class EventsRepository(
             throw e
         }
     }
-
-
-
 }

@@ -90,7 +90,6 @@ fun NewsScreenLayout(
         }
 
         else -> {
-
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()

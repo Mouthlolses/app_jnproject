@@ -26,6 +26,8 @@ class NewsViewModel @Inject constructor(
 
     val isConnected: StateFlow<Boolean> = connectivityObserver.isConnected
 
+    // Precisa de um backing property para pegar o último valor
+
     val events: StateFlow<FetchEventsUiState> =
         repository.getEventsFlow()
             .map { list ->
