@@ -14,10 +14,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.app_jnproject.R
 
 
 @Preview
@@ -30,7 +32,7 @@ fun ShareButton(
         onClick = onClick,
         modifier = modifier,
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color.White, // Fundo branco
+            containerColor = Color.White,
             contentColor = Color(0xFFFF5733)
         ),
         shape = RoundedCornerShape(50),
@@ -41,7 +43,7 @@ fun ShareButton(
         contentPadding = PaddingValues(horizontal = 24.dp, vertical = 12.dp)
     ) {
         Icon(
-            imageVector = Icons.Default.Share,
+           painter = painterResource(R.drawable.ic_share_windows),
             contentDescription = "Compartilhar",
             tint = Color(0xFFFF5733),
             modifier = Modifier.size(20.dp)

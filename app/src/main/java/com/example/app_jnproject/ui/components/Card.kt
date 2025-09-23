@@ -76,7 +76,6 @@ fun EventCard(
                         .size(300.dp)
                 )
             }
-            // PARTE INFERIOR - CONTEÚDO
             Row(
                 modifier = Modifier
                     .fillMaxWidth()

@@ -31,12 +31,10 @@ import com.example.app_jnproject.R
 fun SplashScreen() {
     var visible by remember { mutableStateOf(false) }
 
-    // Inicia a animação ao entrar na tela
     LaunchedEffect(true) {
         visible = true
     }
 
-    // Curva personalizada para o scale
     val scale by animateFloatAsState(
         targetValue = if (visible) 1f else 0.8f,
         animationSpec = tween(
@@ -45,7 +43,6 @@ fun SplashScreen() {
         )
     )
 
-    // Curva personalizada para a rotação leve
     val rotation by animateFloatAsState(
         targetValue = if (visible) 0f else -10f,
         animationSpec = tween(

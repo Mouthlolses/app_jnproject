@@ -37,7 +37,7 @@ fun ButtonAllCustomized(
         shape = RoundedCornerShape(16.dp)
     ) {
         Box(
-            modifier = Modifier.fillMaxWidth(), // ocupa toda largura do botão
+            modifier = Modifier.fillMaxWidth(),
             contentAlignment = Alignment.Center
         ) {
             Text(

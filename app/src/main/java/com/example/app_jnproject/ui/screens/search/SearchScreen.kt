@@ -55,7 +55,6 @@ fun SearchScreen() {
             }
         }
     ) {
-        // Habilita o ponto azul (se localização existir)
         MapEffect(userLocation) { mapView ->
             val fine =
                 ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -73,7 +72,6 @@ fun SearchScreen() {
                     pulsingEnabled = true
                 }
 
-                // faz a câmera seguir o puck
                 mapView.viewport.transitionTo(
                     mapView.viewport.makeFollowPuckViewportState()
                 )

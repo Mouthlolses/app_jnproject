@@ -113,7 +113,6 @@ fun NavigationGraph(
             val event = uiState.events.find { it.id == eventId }
 
             if (uiState.isLoading) {
-                // Exibe um loading se ainda estiver carregando
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
@@ -121,13 +120,11 @@ fun NavigationGraph(
                     CircularProgressIndicator()
                 }
             } else if (event != null) {
-                // Exibe os detalhes do evento
                 NewsDetailsLayout(
                     event = event,
                     navController = navController
                 )
             } else {
-                // Exibe mensagem se não encontrar o evento
                 Box(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center

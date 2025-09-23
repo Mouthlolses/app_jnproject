@@ -29,17 +29,14 @@ class EventsRepository(
         }
 
 
-    // Função privada para atualizar o banco a partir da API.
     private suspend fun refreshEventsIfNeeded() {
         try {
             val response = api.getEvents()
             if (response.isSuccessful) {
                 val apiDocuments = response.body()?.documents ?: emptyList()
 
-                // Mapeando para EventEntity.
                 val apiEvents = apiDocuments.map { it.toEventEntity() }
 
-                // Verificar se houve alteração (simples comparando ids ou conteúdo)
                 val localEvents = eventDao.getAllEvents().firstOrNull() ?: emptyList()
                 if (apiEvents != localEvents) {
                     eventDao.insertEvents(apiEvents)
