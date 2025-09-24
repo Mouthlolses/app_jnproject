@@ -1,5 +1,6 @@
 package com.example.app_jnproject.ui.screens.news.details
 
+import android.content.Intent
 import android.graphics.drawable.BitmapDrawable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -42,6 +43,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import coil.ImageLoader
@@ -50,6 +52,7 @@ import coil.request.ImageRequest
 import com.example.app_jnproject.R
 import com.example.app_jnproject.font.montserratFamily
 import com.example.app_jnproject.shared.shareContent
+import com.example.app_jnproject.ui.components.BuyTicketButtonBar
 import com.example.app_jnproject.ui.components.ShareButton
 import com.example.app_jnproject.ui.components.Tag
 import com.example.network.model.Document
@@ -93,6 +96,15 @@ fun NewsDetailsLayout(
                         )
                     }
                 }
+            )
+        },
+        bottomBar = {
+            BuyTicketButtonBar(
+                onClick = {
+                    val intent = Intent(Intent.ACTION_VIEW, event.fields.link.stringValue.toUri())
+                    context.startActivity(intent)
+                },
+                enable = event.fields.favorite.booleanValue
             )
         }
     ) { innerPadding ->
@@ -182,11 +194,33 @@ fun NewsDetailsLayout(
                         tint = Color.DarkGray,
                         modifier = Modifier.size(18.dp)
                     )
-                    Spacer(modifier = Modifier.width(2.dp))
+                    Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = event.fields.date.stringValue,
                         style = typography.bodyMedium,
                         color = Color.Gray
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Row(
+                    modifier = Modifier
+                        .padding(start = 16.dp),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_personal_places),
+                        contentDescription = stringResource(R.string.location),
+                        tint = Color.Red,
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = event.fields.place.stringValue,
+                        style = typography.bodyMedium,
+                        color = Color.Gray,
                     )
                 }
 
@@ -204,10 +238,10 @@ fun NewsDetailsLayout(
                         tint = Color.Red,
                         modifier = Modifier.size(18.dp)
                     )
-                    Spacer(modifier = Modifier.width(2.dp))
+                    Spacer(modifier = Modifier.width(4.dp))
                     Text(
                         text = event.fields.location.stringValue,
-                        style = typography.bodySmall,
+                        style = typography.bodyMedium,
                         color = Color.Gray,
                     )
                 }
@@ -264,6 +298,7 @@ fun NewsDetailsLayoutPreview() {
             ),
             date = FirestoreString("10/09/2025"),
             location = FirestoreString("Praça Padre Cícero, Juazeiro do Norte"),
+            place = FirestoreString("Evento Presencial em cangaço bar"),
             img = FirestoreString("https://fakeimage.com/event.jpg"),
             favorite = FirestoreBoolean(false),
             link = FirestoreString("https://www.sympla.com.br/evento/gloria-tour-re-nascido-juazeiro-do-norte-25-10/3116330")

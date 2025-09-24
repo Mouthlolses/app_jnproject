@@ -28,6 +28,7 @@ data class EventFields(
     val img: FirestoreString,
     val link: FirestoreString,
     val location: FirestoreString,
+    val place: FirestoreString,
     val title: FirestoreString
 )
 

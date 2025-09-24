@@ -26,7 +26,6 @@ import androidx.navigation.compose.rememberNavController
 import com.example.app_jnproject.navigation.BottomNavigationBar
 import com.example.app_jnproject.navigation.NavItems
 import com.example.app_jnproject.navigation.NavigationGraph
-import com.example.app_jnproject.ui.components.BuyTicketButtonBar
 import com.example.app_jnproject.ui.components.EventCard
 
 
@@ -50,14 +49,7 @@ fun HomeScreen() {
                 in bottomBarRoutes -> {
                     BottomNavigationBar(navController)
                 }
-
-                "newsDetailsScreen/{eventId}" -> {
-                    BuyTicketButtonBar(
-                        onClick = { }
-                    )
-                }
             }
-
         }
     ) { innerPadding ->
         NavigationGraph(

@@ -15,8 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
-import com.example.app_jnproject.connect.RequestLocationPermission
 import com.example.app_jnproject.connect.requestSingleLocationUpdate
+import com.google.accompanist.permissions.ExperimentalPermissionsApi
+import com.google.accompanist.permissions.rememberMultiplePermissionsState
 import com.mapbox.geojson.Point
 import com.mapbox.maps.extension.compose.MapEffect
 import com.mapbox.maps.extension.compose.MapboxMap
@@ -26,20 +27,29 @@ import com.mapbox.maps.plugin.locationcomponent.location
 import com.mapbox.maps.plugin.viewport.viewport
 
 @Preview(showBackground = true)
-
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
 @Composable
 fun SearchScreen() {
-
-    RequestLocationPermission()
-
     val context = LocalContext.current
     var userLocation by remember { mutableStateOf<Point?>(null) }
 
+    val locationPermissionState = rememberMultiplePermissionsState(
+        permissions = listOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        )
+    )
+
     LaunchedEffect(Unit) {
-        requestSingleLocationUpdate(context) { location ->
-            location?.let {
-                userLocation = Point.fromLngLat(it.longitude, it.latitude)
+        locationPermissionState.launchMultiplePermissionRequest()
+    }
+
+    LaunchedEffect(locationPermissionState.allPermissionsGranted) {
+        if (locationPermissionState.allPermissionsGranted) {
+            requestSingleLocationUpdate(context) { location ->
+                location?.let {
+                    userLocation = Point.fromLngLat(it.longitude, it.latitude)
+                }
             }
         }
     }

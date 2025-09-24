@@ -22,7 +22,6 @@ class MainActivity : ComponentActivity() {
         requestNotificationPermission(this, this)
         scheduleCuriosidadeWorker(this)
         NotificationManagerCompat.from(this).cancel(NOTIFICATION_ID)
-
         setContent { App_jnprojectTheme { AppJnToday() } }
     }
 }

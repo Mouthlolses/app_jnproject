@@ -34,7 +34,6 @@ class NewsViewModel @Inject constructor(
                 emit(
                     FetchEventsUiState(
                         isLoading = false,
-                        events = emptyList(),
                         error = "Sem conexão com a Internet! Vamos tentar novamente?"
                     )
                 )
@@ -57,6 +56,7 @@ private fun EventEntity.toDocument(): Document {
             date = FirestoreString(this.date),
             img = FirestoreString(this.img),
             location = FirestoreString(this.location),
+            place = FirestoreString(this.place),
             favorite = FirestoreBoolean(this.favorite),
             link = FirestoreString(this.link)
         )

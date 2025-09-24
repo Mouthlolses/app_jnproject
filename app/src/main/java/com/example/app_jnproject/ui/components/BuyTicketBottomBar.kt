@@ -23,7 +23,8 @@ import com.example.app_jnproject.R
 
 @Composable
 fun BuyTicketButtonBar(
-    onClick: () -> Unit = { }
+    onClick: () -> Unit = { },
+    enable: Boolean = true
 ) {
     Surface(
         tonalElevation = 26.dp,
@@ -43,13 +44,13 @@ fun BuyTicketButtonBar(
             .navigationBarsPadding()
     ) {
         Button(
-            onClick = { onClick },
+            onClick = { onClick() },
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 8.dp)
                 .fillMaxWidth()
                 .height(46.dp),
             shape = RoundedCornerShape(36.dp),
-            enabled = true,
+            enabled = enable,
             colors = ButtonDefaults.buttonColors(
                 containerColor = Color(0xFF00C853),
                 contentColor = Color.White

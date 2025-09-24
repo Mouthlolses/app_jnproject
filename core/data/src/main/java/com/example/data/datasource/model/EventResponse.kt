@@ -16,6 +16,7 @@ data class EventEntity(
     val img: String,
     val link: String,
     val location: String,
+    val place: String,
     val favorite: Boolean
 ) : Parcelable
 
@@ -28,6 +29,7 @@ fun Document.toEventEntity(): EventEntity {
         date = fields.date.stringValue,
         img = fields.img.stringValue,
         location = fields.location.stringValue,
+        place = fields.place.stringValue,
         favorite = fields.favorite.booleanValue,
         link = fields.link.stringValue
     )
