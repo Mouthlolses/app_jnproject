@@ -3,7 +3,6 @@ package com.example.app_jnproject.ui.screens.news
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.app_jnproject.connect.ConnectivityObserver
 import com.example.data.datasource.model.EventEntity
 import com.example.data.datasource.repository.EventsRepository
 import com.example.network.model.Document
@@ -21,7 +20,6 @@ import javax.inject.Inject
 @HiltViewModel
 class NewsViewModel @Inject constructor(
     repository: EventsRepository,
-    connectivityObserver: ConnectivityObserver
 ) : ViewModel() {
 
     val events: StateFlow<FetchEventsUiState> =
@@ -29,7 +27,7 @@ class NewsViewModel @Inject constructor(
             .map { list ->
                 FetchEventsUiState(
                     isLoading = false,
-                    events = list.map { it.toDocument() }, //transform document
+                    events = list.map { it.toDocument() },
                     error = null
                 )
             }.catch { e ->

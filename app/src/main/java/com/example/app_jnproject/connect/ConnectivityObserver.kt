@@ -41,7 +41,6 @@ class NetworkConnectivityObserver @Inject constructor(
         val request = NetworkRequest.Builder().build()
         connectivityManager.registerNetworkCallback(request, networkCallback)
 
-        // Estado inicial
         val activeNetwork = connectivityManager.activeNetworkInfo
         _isConnected.value = activeNetwork?.isConnectedOrConnecting == true
     }
