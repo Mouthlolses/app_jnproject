@@ -43,24 +43,16 @@ fun AppNavigation() {
             SplashScreen()
         }
 
-        onBoardingShown == true -> {
-            NavHost(
-                navController = navController,
-                startDestination = "homeScreen"
-            ) {
-                composable("onBoardingScreen") {
-                    OnBoardingScreen(navController = navController)
-                }
-                composable("homeScreen") {
-                    HomeScreen()
-                }
+        else -> {
+            val startDestination = if (onBoardingShown == true) {
+                "homeScreen"
+            } else {
+                "onBoardingScreen"
             }
-        }
 
-        onBoardingShown == false -> {
             NavHost(
                 navController = navController,
-                startDestination = "onBoardingScreen"
+                startDestination = startDestination
             ) {
                 composable("onBoardingScreen") {
                     OnBoardingScreen(navController = navController)

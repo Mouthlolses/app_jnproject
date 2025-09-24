@@ -124,15 +124,14 @@ fun NewsDetailsLayout(
                         scope.launch {
                             val text = buildString {
                                 appendLine("🎉 ${event.fields.title.stringValue}")
-                                appendLine("📝 ${event.fields.desc.stringValue}")
                                 appendLine("📍 Local: ${event.fields.location.stringValue}")
                                 appendLine("📅 Data: ${event.fields.date.stringValue}")
                                 appendLine()
                                 appendLine("📲 Descubra mais eventos no Cariri com o app Cariri Fest!")
+                                appendLine()
                                 appendLine("👉 Baixe grátis: https://play.google.com/store/apps/details?id=seu.package")
                             }
 
-                            //carrega a imagem via Coil
                             val request = ImageRequest.Builder(context)
                                 .data(event.fields.img.stringValue)
                                 .allowHardware(false)

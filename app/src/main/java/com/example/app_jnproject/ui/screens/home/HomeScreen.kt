@@ -37,7 +37,6 @@ fun HomeScreen() {
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    // Defina as rotas que devem mostrar o BottomBar
     val bottomBarRoutes = listOf(
         NavItems.NEWS.route,
         NavItems.HOME.route,
@@ -51,6 +50,7 @@ fun HomeScreen() {
                 in bottomBarRoutes -> {
                     BottomNavigationBar(navController)
                 }
+
                 "newsDetailsScreen/{eventId}" -> {
                     BuyTicketButtonBar(
                         onClick = { }
