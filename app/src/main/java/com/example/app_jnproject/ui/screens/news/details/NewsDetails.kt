@@ -25,6 +25,7 @@ import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme.typography
@@ -169,7 +170,7 @@ fun NewsDetailsLayout(
                 )
             }
 
-            Column(modifier = Modifier.padding(top = 40.dp)) {
+            Column(modifier = Modifier.padding(top = 35.dp)) {
                 Text(
                     text = event.fields.title.stringValue,
                     style = typography.titleLarge,
@@ -181,6 +182,8 @@ fun NewsDetailsLayout(
                         .fillMaxWidth(),
                     textAlign = TextAlign.Center
                 )
+
+                Spacer(modifier = Modifier.height(16.dp))
 
                 Row(
                     modifier = Modifier
@@ -245,8 +248,9 @@ fun NewsDetailsLayout(
                         color = Color.Gray,
                     )
                 }
-
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(6.dp))
+                HorizontalDivider()
+                Spacer(modifier = Modifier.height(6.dp))
 
                 LazyRow(
                     modifier = Modifier
@@ -270,7 +274,9 @@ fun NewsDetailsLayout(
                     }
                 }
 
-                Spacer(modifier = Modifier.height(16.dp))
+                Spacer(modifier = Modifier.height(6.dp))
+                HorizontalDivider()
+                Spacer(modifier = Modifier.height(6.dp))
 
                 Text(
                     text = event.fields.desc.stringValue,
