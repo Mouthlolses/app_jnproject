@@ -28,7 +28,9 @@ class EventsRepository(
             }
             emitAll(eventDao.getAllEvents())
         }
-
+        .catch { e ->
+            throw e
+        }
 
 
     private suspend fun refreshEventsIfNeeded() {

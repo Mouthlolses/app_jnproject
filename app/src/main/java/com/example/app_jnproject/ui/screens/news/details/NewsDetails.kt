@@ -204,6 +204,27 @@ fun NewsDetailsLayout(
                         color = Color.Gray
                     )
                 }
+                Spacer(modifier = Modifier.height(16.dp))
+
+                Row(
+                    modifier = Modifier
+                        .padding(start = 16.dp),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_schedule),
+                        contentDescription = stringResource(R.string.location),
+                        tint = Color.DarkGray,
+                        modifier = Modifier.size(18.dp)
+                    )
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(
+                        text = event.fields.time.stringValue,
+                        style = typography.bodyMedium,
+                        color = Color.Gray
+                    )
+                }
 
                 Spacer(modifier = Modifier.height(16.dp))
 
@@ -305,6 +326,7 @@ fun NewsDetailsLayoutPreview() {
             date = FirestoreString("10/09/2025"),
             location = FirestoreString("Praça Padre Cícero, Juazeiro do Norte"),
             place = FirestoreString("Evento Presencial em cangaço bar"),
+            time = FirestoreString("18:00"),
             img = FirestoreString("https://fakeimage.com/event.jpg"),
             favorite = FirestoreBoolean(false),
             link = FirestoreString("https://www.sympla.com.br/evento/gloria-tour-re-nascido-juazeiro-do-norte-25-10/3116330")
