@@ -64,6 +64,12 @@ dependencies {
     implementation(libs.android.ndk27)
     implementation(libs.maps.compose.ndk27)
     implementation(libs.navigationcore.android.ndk27)
+    implementation(libs.autofill.ndk27)
+    implementation(libs.discover.ndk27)
+    implementation(libs.place.autocomplete.ndk27)
+    implementation(libs.offline.ndk27)
+    implementation(libs.mapbox.search.android.ndk27)
+    implementation(libs.mapbox.search.android.ui.ndk27)
 
 
     //módulo core-network
@@ -107,6 +113,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.compose.material.icons.extended)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -118,7 +118,7 @@ fun SearchScreen() {
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 32.dp , start = 18.dp, end = 18.dp)
+                .padding(top = 36.dp , start = 18.dp, end = 18.dp)
                 .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(24.dp))
                 .align(Alignment.TopCenter)
         )

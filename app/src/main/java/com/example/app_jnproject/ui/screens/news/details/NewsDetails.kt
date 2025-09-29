@@ -85,7 +85,7 @@ fun NewsDetailsLayout(
                     Image(
                         painter = painterResource(R.drawable.caririfestlogo1),
                         contentDescription = stringResource(R.string.logo),
-                        modifier = Modifier.size(120.dp)
+                        modifier = Modifier.size(90.dp)
                     )
                 },
                 navigationIcon = {
@@ -96,7 +96,9 @@ fun NewsDetailsLayout(
                             tint = Color(0xFFFF5733)
                         )
                     }
-                }
+                },
+                modifier = Modifier
+                    .height(60.dp)
             )
         },
         bottomBar = {

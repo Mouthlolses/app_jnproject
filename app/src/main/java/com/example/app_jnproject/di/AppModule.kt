@@ -1,8 +1,6 @@
 package com.example.app_jnproject.di
 
 import android.content.Context
-import com.example.app_jnproject.connect.ConnectivityObserver
-import com.example.app_jnproject.connect.NetworkConnectivityObserver
 import com.example.data.datasource.database.AppDatabase
 import com.example.data.datasource.repository.EventsRepository
 import com.example.network.data.EventsApi
@@ -32,10 +30,4 @@ object AppModule {
     fun provideRepository(api: EventsApiService, db: AppDatabase): EventsRepository =
         EventsRepository(api, db.eventDao())
 
-
-    //ConnectService
-    @Provides
-    @Singleton
-    fun provideConnectivityObserver(@ApplicationContext context: Context): ConnectivityObserver =
-        NetworkConnectivityObserver(context)
 }

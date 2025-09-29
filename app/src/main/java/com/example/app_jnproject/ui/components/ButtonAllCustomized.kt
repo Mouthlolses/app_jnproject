@@ -49,7 +49,7 @@ fun ButtonAllCustomized(
                     .align(Alignment.Center)
             )
             Icon(
-                Icons.AutoMirrored.Default.ArrowForward,
+                imageVector = Icons.AutoMirrored.Default.ArrowForward,
                 contentDescription = null,
                 modifier = Modifier
                     .align(Alignment.CenterEnd)

@@ -8,7 +8,7 @@ import java.util.concurrent.TimeUnit
 
 fun scheduleCuriosidadeWorker(context: Context) {
     val workRequest = PeriodicWorkRequestBuilder<CuriosidadeWorker>(
-        5, TimeUnit.HOURS // dispara a cada 5 horas
+        5, TimeUnit.HOURS
     ).build()
 
     WorkManager.getInstance(context).enqueueUniquePeriodicWork(

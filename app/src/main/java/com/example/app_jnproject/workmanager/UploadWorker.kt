@@ -20,7 +20,6 @@ class CuriosidadeWorker(
 
     override suspend fun doWork(): Result {
 
-        // Aqui você pode buscar dados do Firestore, API, etc.
         val title = CuriositiesRepositoryTitle.scheduledMessagesTitles.random()
         val message = CuriositiesRepository.scheduledMessages.random()
 
