@@ -10,11 +10,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.app_jnproject"
+    namespace = "com.caririfest.app_jnproject"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.app_jnproject"
+        applicationId = "com.caririfest.app_jnproject"
         minSdk = 31
         targetSdk = 36
         versionCode = 1
