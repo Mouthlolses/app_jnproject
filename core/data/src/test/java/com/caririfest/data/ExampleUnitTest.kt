@@ -1,4 +1,4 @@
-package com.example.data
+package com.caririfest.data
 
 import org.junit.Assert.assertEquals
 import org.junit.Test
