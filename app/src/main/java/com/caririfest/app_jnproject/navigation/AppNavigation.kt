@@ -25,9 +25,12 @@ fun AppNavigation() {
     val navController = rememberNavController()
     val context = LocalContext.current
 
-    val onBoardingShown by context.dataStore.data
-        .map { prefs -> prefs[PreferencesKey.ONBOARDING_SHOWN] ?: false }
-        .collectAsState(initial = null)
+    val onBoardingShownFlow = remember {
+        context.dataStore.data
+            .map { prefs -> prefs[PreferencesKey.ONBOARDING_SHOWN] ?: false }
+    }
+
+    val onBoardingShown by onBoardingShownFlow.collectAsState(initial = null)
 
     var showSplash by remember { mutableStateOf(true) }
 
