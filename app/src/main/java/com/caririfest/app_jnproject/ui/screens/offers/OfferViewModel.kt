@@ -39,10 +39,10 @@ class OfferViewModel() : ViewModel() {
             ),
             OffersData(
                 id = 3,
-                img = R.drawable.logoshopee2,
-                titleOffer = "Ofertas Shopee",
+                img = R.drawable.logo_mercadolivre,
+                titleOffer = "Ofertas Mercado Livre",
                 cuponOffer = "Cupons de oferta:",
-                link = "https://s.shopee.com.br/5AjB41ziAU",
+                link = "https://mercadolivre.com/sec/2qYUXYR",
                 tags = listOf("Tag1", "Tag2"),
                 tagColor = Color(0xFF4CAF50)
             ),
@@ -58,10 +58,10 @@ class OfferViewModel() : ViewModel() {
             ),
             OffersData(
                 id = 5,
-                img = R.drawable.logo_mercadolivre,
-                titleOffer = "Ofertas Mercado Livre",
+                img = R.drawable.logoshopee2,
+                titleOffer = "Ofertas Shopee",
                 cuponOffer = "Cupons de oferta:",
-                link = "https://mercadolivre.com/sec/2qYUXYR",
+                link = "https://s.shopee.com.br/5AjB41ziAU",
                 tags = listOf("Tag1", "Tag2"),
                 tagColor = Color(0xFF4CAF50)
             )
