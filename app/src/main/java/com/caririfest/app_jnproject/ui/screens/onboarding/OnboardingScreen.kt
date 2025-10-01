@@ -146,7 +146,7 @@ fun OnBoardingScreen(
                     .height(56.dp)
                     .padding(start = 14.dp, end = 14.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.Black,
+                    containerColor = Color(0xFFFF6D00),
                     contentColor = Color.White
                 ),
                 elevation = ButtonDefaults.buttonElevation(4.dp),

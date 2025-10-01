@@ -34,7 +34,7 @@ fun ButtonAllCustomized(
         modifier = modifier,
         colors = colors,
         elevation = elevation,
-        shape = RoundedCornerShape(16.dp)
+        shape = RoundedCornerShape(26.dp)
     ) {
         Box(
             modifier = Modifier.fillMaxWidth(),
