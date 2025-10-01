@@ -178,7 +178,7 @@ fun OfferScreen(
                                 8.dp
                             ),
                             colors = ButtonDefaults.buttonColors(
-                                Color(0xFFFF5733),
+                                Color(0xFFFF6D00),
                                 Color.White
                             )
                         ) {
