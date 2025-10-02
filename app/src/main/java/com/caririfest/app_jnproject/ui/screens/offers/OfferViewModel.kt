@@ -25,7 +25,7 @@ class OfferViewModel() : ViewModel() {
                 titleOffer = "Ofertas Magazine Luiza",
                 cuponOffer = "Cupons de oferta:",
                 link = "https://www.magazinevoce.com.br/magazineprecobompromocao/",
-                tags = listOf("Tag1", "Tag2"),
+                tags = listOf("100PRECOBOMPROMOCAO"),
                 tagColor = Color(0xFF4CAF50)
             ),
             OffersData(
@@ -34,7 +34,7 @@ class OfferViewModel() : ViewModel() {
                 titleOffer = "Ofertas Amazon",
                 cuponOffer = "Cupons de oferta:",
                 link = "https://amzn.to/46roRUQ",
-                tags = listOf("Tag1", "Tag2"),
+                tags = listOf("",""),
                 tagColor = Color(0xFF4CAF50)
             ),
             OffersData(
@@ -43,7 +43,7 @@ class OfferViewModel() : ViewModel() {
                 titleOffer = "Ofertas Mercado Livre",
                 cuponOffer = "Cupons de oferta:",
                 link = "https://mercadolivre.com/sec/2qYUXYR",
-                tags = listOf("Tag1", "Tag2"),
+                tags = listOf("",""),
                 tagColor = Color(0xFF4CAF50)
             ),
             OffersData(
@@ -53,7 +53,7 @@ class OfferViewModel() : ViewModel() {
                 cuponOffer = "Cupons de oferta:",
                 link = "https://tidd.ly/46r3pz2",
                 qrCode = R.drawable.awin_qrcode,
-                tags = listOf("Tag1", "Tag2"),
+                tags = listOf("",""),
                 tagColor = Color(0xFF4CAF50)
             ),
             OffersData(
@@ -62,7 +62,7 @@ class OfferViewModel() : ViewModel() {
                 titleOffer = "Ofertas Shopee",
                 cuponOffer = "Cupons de oferta:",
                 link = "https://s.shopee.com.br/5AjB41ziAU",
-                tags = listOf("Tag1", "Tag2"),
+                tags = listOf("",""),
                 tagColor = Color(0xFF4CAF50)
             )
         )

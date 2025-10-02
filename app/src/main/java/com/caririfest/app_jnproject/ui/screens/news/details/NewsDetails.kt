@@ -30,11 +30,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme.typography
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
@@ -82,26 +85,44 @@ fun NewsDetailsLayout(
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Image(
-                        painter = painterResource(R.drawable.caririfestlogo1),
-                        contentDescription = stringResource(R.string.logo),
-                        modifier = Modifier.size(120.dp)
-                    )
-                },
-                navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(
-                            painter = painterResource(R.drawable.ic_arrow_back),
-                            contentDescription = stringResource(R.string.back),
-                            tint = Color(0xFFFF5733)
+            Surface(
+                tonalElevation = 6.dp,
+                shadowElevation = 6.dp,
+                color = Color.White,
+                modifier = Modifier
+                    .drawBehind {
+                        // Linha na parte de baixo da TopBar
+                        val strokeWidth = 1.dp.toPx()
+                        val y = size.height - strokeWidth / 2
+                        drawLine(
+                            color = Color.LightGray,
+                            start = Offset(0f, y),
+                            end = Offset(size.width, y),
+                            strokeWidth = strokeWidth
                         )
                     }
-                },
-                modifier = Modifier
-                    .height(60.dp)
-            )
+            ) {
+                CenterAlignedTopAppBar(
+                    title = {
+                        Image(
+                            painter = painterResource(R.drawable.caririfestlogo1),
+                            contentDescription = stringResource(R.string.logo),
+                            modifier = Modifier.size(120.dp)
+                        )
+                    },
+                    navigationIcon = {
+                        IconButton(onClick = { navController.popBackStack() }) {
+                            Icon(
+                                painter = painterResource(R.drawable.ic_arrow_back),
+                                contentDescription = stringResource(R.string.back),
+                                tint = Color(0xFFFF5733)
+                            )
+                        }
+                    },
+                    modifier = Modifier
+                        .height(60.dp)
+                )
+            }
         },
         bottomBar = {
             BuyTicketButtonBar(
@@ -123,8 +144,7 @@ fun NewsDetailsLayout(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(230.dp)
-                    .padding(top = 16.dp),
+                    .height(230.dp),
                 contentAlignment = Alignment.Center
             ) {
                 AsyncImage(
