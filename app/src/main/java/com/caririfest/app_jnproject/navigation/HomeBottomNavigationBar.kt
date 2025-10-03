@@ -9,7 +9,10 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
@@ -21,8 +24,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -176,18 +178,12 @@ fun BottomNavigationBar(navController: NavHostController) {
     val currentRoute = navBackStackEntry?.destination?.route
 
     NavigationBar(
-        modifier = Modifier.drawBehind {
-            val strokeWidth = 1.dp.toPx()
-            val y = 0f + strokeWidth / 200
-            drawLine(
-                color = Color.LightGray,
-                start = Offset(0f, y),
-                end = Offset(size.width, y),
-                strokeWidth = strokeWidth
-            )
-        },
-        containerColor = Color.White,
-        tonalElevation = 8.dp
+        modifier = Modifier
+            .height(110.dp)
+            .padding(bottom = 28.dp)
+            .clip(RoundedCornerShape(36.dp)),
+        tonalElevation = 8.dp,
+        containerColor = Color(0xFFF8F9FA),
     ) {
         items.forEach { item ->
             val selected = currentRoute == item.route

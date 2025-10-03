@@ -91,7 +91,6 @@ fun NewsDetailsLayout(
                 color = Color.White,
                 modifier = Modifier
                     .drawBehind {
-                        // Linha na parte de baixo da TopBar
                         val strokeWidth = 1.dp.toPx()
                         val y = size.height - strokeWidth / 2
                         drawLine(
@@ -107,7 +106,7 @@ fun NewsDetailsLayout(
                         Image(
                             painter = painterResource(R.drawable.caririfestlogo1),
                             contentDescription = stringResource(R.string.logo),
-                            modifier = Modifier.size(120.dp)
+                            modifier = Modifier.size(100.dp)
                         )
                     },
                     navigationIcon = {
@@ -120,7 +119,7 @@ fun NewsDetailsLayout(
                         }
                     },
                     modifier = Modifier
-                        .height(60.dp)
+                        .height(120.dp)
                 )
             }
         },
@@ -137,7 +136,6 @@ fun NewsDetailsLayout(
         Column(
             modifier = Modifier
                 .padding(innerPadding)
-                .statusBarsPadding()
                 .verticalScroll(scrollState)
                 .fillMaxSize()
         ) {
