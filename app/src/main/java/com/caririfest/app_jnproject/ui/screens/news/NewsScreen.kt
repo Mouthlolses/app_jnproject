@@ -2,8 +2,10 @@ package com.caririfest.app_jnproject.ui.screens.news
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -47,6 +49,7 @@ import coil.compose.AsyncImage
 import com.caririfest.app_jnproject.R
 import com.caririfest.app_jnproject.font.poppinsFamily
 import com.caririfest.app_jnproject.ui.components.Tag
+import org.checkerframework.common.subtyping.qual.Bottom
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -96,7 +99,8 @@ fun NewsScreenLayout(
                 modifier = Modifier
                     .fillMaxSize()
                     .statusBarsPadding()
-                    .navigationBarsPadding()
+                    .navigationBarsPadding(),
+                contentPadding = PaddingValues(bottom = 100.dp)
             ) {
                 items(uiState.events) { doc ->
                     Card(
@@ -134,7 +138,6 @@ fun NewsScreenLayout(
                                 )
                             }
                             Spacer(modifier = Modifier.height(14.dp))
-
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
@@ -185,7 +188,6 @@ fun NewsScreenLayout(
                                     }
                                 }
                                 val isFavorite = doc.fields.favorite.booleanValue
-
                                 Tag(
                                     text =
                                         if (isFavorite)

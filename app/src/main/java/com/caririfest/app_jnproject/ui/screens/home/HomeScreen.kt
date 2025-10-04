@@ -86,8 +86,8 @@ fun HomeScreenLayout(
         Spacer(modifier = Modifier.padding(12.dp))
         LazyColumn(
             modifier = Modifier,
-            contentPadding = PaddingValues(),
-            verticalArrangement = Arrangement.spacedBy(6.dp)
+            contentPadding = PaddingValues(bottom = 100.dp),
+            verticalArrangement = Arrangement.spacedBy(6.dp),
         ) {
             items(cityLocation) { city ->
                 EventCard(

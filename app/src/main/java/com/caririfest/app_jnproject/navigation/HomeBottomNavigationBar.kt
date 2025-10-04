@@ -27,6 +27,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -184,13 +185,19 @@ fun BottomNavigationBar(navController: NavHostController) {
             .height(98.dp)
             .padding(bottom = 28.dp)
             .clip(RoundedCornerShape(36.dp))
+            .shadow(
+                elevation = 10.dp,
+                shape = RoundedCornerShape(36.dp),
+                ambientColor = Color.Black.copy(alpha = 0.1f),
+                spotColor = Color.Black.copy(alpha = 0.1f)
+            )
             .border(
                 width = 2.dp,
                 color = Color.LightGray.copy(alpha = 0.9f),
                 shape = RoundedCornerShape(36.dp)
             ),
         tonalElevation = 8.dp,
-        containerColor = Color.White,
+        containerColor = Color(0xFFF5F5F5),
     ) {
         items.forEach { item ->
             val selected = currentRoute == item.route
