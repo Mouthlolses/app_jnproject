@@ -7,6 +7,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
@@ -24,6 +25,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
@@ -179,11 +181,16 @@ fun BottomNavigationBar(navController: NavHostController) {
 
     NavigationBar(
         modifier = Modifier
-            .height(110.dp)
+            .height(98.dp)
             .padding(bottom = 28.dp)
-            .clip(RoundedCornerShape(36.dp)),
+            .clip(RoundedCornerShape(36.dp))
+            .border(
+                width = 2.dp,
+                color = Color.LightGray.copy(alpha = 0.9f),
+                shape = RoundedCornerShape(36.dp)
+            ),
         tonalElevation = 8.dp,
-        containerColor = Color(0xFFF8F9FA),
+        containerColor = Color.White,
     ) {
         items.forEach { item ->
             val selected = currentRoute == item.route

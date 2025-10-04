@@ -118,7 +118,7 @@ fun NewsDetailsLayout(
                         }
                     },
                     modifier = Modifier
-                        .height(120.dp)
+                        .height(96.dp)
                 )
             }
         },

@@ -55,15 +55,6 @@ class OfferViewModel() : ViewModel() {
                 qrCode = R.drawable.awin_qrcode,
                 tags = listOf("",""),
                 tagColor = Color(0xFF4CAF50)
-            ),
-            OffersData(
-                id = 5,
-                img = R.drawable.logoshopee2,
-                titleOffer = "Ofertas Shopee",
-                cuponOffer = "Cupons de oferta:",
-                link = "https://s.shopee.com.br/5AjB41ziAU",
-                tags = listOf("",""),
-                tagColor = Color(0xFF4CAF50)
             )
         )
     }
