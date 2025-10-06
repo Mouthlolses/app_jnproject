@@ -2,7 +2,6 @@ package com.caririfest.app_jnproject.ui.screens.news
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -49,7 +48,6 @@ import coil.compose.AsyncImage
 import com.caririfest.app_jnproject.R
 import com.caririfest.app_jnproject.font.poppinsFamily
 import com.caririfest.app_jnproject.ui.components.Tag
-import org.checkerframework.common.subtyping.qual.Bottom
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

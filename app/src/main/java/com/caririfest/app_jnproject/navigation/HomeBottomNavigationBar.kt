@@ -25,7 +25,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -135,7 +134,7 @@ fun NavigationGraph(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text("Evento não encontrado")
+                    Text("Ops! Evento não encontrado")
                 }
             }
         }
@@ -193,7 +192,7 @@ fun BottomNavigationBar(navController: NavHostController) {
             )
             .border(
                 width = 2.dp,
-                color = Color.LightGray.copy(alpha = 0.9f),
+                color = Color.Gray.copy(alpha = 0.9f),
                 shape = RoundedCornerShape(36.dp)
             ),
         tonalElevation = 8.dp,
