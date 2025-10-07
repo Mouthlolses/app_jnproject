@@ -1,7 +1,10 @@
 package com.caririfest.app_jnproject.ui.screens.search
 
 import android.Manifest
+import android.content.Context
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,6 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -28,6 +32,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.scale
+import com.caririfest.app_jnproject.R
 import com.caririfest.app_jnproject.connect.requestSingleLocationUpdate
 import com.google.accompanist.permissions.ExperimentalPermissionsApi
 import com.google.accompanist.permissions.rememberMultiplePermissionsState
@@ -35,9 +41,13 @@ import com.mapbox.geojson.Point
 import com.mapbox.maps.extension.compose.MapEffect
 import com.mapbox.maps.extension.compose.MapboxMap
 import com.mapbox.maps.extension.compose.animation.viewport.rememberMapViewportState
+import com.mapbox.maps.extension.compose.annotation.generated.PointAnnotationGroup
+import com.mapbox.maps.plugin.annotation.AnnotationConfig
+import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions
 import com.mapbox.maps.plugin.locationcomponent.createDefault2DPuck
 import com.mapbox.maps.plugin.locationcomponent.location
 import com.mapbox.maps.plugin.viewport.viewport
+
 
 @Preview(showBackground = true)
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalPermissionsApi::class)
@@ -68,6 +78,33 @@ fun SearchScreen() {
             }
         }
     }
+
+    fun getResizedBitmap(context: Context, resId: Int, width: Int, height: Int): Bitmap {
+        val originalBitmap = BitmapFactory.decodeResource(context.resources, resId)
+        return originalBitmap.scale(width, height, false)
+    }
+
+    val customMarkers = remember {
+        mutableStateListOf(
+            PointAnnotationOptions()
+                .withPoint(Point.fromLngLat(-39.3156, -7.2139))
+                .withIconImage(
+                    getResizedBitmap(context, R.drawable.pointmap, 80, 80)
+                ),
+            PointAnnotationOptions()
+                .withPoint(Point.fromLngLat(-39.3100, -7.2200))
+                .withIconImage(
+                    getResizedBitmap(context, R.drawable.pointmap, 80, 80)
+                )
+        )
+    }
+
+    val annotationConfig = AnnotationConfig(
+        layerId = "custom-points-layer",   // camada usada para desenhar os pontos
+        sourceId = "custom-points-source"  // fonte de dados do mapa
+    )
+
+
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -108,7 +145,12 @@ fun SearchScreen() {
                     )
                 }
             }
+            PointAnnotationGroup(
+                annotations = customMarkers,
+                annotationConfig = annotationConfig
+            )
         }
+
         OutlinedTextField(
             value = searchQuery,
             onValueChange = { searchQuery = it },
@@ -118,7 +160,7 @@ fun SearchScreen() {
             leadingIcon = { Icon(Icons.Default.Search, contentDescription = null) },
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 36.dp , start = 18.dp, end = 18.dp)
+                .padding(top = 36.dp, start = 18.dp, end = 18.dp)
                 .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(24.dp))
                 .align(Alignment.TopCenter)
         )
