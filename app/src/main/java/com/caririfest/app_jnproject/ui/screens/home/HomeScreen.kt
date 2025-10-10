@@ -56,7 +56,7 @@ fun HomeScreen() {
             Box(
                 modifier = Modifier
                     .align(Alignment.BottomCenter)
-                    .padding(horizontal = 28.dp)
+                    .padding(horizontal = 32.dp)
                     .navigationBarsPadding()
             ) {
                 BottomNavigationBar(navController)
