@@ -63,7 +63,7 @@ enum class NavItems(
     val icon: Int,
     val route: String
 ) {
-    NEWS(R.string.news, R.drawable.ic_action_news, "news"),
+    NEWS(R.string.news, R.drawable.ic_action_newst, "news"),
     HOME(R.string.home, R.drawable.ic_icon_regionalnews, "home"),
     SEARCH(R.string.search, R.drawable.ic_icon_mapsearch, "search"),
     OFFER(R.string.favorites, R.drawable.ic_action_sell, "offer")
@@ -216,7 +216,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                     Icon(
                         painter = painterResource(id = item.icon),
                         contentDescription = item.label,
-                        tint = if (selected) Color(0xFFFF6D00) else Color.Gray,
+                        tint = if (selected) Color(0xFFFF6D00) else Color.Black,
                         modifier = Modifier.size(26.dp)
                     )
                 },
@@ -231,7 +231,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                         if (it) {
                             Text(
                                 item.label,
-                                color = if (selected) Color(0xFFFF6D00) else Color.Gray,
+                                color = if (selected) Color(0xFFFF6D00) else Color.Black,
                                 fontFamily = poppinsFamily,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 12.sp
