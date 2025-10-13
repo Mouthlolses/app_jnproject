@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.caririfest.data.datasource.dao.EventDao
 import com.caririfest.data.datasource.model.EventEntity
 
-@Database(entities = [EventEntity::class], version = 1, exportSchema = false)
+@Database(entities = [EventEntity::class], version = 2, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun eventDao(): EventDao
@@ -22,7 +22,7 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "event_database"
-                ).build().also { INSTANCE = it }
+                ).fallbackToDestructiveMigration(true).build().also { INSTANCE = it }
             }
         }
 
