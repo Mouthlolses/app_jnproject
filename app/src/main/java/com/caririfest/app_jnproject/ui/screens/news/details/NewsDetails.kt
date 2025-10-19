@@ -165,7 +165,8 @@ fun NewsDetailsLayout(
                                 appendLine()
                                 appendLine("📲 Descubra mais eventos no Cariri com o app Cariri Fest!")
                                 appendLine()
-                                appendLine("👉 Baixe grátis: https://shre.ink/cariri-fest")
+                                appendLine("👉 Disponível na Google Play " +
+                                        " Baixe grátis: https://play.google.com/store/apps/details?id=com.caririfest.app_jnproject")
                             }
 
                             val request = ImageRequest.Builder(context)

@@ -1,6 +1,8 @@
 package com.caririfest.app_jnproject.ui.screens.news
 
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -13,7 +15,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -21,19 +22,28 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Place
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
@@ -55,8 +65,8 @@ fun NewsScreenLayout(
     navController: NavHostController,
     viewModel: NewsViewModel = hiltViewModel()
 ) {
-
     val uiState by viewModel.events.collectAsState()
+    var query by remember { mutableStateOf("") }
 
     when {
         uiState.isLoading -> {
@@ -93,109 +103,187 @@ fun NewsScreenLayout(
         }
 
         else -> {
-            LazyColumn(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .statusBarsPadding()
-                    .navigationBarsPadding(),
-                contentPadding = PaddingValues(bottom = 100.dp)
-            ) {
-                items(uiState.events) { doc ->
-                    Card(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(start = 16.dp, end = 16.dp, top = 16.dp, bottom = 16.dp)
-                            .clickable(
-                                onClick = { navController.navigate("newsDetailsScreen/${doc.id}") },
-                                enabled = true,
-                            ),
-                        colors = CardDefaults.cardColors(
-                            containerColor = Color.White
+            val filterEvents = remember(query) {
+                if (query.isEmpty()) {
+                    uiState.events
+                } else {
+                    uiState.events.filter {
+                        it.fields.title.stringValue.contains(
+                            query,
+                            ignoreCase = true
+                        )
+                    }
+                }
+            }
+
+            Scaffold(
+                topBar = {
+                    TopAppBar(
+                        title = {
+                            Text(
+                                text = "O que vai ser hoje?",
+                                fontFamily = poppinsFamily
+                            )
+                        },
+                        colors = TopAppBarDefaults.topAppBarColors(
+                            containerColor = Color.Transparent,
+                            scrolledContainerColor = Color(0xFFF5F5F5),
+                            navigationIconContentColor = Color(0xFFF5F5F5),
+                            titleContentColor = Color.Black,
+                            actionIconContentColor = Color(0xFFF5F5F5),
+                            subtitleContentColor = Color.Black,
                         ),
-                        shape = RoundedCornerShape(16.dp),
-                        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
-                    ) {
-                        Column(
-                            Modifier
+                        modifier = Modifier
+                            .clip(RoundedCornerShape(16.dp))
+                            .border(
+                                shape = RoundedCornerShape(16.dp),
+                                width = 2.dp,
+                                color = Color.Black
+                            )
+                            .background(
+                                Brush.verticalGradient(
+                                    colors = listOf(
+                                        Color(0xFFFF9800),
+                                        Color(0xFFFFEA00)
+                                    ) // Laranja → Amarelo
+                                )
+                            )
+                    )
+                }
+            ) { innerPadding ->
+                LazyColumn(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(innerPadding)
+                        .navigationBarsPadding(),
+                    contentPadding = PaddingValues(bottom = 100.dp)
+                ) {
+                    item {
+                        Row(
+                            modifier = Modifier
                                 .fillMaxWidth()
+                                .padding(start = 16.dp, end = 16.dp, top = 16.dp)
                         ) {
-                            Box(
+                            OutlinedTextField(
+                                value = query,
+                                onValueChange = { query = it },
+                                enabled = true,
+                                singleLine = true,
+                                placeholder = { Text(text = "Explore") },
+                                shape = RoundedCornerShape(26.dp),
+                                leadingIcon = {
+                                    Icon(
+                                        Icons.Default.Search,
+                                        contentDescription = "search"
+                                    )
+                                },
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(200.dp),
-                                contentAlignment = Alignment.Center
+                            )
+                        }
+                    }
+                    items(filterEvents) { doc ->
+                        Card(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(
+                                    start = 16.dp,
+                                    end = 16.dp,
+                                    top = 16.dp,
+                                    bottom = 16.dp
+                                )
+                                .clickable(
+                                    onClick = { navController.navigate("newsDetailsScreen/${doc.id}") },
+                                    enabled = true,
+                                ),
+                            colors = CardDefaults.cardColors(
+                                containerColor = Color.White
+                            ),
+                            shape = RoundedCornerShape(16.dp),
+                            elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+                        ) {
+                            Column(
+                                Modifier
+                                    .fillMaxWidth()
                             ) {
-                                AsyncImage(
-                                    model = doc.fields.img.stringValue,
-                                    contentDescription = stringResource(R.string.imageEvents),
+                                Box(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .height(200.dp)
-                                        .clip(RoundedCornerShape(16.dp)),
-                                    contentScale = ContentScale.Crop
-                                )
-                            }
-                            Spacer(modifier = Modifier.height(14.dp))
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 16.dp, vertical = 12.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Column(
-                                    modifier = Modifier.weight(1f)
+                                        .height(200.dp),
+                                    contentAlignment = Alignment.Center
                                 ) {
-                                    Text(
-                                        text = doc.fields.title.stringValue,
-                                        fontFamily = poppinsFamily,
-                                        fontWeight = FontWeight.Bold,
-                                        color = Color.Black
+                                    AsyncImage(
+                                        model = doc.fields.img.stringValue,
+                                        contentDescription = stringResource(R.string.imageEvents),
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(200.dp)
+                                            .clip(RoundedCornerShape(16.dp)),
+                                        contentScale = ContentScale.Crop
                                     )
-
-                                    Spacer(modifier = Modifier.height(14.dp))
-
-                                    Row(verticalAlignment = Alignment.CenterVertically) {
-                                        Icon(
-                                            imageVector = Icons.Default.DateRange,
-                                            contentDescription = stringResource(R.string.date),
-                                            tint = Color.DarkGray,
-                                            modifier = Modifier.size(18.dp)
-                                        )
-                                        Spacer(modifier = Modifier.width(4.dp))
-                                        Text(
-                                            text = doc.fields.date.stringValue,
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = Color.Gray
-                                        )
-                                    }
-                                    Spacer(modifier = Modifier.height(8.dp))
-
-                                    Row(verticalAlignment = Alignment.CenterVertically) {
-                                        Icon(
-                                            imageVector = Icons.Default.Place,
-                                            contentDescription = stringResource(R.string.location),
-                                            tint = Color.Red,
-                                            modifier = Modifier.size(18.dp)
-                                        )
-                                        Spacer(modifier = Modifier.width(2.dp))
-                                        Text(
-                                            text = doc.fields.location.stringValue,
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = Color.Gray
-                                        )
-                                    }
                                 }
-                                val isFavorite = doc.fields.favorite.booleanValue
-                                Tag(
-                                    text =
-                                        if (isFavorite)
-                                            stringResource(R.string.available)
-                                        else
-                                            stringResource(R.string.exhausted),
-                                    backgroundColor = if (isFavorite) Color(0xFF4CAF50) else Color(
-                                        0xFF9E9E9E
+                                Spacer(modifier = Modifier.height(14.dp))
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Column(
+                                        modifier = Modifier.weight(1f)
+                                    ) {
+                                        Text(
+                                            text = doc.fields.title.stringValue,
+                                            fontFamily = poppinsFamily,
+                                            fontWeight = FontWeight.Bold,
+                                            color = Color.Black
+                                        )
+
+                                        Spacer(modifier = Modifier.height(14.dp))
+
+                                        Row(verticalAlignment = Alignment.CenterVertically) {
+                                            Icon(
+                                                imageVector = Icons.Default.DateRange,
+                                                contentDescription = stringResource(R.string.date),
+                                                tint = Color.DarkGray,
+                                                modifier = Modifier.size(18.dp)
+                                            )
+                                            Spacer(modifier = Modifier.width(4.dp))
+                                            Text(
+                                                text = doc.fields.date.stringValue,
+                                                style = MaterialTheme.typography.bodySmall,
+                                                color = Color.Gray
+                                            )
+                                        }
+                                        Spacer(modifier = Modifier.height(8.dp))
+
+                                        Row(verticalAlignment = Alignment.CenterVertically) {
+                                            Icon(
+                                                imageVector = Icons.Default.Place,
+                                                contentDescription = stringResource(R.string.location),
+                                                tint = Color.Red,
+                                                modifier = Modifier.size(18.dp)
+                                            )
+                                            Spacer(modifier = Modifier.width(2.dp))
+                                            Text(
+                                                text = doc.fields.location.stringValue,
+                                                style = MaterialTheme.typography.bodySmall,
+                                                color = Color.Gray
+                                            )
+                                        }
+                                    }
+                                    val isFavorite = doc.fields.favorite.booleanValue
+                                    Tag(
+                                        text =
+                                            if (isFavorite)
+                                                stringResource(R.string.available)
+                                            else
+                                                stringResource(R.string.exhausted),
+                                        backgroundColor = if (isFavorite) Color(0xFF4CAF50) else Color(
+                                            0xFF9E9E9E
+                                        )
                                     )
-                                )
+                                }
                             }
                         }
                     }
