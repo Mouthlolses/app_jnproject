@@ -7,7 +7,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -182,22 +181,22 @@ fun BottomNavigationBar(navController: NavHostController) {
 
     NavigationBar(
         modifier = Modifier
-            .height(98.dp)
+            .height(96.dp)
             .padding(bottom = 28.dp)
             .clip(RoundedCornerShape(36.dp))
             .shadow(
-                elevation = 10.dp,
+                elevation = 12.dp,
                 shape = RoundedCornerShape(36.dp),
-                ambientColor = Color.Black.copy(alpha = 0.1f),
-                spotColor = Color.Black.copy(alpha = 0.1f)
+                ambientColor = Color(0xFF8C4A2F).copy(alpha = 0.25f),
+                spotColor = Color(0xFF8C4A2F).copy(alpha = 0.25f)
             )
             .border(
-                width = 2.dp,
-                color = Color.Gray.copy(alpha = 0.9f),
+                width = 1.dp,
+                color = Color.DarkGray,
                 shape = RoundedCornerShape(36.dp)
             ),
-        tonalElevation = 8.dp,
-        containerColor = Color(0xFFF5F5F5),
+        tonalElevation = 10.dp,
+        containerColor = Color(0xFF8A8A89),
     ) {
         items.forEach { item ->
             val selected = currentRoute == item.route
@@ -217,7 +216,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                     Icon(
                         painter = painterResource(id = item.icon),
                         contentDescription = item.label,
-                        tint = if (selected) Color(0xFFFF6D00) else Color.Black,
+                        tint = if (selected) Color(0xFFFFEA00) else Color.White,
                         modifier = Modifier.size(26.dp)
                     )
                 },
@@ -232,7 +231,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                         if (it) {
                             Text(
                                 item.label,
-                                color = if (selected) Color(0xFFFF6D00) else Color.Black,
+                                color = if (selected) Color(0xFFFFEA00) else Color.White,
                                 fontFamily = poppinsFamily,
                                 fontWeight = FontWeight.Bold,
                                 fontSize = 12.sp

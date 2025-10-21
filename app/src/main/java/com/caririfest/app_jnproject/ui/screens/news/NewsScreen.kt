@@ -129,23 +129,19 @@ fun NewsScreenLayout(
                             containerColor = Color.Transparent,
                             scrolledContainerColor = Color(0xFFF5F5F5),
                             navigationIconContentColor = Color(0xFFF5F5F5),
-                            titleContentColor = Color.Black,
+                            titleContentColor = Color.DarkGray,
                             actionIconContentColor = Color(0xFFF5F5F5),
                             subtitleContentColor = Color.Black,
                         ),
                         modifier = Modifier
-                            .clip(RoundedCornerShape(16.dp))
-                            .border(
-                                shape = RoundedCornerShape(16.dp),
-                                width = 2.dp,
-                                color = Color.Black
-                            )
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(bottomStart = 16.dp,bottomEnd = 16.dp))
                             .background(
                                 Brush.verticalGradient(
                                     colors = listOf(
                                         Color(0xFFFF9800),
                                         Color(0xFFFFEA00)
-                                    ) // Laranja → Amarelo
+                                    )
                                 )
                             )
                     )
