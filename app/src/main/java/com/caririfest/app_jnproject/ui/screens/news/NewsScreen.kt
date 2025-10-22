@@ -57,11 +57,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.caririfest.app_jnproject.R
 import com.caririfest.app_jnproject.font.poppinsFamily
+import com.caririfest.app_jnproject.font.robotoFamily
 import com.caririfest.app_jnproject.ui.components.Tag
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -183,17 +185,33 @@ fun NewsScreenLayout(
                     contentPadding = PaddingValues(bottom = 100.dp)
                 ) {
                     item {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(Color(0xFFE6E6E6))
+                        ) {
+                            Text(
+                                text = "Imperdíveis",
+                                fontFamily = robotoFamily,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 24.sp,
+                                color = Color(0xFF565555),
+                                modifier = Modifier
+                                    .padding(start = 12.dp, top = 12.dp, bottom = 8.dp)
+                            )
+                        }
                         HorizontalPager(
                             state = pagerState,
                             modifier = Modifier
                                 .fillMaxWidth()
+                                .background(Color.White)
                         ) { page ->
                             val event = filterEvents[page]
                             Card(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .clickable(
-                                        onClick = { navController.navigate("newsDetailsScreen/${event.id}")},
+                                        onClick = { navController.navigate("newsDetailsScreen/${event.id}") },
                                         enabled = true
                                     )
                                     .padding(
@@ -231,6 +249,7 @@ fun NewsScreenLayout(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
+                                .background(Color(0xFFE6E6E6))
                                 .padding(start = 16.dp, end = 16.dp, top = 16.dp)
                         ) {
                             OutlinedTextField(
@@ -255,6 +274,7 @@ fun NewsScreenLayout(
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
+                                .background(Color(0xFFE6E6E6))
                                 .padding(
                                     start = 16.dp,
                                     end = 16.dp,
