@@ -179,6 +179,7 @@ fun NewsScreenLayout(
             ) { innerPadding ->
                 LazyColumn(
                     modifier = Modifier
+                        .background(Color(0xFFE6E6E6))
                         .fillMaxSize()
                         .padding(innerPadding)
                         .navigationBarsPadding(),
@@ -188,7 +189,6 @@ fun NewsScreenLayout(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .background(Color(0xFFE6E6E6))
                         ) {
                             Text(
                                 text = "Imperdíveis",
@@ -249,7 +249,6 @@ fun NewsScreenLayout(
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .background(Color(0xFFE6E6E6))
                                 .padding(start = 16.dp, end = 16.dp, top = 16.dp)
                         ) {
                             OutlinedTextField(
@@ -274,7 +273,6 @@ fun NewsScreenLayout(
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .background(Color(0xFFE6E6E6))
                                 .padding(
                                     start = 16.dp,
                                     end = 16.dp,
