@@ -1,8 +1,9 @@
 package com.caririfest.app_jnproject.ui.screens.news
 
+import androidx.compose.animation.core.FastOutSlowInEasing
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,6 +19,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.pager.HorizontalPager
+import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
@@ -35,10 +38,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -58,6 +63,8 @@ import coil.compose.AsyncImage
 import com.caririfest.app_jnproject.R
 import com.caririfest.app_jnproject.font.poppinsFamily
 import com.caririfest.app_jnproject.ui.components.Tag
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -67,6 +74,27 @@ fun NewsScreenLayout(
 ) {
     val uiState by viewModel.events.collectAsState()
     var query by remember { mutableStateOf("") }
+    val pagerState = rememberPagerState(pageCount = { uiState.events.size })
+    val scope = rememberCoroutineScope()
+
+
+    LaunchedEffect(
+        pagerState.isScrollInProgress
+    ) {
+        if (!pagerState.isScrollInProgress) {
+            delay(3000)
+            val nextPage = (pagerState.currentPage + 1) % pagerState.pageCount
+            scope.launch {
+                pagerState.animateScrollToPage(
+                    page = nextPage,
+                    animationSpec = tween(
+                        durationMillis = 1000,
+                        easing = FastOutSlowInEasing
+                    )
+                )
+            }
+        }
+    }
 
     when {
         uiState.isLoading -> {
@@ -135,7 +163,7 @@ fun NewsScreenLayout(
                         ),
                         modifier = Modifier
                             .fillMaxWidth()
-                            .clip(RoundedCornerShape(bottomStart = 16.dp,bottomEnd = 16.dp))
+                            .clip(RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp))
                             .background(
                                 Brush.verticalGradient(
                                     colors = listOf(
@@ -154,6 +182,51 @@ fun NewsScreenLayout(
                         .navigationBarsPadding(),
                     contentPadding = PaddingValues(bottom = 100.dp)
                 ) {
+                    item {
+                        HorizontalPager(
+                            state = pagerState,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                        ) { page ->
+                            val event = filterEvents[page]
+                            Card(
+                                modifier = Modifier
+                                    .fillMaxWidth()
+                                    .clickable(
+                                        onClick = { navController.navigate("newsDetailsScreen/${event.id}")},
+                                        enabled = true
+                                    )
+                                    .padding(
+                                        start = 16.dp,
+                                        end = 16.dp,
+                                        top = 16.dp,
+                                        bottom = 16.dp
+                                    )
+                            ) {
+                                Column(
+                                    Modifier
+                                        .fillMaxWidth()
+                                ) {
+                                    Box(
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(200.dp),
+                                        contentAlignment = Alignment.Center
+                                    ) {
+                                        AsyncImage(
+                                            model = event.fields.img.stringValue,
+                                            contentDescription = stringResource(R.string.imageEvents),
+                                            modifier = Modifier
+                                                .fillMaxWidth()
+                                                .height(200.dp)
+                                                .clip(RoundedCornerShape(16.dp)),
+                                            contentScale = ContentScale.Crop
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
                     item {
                         Row(
                             modifier = Modifier
