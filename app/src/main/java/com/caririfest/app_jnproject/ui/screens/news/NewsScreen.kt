@@ -157,10 +157,10 @@ fun NewsScreenLayout(
                         },
                         colors = TopAppBarDefaults.topAppBarColors(
                             containerColor = Color.Transparent,
-                            scrolledContainerColor = Color(0xFFF5F5F5),
-                            navigationIconContentColor = Color(0xFFF5F5F5),
+                            scrolledContainerColor = Color.Transparent,
+                            navigationIconContentColor = Color.Transparent,
                             titleContentColor = Color.DarkGray,
-                            actionIconContentColor = Color(0xFFF5F5F5),
+                            actionIconContentColor = Color.Transparent,
                             subtitleContentColor = Color.Black,
                         ),
                         modifier = Modifier
@@ -179,7 +179,6 @@ fun NewsScreenLayout(
             ) { innerPadding ->
                 LazyColumn(
                     modifier = Modifier
-                        .background(Color(0xFFE6E6E6))
                         .fillMaxSize()
                         .padding(innerPadding)
                         .navigationBarsPadding(),
@@ -204,7 +203,7 @@ fun NewsScreenLayout(
                             state = pagerState,
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .background(Color.White)
+                                .background(Color(0xFFE6E6E6))
                         ) { page ->
                             val event = filterEvents[page]
                             Card(
