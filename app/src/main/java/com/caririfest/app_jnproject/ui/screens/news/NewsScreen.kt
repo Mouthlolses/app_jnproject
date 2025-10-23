@@ -50,7 +50,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
@@ -85,7 +84,7 @@ fun NewsScreenLayout(
         pagerState.isScrollInProgress
     ) {
         if (!pagerState.isScrollInProgress) {
-            delay(3000)
+            delay(6000)
             val nextPage = (pagerState.currentPage + 1) % pagerState.pageCount
             scope.launch {
                 pagerState.animateScrollToPage(
@@ -209,7 +208,7 @@ fun NewsScreenLayout(
                                 state = pagerState,
                                 modifier = Modifier
                                     .fillMaxWidth()
-                                    .height(360.dp)
+                                    .height(366.dp)
                             ) { page ->
                                 val event = uiState.events[page]
                                 Card(
@@ -253,26 +252,42 @@ fun NewsScreenLayout(
                                             modifier = Modifier
                                                 .padding(horizontal = 16.dp)
                                         )
-                                        Spacer(modifier = Modifier.height(4.dp))
-                                        Text(
-                                            text = event.fields.date.stringValue,
-                                            fontFamily = robotoFamily,
-                                            fontWeight = FontWeight.Medium,
-                                            fontSize = 14.sp,
-                                            color = Color(0xFF666666),
-                                            textAlign = TextAlign.Center,
-                                            modifier = Modifier.padding(horizontal = 16.dp)
-                                        )
+                                        Spacer(modifier = Modifier.height(12.dp))
+                                        Row(verticalAlignment = Alignment.CenterVertically) {
+                                            Icon(
+                                                imageVector = Icons.Default.DateRange,
+                                                contentDescription = stringResource(R.string.date),
+                                                tint = Color.DarkGray,
+                                                modifier = Modifier.size(18.dp)
+                                            )
+                                            Spacer(modifier = Modifier.width(4.dp))
+                                            Text(
+                                                text = event.fields.date.stringValue,
+                                                fontFamily = robotoFamily,
+                                                fontWeight = FontWeight.Medium,
+                                                fontSize = 14.sp,
+                                                color = Color(0xFF666666),
+                                                textAlign = TextAlign.Center,
+                                            )
+                                        }
                                         Spacer(modifier = Modifier.height(2.dp))
-                                        Text(
-                                            text = event.fields.location.stringValue,
-                                            fontFamily = robotoFamily,
-                                            fontWeight = FontWeight.Normal,
-                                            fontSize = 14.sp,
-                                            color = Color(0xFF888888),
-                                            textAlign = TextAlign.Center,
-                                            modifier = Modifier
-                                        )
+                                        Row(verticalAlignment = Alignment.CenterVertically) {
+                                            Icon(
+                                                imageVector = Icons.Default.Place,
+                                                contentDescription = stringResource(R.string.date),
+                                                tint = Color.Red,
+                                                modifier = Modifier.size(18.dp)
+                                            )
+                                            Spacer(modifier = Modifier.width(4.dp))
+                                            Text(
+                                                text = event.fields.location.stringValue,
+                                                fontFamily = robotoFamily,
+                                                fontWeight = FontWeight.Normal,
+                                                fontSize = 14.sp,
+                                                color = Color(0xFF888888),
+                                                textAlign = TextAlign.Center,
+                                            )
+                                        }
                                     }
                                 }
                             }
@@ -289,13 +304,29 @@ fun NewsScreenLayout(
                                             .padding(4.dp)
                                             .size(if (isSelected) 12.dp else 8.dp)
                                             .background(
-                                                if (isSelected) Color.Black else Color.Gray,
+                                                if (isSelected) Color(0xFFFF6D00) else Color.LightGray,
                                                 shape = CircleShape
                                             )
                                     )
                                 }
                             }
                             Spacer(modifier = Modifier.height(26.dp))
+                        }
+                    }
+                    item {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                        ) {
+                            Text(
+                                text = "Em Alta",
+                                fontFamily = robotoFamily,
+                                fontWeight = FontWeight.Bold,
+                                fontSize = 20.sp,
+                                color = Color(0xFF565555),
+                                modifier = Modifier
+                                    .padding(start = 12.dp, top = 16.dp)
+                            )
                         }
                     }
                     items(uiState.events) { doc ->
@@ -305,7 +336,7 @@ fun NewsScreenLayout(
                                 .padding(
                                     start = 16.dp,
                                     end = 16.dp,
-                                    top = 16.dp,
+                                    top = 12.dp,
                                     bottom = 16.dp
                                 )
                                 .clickable(
