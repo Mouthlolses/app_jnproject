@@ -48,6 +48,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -202,6 +203,11 @@ fun NewsScreenLayout(
                         }
                         Column(
                             modifier = Modifier
+                                .shadow(
+                                    elevation = 8.dp,
+                                    shape = RoundedCornerShape(16.dp),
+                                    clip = false
+                                )
                                 .background(Color.White)
                         ) {
                             HorizontalPager(
@@ -223,7 +229,7 @@ fun NewsScreenLayout(
                                             end = 16.dp,
                                             top = 16.dp,
                                             bottom = 16.dp
-                                        )
+                                        ),
                                 ) {
                                     Column(
                                         Modifier
