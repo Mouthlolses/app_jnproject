@@ -115,6 +115,7 @@ fun OnBoardingScreen(
                 }
             }
         }
+
         Row(
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,
@@ -135,6 +136,7 @@ fun OnBoardingScreen(
                 )
             }
         }
+
         Box(
             modifier = Modifier
                 .align(Alignment.BottomCenter)
@@ -163,7 +165,6 @@ fun OnBoardingScreen(
         }
     }
 }
-
 
 @Composable
 fun OnBoardingScreeLayout(
