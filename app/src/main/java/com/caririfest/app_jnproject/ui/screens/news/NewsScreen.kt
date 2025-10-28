@@ -73,7 +73,8 @@ fun NewsScreenLayout(
     viewModel: NewsViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.events.collectAsState()
-    val pagerState = rememberPagerState(pageCount = { uiState.events.filter { it.fields.hot.booleanValue }.size })
+    val uiStateHotFilter = uiState.events.filter { it.fields.hot.booleanValue }
+    val pagerState = rememberPagerState(pageCount = { uiStateHotFilter.size })
     val scope = rememberCoroutineScope()
 
 
@@ -200,7 +201,7 @@ fun NewsScreenLayout(
                                     .height(366.dp)
                             ) { page ->
                                 val event =
-                                    uiState.events.filter { it.fields.hot.booleanValue }[page]
+                                    uiStateHotFilter[page]
                                 Card(
                                     modifier = Modifier
                                         .fillMaxWidth()
@@ -287,7 +288,7 @@ fun NewsScreenLayout(
                                 modifier = Modifier
                                     .align(Alignment.CenterHorizontally)
                             ) {
-                                repeat(uiState.events.filter { it.fields.hot.booleanValue }.size) { index ->
+                                repeat(uiStateHotFilter.size) { index ->
                                     val isSelected = pagerState.currentPage == index
                                     Box(
                                         modifier = Modifier
