@@ -25,6 +25,7 @@ data class EventFields(
     val date: FirestoreString,
     val desc: FirestoreString,
     val favorite: FirestoreBoolean,
+    val hot: FirestoreBoolean,
     val img: FirestoreString,
     val link: FirestoreString,
     val location: FirestoreString,

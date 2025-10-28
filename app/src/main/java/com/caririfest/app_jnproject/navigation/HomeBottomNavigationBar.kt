@@ -134,7 +134,7 @@ fun NavigationGraph(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
-                    Text("Ops! Evento não encontrado")
+                    Text("Ops! Evento encerrado")
                 }
             }
         }

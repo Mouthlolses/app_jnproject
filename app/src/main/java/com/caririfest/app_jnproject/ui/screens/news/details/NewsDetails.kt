@@ -353,6 +353,7 @@ fun NewsDetailsLayoutPreview() {
             time = FirestoreString("18:00"),
             img = FirestoreString("https://fakeimage.com/event.jpg"),
             favorite = FirestoreBoolean(false),
+            hot = FirestoreBoolean(false),
             link = FirestoreString("https://www.sympla.com.br/evento/gloria-tour-re-nascido-juazeiro-do-norte-25-10/3116330")
         )
     )

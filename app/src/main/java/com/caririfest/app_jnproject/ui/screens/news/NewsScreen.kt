@@ -41,10 +41,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -76,8 +73,7 @@ fun NewsScreenLayout(
     viewModel: NewsViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.events.collectAsState()
-    var query by remember { mutableStateOf("") }
-    val pagerState = rememberPagerState(pageCount = { uiState.events.size })
+    val pagerState = rememberPagerState(pageCount = { uiState.events.filter { it.fields.hot.booleanValue }.size })
     val scope = rememberCoroutineScope()
 
 
@@ -134,19 +130,6 @@ fun NewsScreenLayout(
         }
 
         else -> {
-            val filterEvents = remember(query) {
-                if (query.isEmpty()) {
-                    uiState.events
-                } else {
-                    uiState.events.filter {
-                        it.fields.title.stringValue.contains(
-                            query,
-                            ignoreCase = true
-                        )
-                    }
-                }
-            }
-
             Scaffold(
                 topBar = {
                     TopAppBar(
@@ -216,7 +199,8 @@ fun NewsScreenLayout(
                                     .fillMaxWidth()
                                     .height(366.dp)
                             ) { page ->
-                                val event = uiState.events[page]
+                                val event =
+                                    uiState.events.filter { it.fields.hot.booleanValue }[page]
                                 Card(
                                     modifier = Modifier
                                         .fillMaxWidth()
@@ -303,7 +287,7 @@ fun NewsScreenLayout(
                                 modifier = Modifier
                                     .align(Alignment.CenterHorizontally)
                             ) {
-                                repeat(uiState.events.size) { index ->
+                                repeat(uiState.events.filter { it.fields.hot.booleanValue }.size) { index ->
                                     val isSelected = pagerState.currentPage == index
                                     Box(
                                         modifier = Modifier
