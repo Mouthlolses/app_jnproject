@@ -3,7 +3,6 @@ package com.caririfest.app_jnproject.ui.screens.home
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -102,6 +101,34 @@ fun HomeScreenLayout(
             .fillMaxSize()
             .statusBarsPadding(),
     ) {
+        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = "Descubra",
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp),
+            style = MaterialTheme.typography.titleMedium.copy(
+                fontWeight = FontWeight.Bold
+            ),
+            fontSize = 26.sp,
+            color = Color.Black
+        )
+        Spacer(modifier = Modifier.height(6.dp))
+        LazyRow(
+            modifier = Modifier,
+        ) {
+            items(filterCities) { city ->
+                EventCard(
+                    modifier = Modifier,
+                    img = city.img,
+                    title = city.name,
+                    onCardClick = {
+                        navController.navigate("detailsScreen/${city.id}")
+                    },
+                    cardEnable = false
+                )
+            }
+        }
         Spacer(modifier = Modifier.padding(12.dp))
         Row(
             modifier = Modifier
@@ -119,35 +146,6 @@ fun HomeScreenLayout(
                 modifier = Modifier
                     .fillMaxWidth()
             )
-        }
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(
-            text = "Descubra",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp),
-            style = MaterialTheme.typography.titleMedium.copy(
-                fontWeight = FontWeight.Bold
-            ),
-            fontSize = 26.sp,
-            color = Color.Black
-        )
-        Spacer(modifier = Modifier.height(6.dp))
-        LazyRow(
-            modifier = Modifier,
-            contentPadding = PaddingValues(bottom = 100.dp),
-        ) {
-            items(filterCities) { city ->
-                EventCard(
-                    modifier = Modifier,
-                    img = city.img,
-                    title = city.name,
-                    onCardClick = {
-                        navController.navigate("detailsScreen/${city.id}")
-                    },
-                    cardEnable = false
-                )
-            }
         }
     }
 }
