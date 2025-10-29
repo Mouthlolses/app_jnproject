@@ -81,7 +81,7 @@ fun NewsScreenLayout(
     LaunchedEffect(
         pagerState.isScrollInProgress
     ) {
-        if (!pagerState.isScrollInProgress) {
+        if (!pagerState.isScrollInProgress && pagerState.pageCount > 0) {
             delay(6000)
             val nextPage = (pagerState.currentPage + 1) % pagerState.pageCount
             scope.launch {
