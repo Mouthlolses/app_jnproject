@@ -175,7 +175,6 @@ fun NewsDetailsLayout(
                                 .build()
 
                             val result = withContext(Dispatchers.IO) {
-                                loading
                                 imageLoader.execute(request)
                             }
 

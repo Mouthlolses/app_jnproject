@@ -2,7 +2,6 @@ package com.caririfest.app_jnproject.ui.screens.home
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -40,6 +40,7 @@ import androidx.navigation.compose.rememberNavController
 import com.caririfest.app_jnproject.navigation.BottomNavigationBar
 import com.caririfest.app_jnproject.navigation.NavItems
 import com.caririfest.app_jnproject.navigation.NavigationGraph
+import com.caririfest.app_jnproject.ui.components.CategoryCard
 import com.caririfest.app_jnproject.ui.components.EventCard
 
 @OptIn(ExperimentalAnimationApi::class)
@@ -86,66 +87,101 @@ fun HomeScreenLayout(
     navController: NavHostController
 ) {
     val cityLocation by viewModel.cityLocation.collectAsState()
+    val categoriesState by viewModel.categories.collectAsState()
     var query by remember { mutableStateOf("") }
 
-    val filterCities = remember(query) {
-        if (query.isEmpty()) {
-            cityLocation
-        } else {
-            cityLocation.filter { it.name.contains(query, ignoreCase = true) }
-        }
-    }
+//    val filterCities = remember(query) {
+//        if (query.isEmpty()) {
+//            cityLocation
+//        } else {
+//            cityLocation.filter { it.name.contains(query, ignoreCase = true) }
+//        }
+//    }
 
-    Column(
+    LazyColumn(
         modifier = Modifier
             .fillMaxSize()
             .statusBarsPadding(),
     ) {
-        Spacer(modifier = Modifier.height(16.dp))
-        Text(
-            text = "Descubra",
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp),
-            style = MaterialTheme.typography.titleMedium.copy(
-                fontWeight = FontWeight.Bold
-            ),
-            fontSize = 26.sp,
-            color = Color.Black
-        )
-        Spacer(modifier = Modifier.height(6.dp))
-        LazyRow(
-            modifier = Modifier,
-        ) {
-            items(filterCities) { city ->
-                EventCard(
-                    modifier = Modifier,
-                    img = city.img,
-                    title = city.name,
-                    onCardClick = {
-                        navController.navigate("detailsScreen/${city.id}")
-                    },
-                    cardEnable = false
+        item {
+            Spacer(modifier = Modifier.height(16.dp))
+            Text(
+                text = "Descubra",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp),
+                style = MaterialTheme.typography.titleMedium.copy(
+                    fontWeight = FontWeight.Bold
+                ),
+                fontSize = 26.sp,
+                color = Color.Black
+            )
+        }
+        item {
+            Spacer(modifier = Modifier.height(6.dp))
+            LazyRow(
+                modifier = Modifier,
+            ) {
+                items(cityLocation) { city ->
+                    EventCard(
+                        modifier = Modifier,
+                        img = city.img,
+                        title = city.name,
+                        onCardClick = {
+                            navController.navigate("detailsScreen/${city.id}")
+                        },
+                        cardEnable = false
+                    )
+                }
+            }
+        }
+        item {
+            Spacer(modifier = Modifier.padding(12.dp))
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp)
+            ) {
+                OutlinedTextField(
+                    value = query,
+                    onValueChange = { query = it },
+                    enabled = true,
+                    singleLine = true,
+                    placeholder = { Text(text = "Explore") },
+                    shape = RoundedCornerShape(26.dp),
+                    leadingIcon = { Icon(Icons.Default.Search, contentDescription = "search") },
+                    modifier = Modifier
+                        .fillMaxWidth()
                 )
             }
         }
-        Spacer(modifier = Modifier.padding(12.dp))
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp)
-        ) {
-            OutlinedTextField(
-                value = query,
-                onValueChange = { query = it },
-                enabled = true,
-                singleLine = true,
-                placeholder = { Text(text = "Explore") },
-                shape = RoundedCornerShape(26.dp),
-                leadingIcon = { Icon(Icons.Default.Search, contentDescription = "search") },
+        item {
+            Spacer(modifier = Modifier.padding(16.dp))
+            Text(
+                text = "Explore as categorias",
                 modifier = Modifier
                     .fillMaxWidth()
+                    .padding(start = 16.dp),
+                style = MaterialTheme.typography.titleMedium.copy(
+                    fontWeight = FontWeight.Bold
+                ),
+                fontSize = 26.sp,
+                color = Color.Black
             )
+        }
+        item {
+            Spacer(modifier = Modifier.padding(4.dp))
+            //categories
+            LazyRow(
+                modifier = Modifier
+            ) {
+                items(categoriesState) { value ->
+                    CategoryCard(
+                        icon = value.image,
+                        title = value.nameCategories
+                    )
+                }
+            }
         }
     }
 }
