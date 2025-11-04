@@ -5,13 +5,17 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.caririfest.data.datasource.dao.EventDao
+import com.caririfest.data.datasource.dao.RecentEventDao
 import com.caririfest.data.datasource.migrations.MIGRATION_2_3
+import com.caririfest.data.datasource.migrations.MIGRATION_3_4
 import com.caririfest.data.datasource.model.EventEntity
+import com.caririfest.data.datasource.model.RecentEventEntity
 
-@Database(entities = [EventEntity::class], version = 3, exportSchema = false)
+@Database(entities = [EventEntity::class, RecentEventEntity::class], version = 4, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun eventDao(): EventDao
+    abstract fun recentEventDao(): RecentEventDao
 
     companion object {
         @Volatile
@@ -23,7 +27,7 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "event_database"
-                ).addMigrations(MIGRATION_2_3).build().also { INSTANCE = it }
+                ).addMigrations(MIGRATION_2_3, MIGRATION_3_4).build().also { INSTANCE = it }
             }
         }
 

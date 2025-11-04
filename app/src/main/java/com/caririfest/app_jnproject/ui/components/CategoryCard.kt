@@ -21,13 +21,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
+@Preview(showBackground = true)
 @Composable
 fun CategoryCard(
-    icon: Int,
-    title: String,
+    icon: Int = 0,
+    title: String = "",
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {}
 ) {
@@ -35,7 +37,7 @@ fun CategoryCard(
         modifier = modifier
             .fillMaxWidth()
             .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 10.dp)
-            .size(110.dp)
+            .size(126.dp)
             .clickable(enabled = false, onClick = onClick),
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(4.dp),
@@ -60,9 +62,9 @@ fun CategoryCard(
             Text(
                 text = title,
                 fontSize = 14.sp,
-                fontWeight = FontWeight.Medium,
                 color = Color(0xFF6E6E6E),
-                textAlign = TextAlign.Center
+                fontWeight = FontWeight.Medium,
+                textAlign = TextAlign.Center,
             )
         }
     }

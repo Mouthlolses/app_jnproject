@@ -91,42 +91,42 @@ class HomeViewModel : ViewModel() {
             Categories(
                 id = 1,
                 image = R.drawable.caririfestlogo1,
-                nameCategories = "Random"
+                nameCategories = "Cultura & Tradição"
             ),
             Categories(
                 id = 2,
                 image = R.drawable.caririfestlogo1,
-                nameCategories = "Random"
+                nameCategories = "Música & Entretenimento"
             ),
             Categories(
                 id = 3,
                 image = R.drawable.caririfestlogo1,
-                nameCategories = "Random"
+                nameCategories = "Gastronomia"
             ),
             Categories(
                 id = 4,
                 image = R.drawable.caririfestlogo1,
-                nameCategories = "Random"
+                nameCategories = "Esporte & Bem-Estar"
             ),
             Categories(
                 id = 5,
                 image = R.drawable.caririfestlogo1,
-                nameCategories = "Random"
+                nameCategories = "Educação & Negócios"
             ),
             Categories(
                 id = 6,
                 image = R.drawable.caririfestlogo1,
-                nameCategories = "Random"
+                nameCategories = "Família & Comunidade"
             ),
             Categories(
                 id = 7,
                 image = R.drawable.caririfestlogo1,
-                nameCategories = "Random"
+                nameCategories = "Cinema & Arte"
             ),
             Categories(
                 id = 8,
                 image = R.drawable.caririfestlogo1,
-                nameCategories = "Random"
+                nameCategories = "Turismo & Natureza"
             )
         )
     }

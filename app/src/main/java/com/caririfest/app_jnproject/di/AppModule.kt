@@ -1,8 +1,11 @@
 package com.caririfest.app_jnproject.di
 
 import android.content.Context
+import com.caririfest.data.datasource.dao.EventDao
+import com.caririfest.data.datasource.dao.RecentEventDao
 import com.caririfest.data.datasource.database.AppDatabase
 import com.caririfest.data.datasource.repository.EventsRepository
+import com.caririfest.data.datasource.repository.RecentEventsRepository
 import com.caririfest.network.data.EventsApi
 import com.caririfest.network.data.EventsApiService
 import dagger.Module
@@ -26,8 +29,24 @@ object AppModule {
         AppDatabase.getDatabase(context)
 
     @Provides
+    fun provideEventDao(db: AppDatabase): EventDao = db.eventDao()
+
+    @Provides
+    fun provideRecentEventDao(db: AppDatabase): RecentEventDao = db.recentEventDao()
+
+
+    @Provides
     @Singleton
-    fun provideRepository(api: EventsApiService, db: AppDatabase): EventsRepository =
-        EventsRepository(api, db.eventDao())
+    fun provideEventsRepository(
+        api: EventsApiService,
+        eventDao: EventDao
+    ): EventsRepository = EventsRepository(api, eventDao)
+
+    @Provides
+    @Singleton
+    fun provideRecentEventsRepository(
+        eventDao: EventDao,
+        recentEventDao: RecentEventDao
+    ): RecentEventsRepository = RecentEventsRepository(eventDao, recentEventDao)
 
 }

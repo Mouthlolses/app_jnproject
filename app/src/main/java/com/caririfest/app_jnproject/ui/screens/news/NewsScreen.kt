@@ -63,6 +63,8 @@ import com.caririfest.app_jnproject.R
 import com.caririfest.app_jnproject.font.poppinsFamily
 import com.caririfest.app_jnproject.font.robotoFamily
 import com.caririfest.app_jnproject.ui.components.Tag
+import com.caririfest.app_jnproject.ui.screens.home.RecentEventViewModel
+import com.caririfest.data.datasource.model.EventEntity
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -70,7 +72,8 @@ import kotlinx.coroutines.launch
 @Composable
 fun NewsScreenLayout(
     navController: NavHostController,
-    viewModel: NewsViewModel = hiltViewModel()
+    viewModel: NewsViewModel = hiltViewModel(),
+    recentEventViewModel: RecentEventViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.events.collectAsState()
     val uiStateHotFilter = uiState.events.filter { it.fields.hot.booleanValue }
@@ -206,7 +209,24 @@ fun NewsScreenLayout(
                                     modifier = Modifier
                                         .fillMaxWidth()
                                         .clickable(
-                                            onClick = { navController.navigate("newsDetailsScreen/${event.id}") },
+                                            onClick = {
+                                                recentEventViewModel.onEventOpened(
+                                                    EventEntity(
+                                                        id = event.id,
+                                                        title = event.fields.title.stringValue,
+                                                        desc = event.fields.desc.stringValue,
+                                                        date = event.fields.date.stringValue,
+                                                        img = event.fields.img.stringValue,
+                                                        link = event.fields.link.stringValue,
+                                                        location = event.fields.location.stringValue,
+                                                        place = event.fields.place.stringValue,
+                                                        time = event.fields.time.stringValue,
+                                                        favorite = event.fields.favorite.booleanValue,
+                                                        hot = event.fields.hot.booleanValue
+                                                    )
+                                                )
+                                                navController.navigate("newsDetailsScreen/${event.id}")
+                                            },
                                             enabled = true
                                         )
                                         .padding(
@@ -331,7 +351,24 @@ fun NewsScreenLayout(
                                     bottom = 16.dp
                                 )
                                 .clickable(
-                                    onClick = { navController.navigate("newsDetailsScreen/${doc.id}") },
+                                    onClick = {
+                                        recentEventViewModel.onEventOpened(
+                                            EventEntity(
+                                                id = doc.id,
+                                                title = doc.fields.title.stringValue,
+                                                desc = doc.fields.desc.stringValue,
+                                                date = doc.fields.date.stringValue,
+                                                img = doc.fields.img.stringValue,
+                                                link = doc.fields.link.stringValue,
+                                                location = doc.fields.location.stringValue,
+                                                place = doc.fields.place.stringValue,
+                                                time = doc.fields.time.stringValue,
+                                                favorite = doc.fields.favorite.booleanValue,
+                                                hot = doc.fields.hot.booleanValue
+                                            )
+                                        )
+                                        navController.navigate("newsDetailsScreen/${doc.id}")
+                                    },
                                     enabled = true,
                                 ),
                             colors = CardDefaults.cardColors(
