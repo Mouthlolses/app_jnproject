@@ -12,23 +12,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Place
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -162,26 +154,6 @@ fun HomeScreenLayout(
             }
         }
         item {
-            Spacer(modifier = Modifier.padding(12.dp))
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp)
-            ) {
-                OutlinedTextField(
-                    value = query,
-                    onValueChange = { query = it },
-                    enabled = true,
-                    singleLine = true,
-                    placeholder = { Text(text = "Explore") },
-                    shape = RoundedCornerShape(26.dp),
-                    leadingIcon = { Icon(Icons.Default.Search, contentDescription = "search") },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                )
-            }
-        }
-        item {
             Spacer(modifier = Modifier.padding(16.dp))
             Text(
                 text = "Explore as categorias",
@@ -209,12 +181,14 @@ fun HomeScreenLayout(
                 }
             }
         }
+
         item {
+            //recentEvents
             if (recentEvents.isNotEmpty()) {
                 Spacer(
                     modifier = Modifier.padding(
                         top = 24.dp,
-                        bottom = 16.dp,
+                        bottom = 18.dp,
                         start = 16.dp,
                         end = 16.dp,
                     )
@@ -233,12 +207,15 @@ fun HomeScreenLayout(
             }
         }
         item {
-            LazyRow() {
+            LazyRow(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
                 items(recentEvents) { recentEvents ->
                     Card(
                         modifier = Modifier
-                            .width(300.dp)
-                            .padding(horizontal = 16.dp, vertical = 16.dp)
+                            .width(340.dp)
+                            .padding(horizontal = 12.dp, vertical = 12.dp)
                             .clickable(
                                 onClick = {
                                     navController.navigate("newsDetailsScreen/${recentEvents.id}")
@@ -246,10 +223,11 @@ fun HomeScreenLayout(
                                 enabled = true,
                             ),
                         colors = CardDefaults.cardColors(
-                            containerColor = Color.White
-                        ),
-                        shape = RoundedCornerShape(16.dp),
-                        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+                            containerColor = Color.Transparent,
+                            contentColor = Color.Transparent,
+                            disabledContainerColor = Color.Transparent,
+                            disabledContentColor = Color.Transparent
+                        )
                     ) {
                         Column(
                             Modifier
@@ -271,7 +249,7 @@ fun HomeScreenLayout(
                                     contentScale = ContentScale.Crop
                                 )
                             }
-                            Spacer(modifier = Modifier.height(14.dp))
+                            Spacer(modifier = Modifier.height(2.dp))
                             Row(
                                 modifier = Modifier
                                     .fillMaxWidth()
@@ -283,40 +261,27 @@ fun HomeScreenLayout(
                                 ) {
                                     Text(
                                         text = recentEvents.title,
+                                        color = Color.Black,
                                         fontFamily = poppinsFamily,
                                         fontWeight = FontWeight.Bold,
-                                        color = Color.Black
+                                        maxLines = 2
                                     )
-                                    Spacer(modifier = Modifier.height(14.dp))
+                                    Spacer(modifier = Modifier.height(8.dp))
 
                                     Row(verticalAlignment = Alignment.CenterVertically) {
-                                        Icon(
-                                            imageVector = Icons.Default.DateRange,
-                                            contentDescription = stringResource(R.string.date),
-                                            tint = Color.DarkGray,
-                                            modifier = Modifier.size(18.dp)
-                                        )
-                                        Spacer(modifier = Modifier.width(4.dp))
                                         Text(
-                                            text = recentEvents.date,
-                                            style = MaterialTheme.typography.bodySmall,
+                                            text = recentEvents.place,
+                                            style = MaterialTheme.typography.bodyMedium,
                                             color = Color.Gray
                                         )
                                     }
                                     Spacer(modifier = Modifier.height(8.dp))
 
                                     Row(verticalAlignment = Alignment.CenterVertically) {
-                                        Icon(
-                                            imageVector = Icons.Default.Place,
-                                            contentDescription = stringResource(R.string.location),
-                                            tint = Color.Red,
-                                            modifier = Modifier.size(18.dp)
-                                        )
-                                        Spacer(modifier = Modifier.width(2.dp))
                                         Text(
-                                            text = recentEvents.location,
-                                            style = MaterialTheme.typography.bodySmall,
-                                            color = Color.Gray
+                                            text = recentEvents.date,
+                                            style = MaterialTheme.typography.bodyMedium,
+                                            color = Color.Black
                                         )
                                     }
                                 }
