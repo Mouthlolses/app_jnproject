@@ -24,12 +24,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.caririfest.app_jnproject.R
 
-@Preview(showBackground = true)
+@Preview()
 @Composable
 fun CategoryCard(
-    icon: Int = 0,
-    title: String = "",
+    icon: Int = R.drawable.caririfestlogo1,
+    title: String = "title",
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {}
 ) {
@@ -37,7 +38,7 @@ fun CategoryCard(
         modifier = modifier
             .fillMaxWidth()
             .padding(start = 10.dp, end = 10.dp, top = 10.dp, bottom = 10.dp)
-            .size(126.dp)
+            .size(130.dp)
             .clickable(enabled = false, onClick = onClick),
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(4.dp),
@@ -65,6 +66,7 @@ fun CategoryCard(
                 color = Color(0xFF6E6E6E),
                 fontWeight = FontWeight.Medium,
                 textAlign = TextAlign.Center,
+                maxLines = 2
             )
         }
     }

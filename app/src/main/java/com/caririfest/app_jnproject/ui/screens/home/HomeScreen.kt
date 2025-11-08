@@ -211,7 +211,7 @@ fun HomeScreenLayout(
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                items(recentEvents) { recentEvents ->
+                items(recentEvents.reversed()) { recentEvents ->
                     Card(
                         modifier = Modifier
                             .width(340.dp)
@@ -266,7 +266,7 @@ fun HomeScreenLayout(
                                         fontWeight = FontWeight.Bold,
                                         maxLines = 2
                                     )
-                                    Spacer(modifier = Modifier.height(8.dp))
+                                    Spacer(modifier = Modifier.height(14.dp))
 
                                     Row(verticalAlignment = Alignment.CenterVertically) {
                                         Text(
