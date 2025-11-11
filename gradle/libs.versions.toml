@@ -3,7 +3,7 @@ accompanistPermissions = "0.37.3"
 agp = "8.13.0"
 androidNdk27 = "11.15.0"
 androidNdk27Version = "3.12.0"
-androidSdk = "12.0.1"
+androidSdk = "12.1.0"
 animation = "1.9.4"
 autofillNdk27 = "2.14.0"
 datastorePreferences = "1.1.7"
@@ -57,6 +57,7 @@ discover-ndk27 = { module = "com.mapbox.search:discover-ndk27", version.ref = "d
 firebase-bom-v3222 = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBomVersion" }
 firebase-crashlytics-ndk = { module = "com.google.firebase:firebase-crashlytics-ndk" }
 google-firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+google-firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
 androidx-animation = { module = "androidx.compose.animation:animation", version.ref = "animation" }
@@ -96,6 +97,7 @@ place-autocomplete-ndk27 = { module = "com.mapbox.search:place-autocomplete-ndk2
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit2-kotlinx-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit2KotlinxSerializationConverter" }
 places = { group = "com.google.android.libraries.places", name = "places", version.ref = "places" }
+androidx-compose-material3-adaptive-navigation-suite = { group = "androidx.compose.material3", name = "material3-adaptive-navigation-suite" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
