@@ -105,13 +105,11 @@ fun HomeScreen() {
             value = inputTitle,
             onValueChange = {
                 inputTitle = it
-                isError = inputTitle.matches(titleRegex) || inputTitle.isEmpty()
             },
             label = { Text(text = "Título do evento") },
             keyboardOptions = KeyboardOptions(
                 keyboardType = KeyboardType.Text
             ),
-            isError = !isError,
             singleLine = true,
             modifier = Modifier
                 .padding(top = 16.dp)
