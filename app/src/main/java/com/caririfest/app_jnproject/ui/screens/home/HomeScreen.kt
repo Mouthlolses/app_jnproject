@@ -101,10 +101,6 @@ fun HomeScreenLayout(
     val categoriesState by viewModel.categories.collectAsState()
     val recentEvents by recentViewModel.recentEvents.collectAsState()
 
-    LaunchedEffect(Unit) {
-        recentViewModel.loadEvents()
-    }
-
     val reversedRecentEvents = remember(recentEvents) { recentEvents.reversed() }
 
     var query by remember { mutableStateOf("") }
