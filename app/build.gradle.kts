@@ -17,8 +17,8 @@ android {
         applicationId = "com.caririfest.app_jnproject"
         minSdk = 31
         targetSdk = 36
-        versionCode = 7
-        versionName = "1.1.4"
+        versionCode = 8
+        versionName = "1.1.5"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
