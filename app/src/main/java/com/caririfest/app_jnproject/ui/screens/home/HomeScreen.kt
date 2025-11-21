@@ -105,6 +105,8 @@ fun HomeScreenLayout(
         recentViewModel.loadEvents()
     }
 
+    val reversedRecentEvents = remember(recentEvents) { recentEvents.reversed() }
+
     var query by remember { mutableStateOf("") }
 
 //    val filterCities = remember(query) {
@@ -134,9 +136,6 @@ fun HomeScreenLayout(
                 fontSize = 26.sp,
                 color = Color.Black
             )
-        }
-        item {
-            Spacer(modifier = Modifier.height(6.dp))
             LazyRow(
                 modifier = Modifier,
             ) {
@@ -166,9 +165,7 @@ fun HomeScreenLayout(
                 fontSize = 26.sp,
                 color = Color.Black
             )
-        }
-        item {
-            Spacer(modifier = Modifier.padding(4.dp))
+
             //categories
             LazyRow(
                 modifier = Modifier
@@ -204,98 +201,97 @@ fun HomeScreenLayout(
                     fontSize = 26.sp,
                     color = Color.Black
                 )
-            }
-        }
-        item {
-            LazyRow(
-                modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                items(recentEvents.reversed()) { recentEvents ->
-                    Card(
-                        modifier = Modifier
-                            .width(340.dp)
-                            .padding(horizontal = 12.dp, vertical = 12.dp)
-                            .clickable(
-                                onClick = {
-                                    navController.navigate("newsDetailsScreen/${recentEvents.id}")
-                                },
-                                enabled = true,
-                            ),
-                        colors = CardDefaults.cardColors(
-                            containerColor = Color.Transparent,
-                            contentColor = Color.Transparent,
-                            disabledContainerColor = Color.Transparent,
-                            disabledContentColor = Color.Transparent
-                        )
-                    ) {
-                        Column(
-                            Modifier
-                                .fillMaxWidth()
+
+                LazyRow(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                ) {
+                    items(reversedRecentEvents) { recentEvents ->
+                        Card(
+                            modifier = Modifier
+                                .width(340.dp)
+                                .padding(horizontal = 12.dp, vertical = 12.dp)
+                                .clickable(
+                                    onClick = {
+                                        navController.navigate("newsDetailsScreen/${recentEvents.id}")
+                                    },
+                                    enabled = true,
+                                ),
+                            colors = CardDefaults.cardColors(
+                                containerColor = Color.Transparent,
+                                contentColor = Color.Transparent,
+                                disabledContainerColor = Color.Transparent,
+                                disabledContentColor = Color.Transparent
+                            )
                         ) {
-                            Box(
-                                modifier = Modifier
+                            Column(
+                                Modifier
                                     .fillMaxWidth()
-                                    .height(200.dp),
-                                contentAlignment = Alignment.Center
                             ) {
-                                AsyncImage(
-                                    model = recentEvents.img,
-                                    contentDescription = stringResource(R.string.imageEvents),
+                                Box(
                                     modifier = Modifier
                                         .fillMaxWidth()
-                                        .height(200.dp)
-                                        .clip(RoundedCornerShape(16.dp)),
-                                    contentScale = ContentScale.Crop
-                                )
-                            }
-                            Spacer(modifier = Modifier.height(2.dp))
-                            Row(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .padding(horizontal = 16.dp, vertical = 12.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Column(
-                                    modifier = Modifier.weight(1f)
+                                        .height(200.dp),
+                                    contentAlignment = Alignment.Center
                                 ) {
-                                    Text(
-                                        text = recentEvents.title,
-                                        color = Color.Black,
-                                        fontFamily = poppinsFamily,
-                                        fontWeight = FontWeight.Bold,
-                                        maxLines = 2
+                                    AsyncImage(
+                                        model = recentEvents.img,
+                                        contentDescription = stringResource(R.string.imageEvents),
+                                        modifier = Modifier
+                                            .fillMaxWidth()
+                                            .height(200.dp)
+                                            .clip(RoundedCornerShape(16.dp)),
+                                        contentScale = ContentScale.Crop
                                     )
-                                    Spacer(modifier = Modifier.height(14.dp))
-
-                                    Row(verticalAlignment = Alignment.CenterVertically) {
-                                        Text(
-                                            text = recentEvents.place,
-                                            style = MaterialTheme.typography.bodyMedium,
-                                            color = Color.Gray
-                                        )
-                                    }
-                                    Spacer(modifier = Modifier.height(8.dp))
-
-                                    Row(verticalAlignment = Alignment.CenterVertically) {
-                                        Text(
-                                            text = recentEvents.date,
-                                            style = MaterialTheme.typography.bodyMedium,
-                                            color = Color.Black
-                                        )
-                                    }
                                 }
-                                val isFavorite = recentEvents.favorite
-                                Tag(
-                                    text =
-                                        if (isFavorite)
-                                            stringResource(R.string.available)
-                                        else
-                                            stringResource(R.string.exhausted),
-                                    backgroundColor = if (isFavorite) Color(0xFF4CAF50) else Color(
-                                        0xFF9E9E9E
+                                Spacer(modifier = Modifier.height(2.dp))
+                                Row(
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .padding(horizontal = 16.dp, vertical = 12.dp),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Column(
+                                        modifier = Modifier.weight(1f)
+                                    ) {
+                                        Text(
+                                            text = recentEvents.title,
+                                            color = Color.Black,
+                                            fontFamily = poppinsFamily,
+                                            fontWeight = FontWeight.Bold,
+                                            maxLines = 2
+                                        )
+                                        Spacer(modifier = Modifier.height(14.dp))
+
+                                        Row(verticalAlignment = Alignment.CenterVertically) {
+                                            Text(
+                                                text = recentEvents.place,
+                                                style = MaterialTheme.typography.bodyMedium,
+                                                color = Color.Gray
+                                            )
+                                        }
+                                        Spacer(modifier = Modifier.height(8.dp))
+
+                                        Row(verticalAlignment = Alignment.CenterVertically) {
+                                            Text(
+                                                text = recentEvents.date,
+                                                style = MaterialTheme.typography.bodyMedium,
+                                                color = Color.Black
+                                            )
+                                        }
+                                    }
+                                    val isFavorite = recentEvents.favorite
+                                    Tag(
+                                        text =
+                                            if (isFavorite)
+                                                stringResource(R.string.available)
+                                            else
+                                                stringResource(R.string.exhausted),
+                                        backgroundColor = if (isFavorite) Color(0xFF4CAF50) else Color(
+                                            0xFF9E9E9E
+                                        )
                                     )
-                                )
+                                }
                             }
                         }
                     }
@@ -305,7 +301,6 @@ fun HomeScreenLayout(
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenLayoutPreview() {
@@ -313,3 +308,4 @@ fun HomeScreenLayoutPreview() {
         navController = rememberNavController()
     )
 }
+
