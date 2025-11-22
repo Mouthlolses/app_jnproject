@@ -18,10 +18,6 @@ class RecentEventViewModel @Inject constructor(
     private val _recentEvents = MutableStateFlow<List<EventEntity>>(emptyList())
     val recentEvents: MutableStateFlow<List<EventEntity>> = _recentEvents
 
-
-    init {
-        loadEvents()
-    }
     fun loadEvents() {
         viewModelScope.launch {
             _recentEvents.value = repository.getRecentlyViewedEvents()
