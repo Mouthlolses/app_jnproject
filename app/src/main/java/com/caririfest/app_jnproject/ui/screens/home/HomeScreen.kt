@@ -52,6 +52,7 @@ import com.caririfest.app_jnproject.navigation.NavigationGraph
 import com.caririfest.app_jnproject.ui.components.CategoryCard
 import com.caririfest.app_jnproject.ui.components.EventCard
 import com.caririfest.app_jnproject.ui.components.Tag
+import kotlinx.coroutines.CoroutineScope
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -101,7 +102,10 @@ fun HomeScreenLayout(
     val categoriesState by viewModel.categories.collectAsState()
     val recentEvents by recentViewModel.recentEvents.collectAsState()
 
-    val reversedRecentEvents = remember(recentEvents) { recentEvents.reversed() }
+
+    LaunchedEffect(Unit) {
+        recentViewModel.loadEvents()
+    }
 
     var query by remember { mutableStateOf("") }
 
@@ -202,7 +206,7 @@ fun HomeScreenLayout(
                     modifier = Modifier
                         .fillMaxWidth()
                 ) {
-                    items(reversedRecentEvents) { recentEvents ->
+                    items(recentEvents.reversed()) { recentEvents ->
                         Card(
                             modifier = Modifier
                                 .width(340.dp)
