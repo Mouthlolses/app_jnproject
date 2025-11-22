@@ -324,7 +324,7 @@ fun NewsScreenLayout(
                             Spacer(modifier = Modifier.height(26.dp))
                         }
                     }
-                    items(uiState.events) { doc ->
+                    item {
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -339,6 +339,8 @@ fun NewsScreenLayout(
                                     .padding(start = 12.dp, top = 16.dp)
                             )
                         }
+                    }
+                    items(uiState.events) { doc ->
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
