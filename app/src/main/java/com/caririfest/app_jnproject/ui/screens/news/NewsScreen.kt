@@ -29,7 +29,6 @@ import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -49,7 +48,6 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -62,6 +60,7 @@ import coil.compose.AsyncImage
 import com.caririfest.app_jnproject.R
 import com.caririfest.app_jnproject.font.poppinsFamily
 import com.caririfest.app_jnproject.font.robotoFamily
+import com.caririfest.app_jnproject.ui.components.LoadingIndicatorLayout
 import com.caririfest.app_jnproject.ui.components.Tag
 import com.caririfest.app_jnproject.ui.screens.home.RecentEventViewModel
 import com.caririfest.data.datasource.model.EventEntity
@@ -105,9 +104,7 @@ fun NewsScreenLayout(
                 modifier = Modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ) {
-                CircularProgressIndicator(
-                    color = colorResource(R.color.principal_color)
-                )
+                LoadingIndicatorLayout()
             }
         }
 

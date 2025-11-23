@@ -43,6 +43,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.caririfest.app_jnproject.R
 import com.caririfest.app_jnproject.font.poppinsFamily
+import com.caririfest.app_jnproject.ui.components.LoadingIndicatorLayout
 import com.caririfest.app_jnproject.ui.screens.home.HomeScreenLayout
 import com.caririfest.app_jnproject.ui.screens.home.HomeViewModel
 import com.caririfest.app_jnproject.ui.screens.home.details.DetailsScreen
@@ -122,7 +123,7 @@ fun NavigationGraph(
                     modifier = Modifier.fillMaxSize(),
                     contentAlignment = Alignment.Center
                 ) {
-                    CircularProgressIndicator(color = colorResource(R.color.principal_color))
+                    LoadingIndicatorLayout()
                 }
             } else if (event != null) {
                 NewsDetailsLayout(

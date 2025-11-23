@@ -52,7 +52,6 @@ import com.caririfest.app_jnproject.navigation.NavigationGraph
 import com.caririfest.app_jnproject.ui.components.CategoryCard
 import com.caririfest.app_jnproject.ui.components.EventCard
 import com.caririfest.app_jnproject.ui.components.Tag
-import kotlinx.coroutines.CoroutineScope
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
