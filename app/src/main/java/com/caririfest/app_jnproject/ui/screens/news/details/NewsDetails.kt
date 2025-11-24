@@ -22,7 +22,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Place
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -40,7 +39,6 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -75,8 +73,6 @@ fun NewsDetailsLayout(
     navController: NavHostController
 ) {
     val scope = rememberCoroutineScope()
-    val loading: @Composable () -> Unit =
-        { CircularProgressIndicator(color = colorResource(R.color.principal_color)) }
     val context = LocalContext.current
     val imageLoader = ImageLoader(context)
     val scrollState = rememberScrollState()
@@ -165,8 +161,10 @@ fun NewsDetailsLayout(
                                 appendLine()
                                 appendLine("📲 Descubra mais eventos no Cariri com o app Cariri Fest!")
                                 appendLine()
-                                appendLine("👉 Disponível na Google Play " +
-                                        " Baixe grátis: https://play.google.com/store/apps/details?id=com.caririfest.app_jnproject")
+                                appendLine(
+                                    "👉 Disponível na Google Play " +
+                                            " Baixe grátis: https://play.google.com/store/apps/details?id=com.caririfest.app_jnproject"
+                                )
                             }
 
                             val request = ImageRequest.Builder(context)
