@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    namespace = "com.caririfest.app_jnproject"
+    namespace = "com.caririfest.app"
     compileSdk = 36
 
     defaultConfig {

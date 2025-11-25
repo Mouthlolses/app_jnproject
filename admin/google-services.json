@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:342538459088:android:22c0970463851c56448bd5",
+        "mobilesdk_app_id": "1:342538459088:android:f3b92aabc7a3c7de448bd5",
         "android_client_info": {
-          "package_name": "com.caririfest.admin"
+          "package_name": "com.caririfest.app_jnproject"
         }
       },
       "oauth_client": [],
@@ -26,9 +26,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:342538459088:android:f3b92aabc7a3c7de448bd5",
+        "mobilesdk_app_id": "1:342538459088:android:0c836e316d6c1ed5448bd5",
         "android_client_info": {
-          "package_name": "com.caririfest.app_jnproject"
+          "package_name": "com.caririfest.seucaririfest"
         }
       },
       "oauth_client": [],

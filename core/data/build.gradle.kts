@@ -8,7 +8,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.data"
+    namespace = "com.caririfest.data"
     compileSdk = 36
 
     defaultConfig {

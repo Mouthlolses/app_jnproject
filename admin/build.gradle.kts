@@ -13,7 +13,7 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.caririfest.admin"
+        applicationId = "com.caririfest.seucaririfest"
         minSdk = 31
         targetSdk = 36
         versionCode = 1
