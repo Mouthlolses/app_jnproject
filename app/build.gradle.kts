@@ -57,6 +57,9 @@ dependencies {
     //permission
     implementation(libs.accompanist.permissions)
 
+    //stripe
+    implementation(libs.stripe.android)
+
     //firebase
     implementation(platform(libs.firebase.bom.v3222))
     implementation(libs.firebase.crashlytics.ndk)

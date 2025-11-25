@@ -38,6 +38,7 @@ foundation = "1.9.5"
 material3 = "1.5.0-alpha09"
 appcompat = "1.7.1"
 material = "1.13.0"
+stripeAndroid = "22.2.0"
 workRuntimeKtx = "2.11.0"
 places = "5.1.1"
 
@@ -98,6 +99,7 @@ retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit
 retrofit2-kotlinx-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "retrofit2KotlinxSerializationConverter" }
 places = { group = "com.google.android.libraries.places", name = "places", version.ref = "places" }
 androidx-compose-material3-adaptive-navigation-suite = { group = "androidx.compose.material3", name = "material3-adaptive-navigation-suite" }
+stripe-android = { module = "com.stripe:stripe-android", version.ref = "stripeAndroid" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
