@@ -60,6 +60,9 @@ dependencies {
     //stripe
     implementation(libs.stripe.android)
 
+    //abacatePay
+    implementation(libs.abacatepay.kotlin.sdk)
+
     //firebase
     implementation(platform(libs.firebase.bom.v3222))
     implementation(libs.firebase.crashlytics.ndk)

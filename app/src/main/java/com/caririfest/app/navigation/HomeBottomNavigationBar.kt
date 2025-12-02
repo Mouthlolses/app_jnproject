@@ -41,6 +41,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.caririfest.app.R
 import com.caririfest.app.font.poppinsFamily
+import com.caririfest.app.payment.stripe.ui.CheckoutScreen
+import com.caririfest.app.payment.stripe.ui.CheckoutViewModel
 import com.caririfest.app.ui.components.LoadingIndicatorLayout
 import com.caririfest.app.ui.screens.home.HomeScreenLayout
 import com.caririfest.app.ui.screens.home.HomeViewModel
@@ -50,6 +52,9 @@ import com.caririfest.app.ui.screens.news.NewsViewModel
 import com.caririfest.app.ui.screens.news.details.NewsDetailsLayout
 import com.caririfest.app.ui.screens.offers.OfferScreen
 import com.caririfest.app.ui.screens.search.SearchScreen
+import com.stripe.android.paymentsheet.PaymentSheet
+import com.stripe.android.paymentsheet.PaymentSheetResult
+import com.stripe.android.paymentsheet.rememberPaymentSheet
 
 data class BottomNavItem(
     val route: String,
@@ -146,6 +151,29 @@ fun NavigationGraph(
             NavItems.OFFER.route
         ) {
             OfferScreen()
+        }
+        composable(
+            route = "checkout"
+        ) {
+            val viewModel: CheckoutViewModel = hiltViewModel()
+
+            val paymentSheet = rememberPaymentSheet { result ->
+                when (result) {
+                    is PaymentSheetResult.Completed -> println("Pagamento completo!")
+                    is PaymentSheetResult.Canceled -> println("Cancelado!")
+                    is PaymentSheetResult.Failed -> println("Erro: ${result.error.message}")
+                }
+            }
+            CheckoutScreen(
+                viewModel = viewModel,
+                paymentSheet = paymentSheet,
+                onPayClicked = { sheet, secret ->
+                    sheet.presentWithPaymentIntent(
+                        secret,
+                        PaymentSheet.Configuration("Minha Loja")
+                    )
+                }
+            )
         }
     }
 }

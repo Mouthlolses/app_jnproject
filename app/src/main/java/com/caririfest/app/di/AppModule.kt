@@ -2,6 +2,8 @@ package com.caririfest.app.di
 
 import android.content.Context
 import com.caririfest.app.R
+import com.caririfest.app.payment.stripe.data.remote.StripeApi
+import com.caririfest.app.payment.stripe.data.remote.StripeRepository
 import com.caririfest.data.datasource.dao.EventDao
 import com.caririfest.data.datasource.dao.RecentEventDao
 import com.caririfest.data.datasource.database.AppDatabase
@@ -18,6 +20,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -26,7 +30,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
-    // Prover o token
     @Provides
     @Singleton
     @Named("mapBoxToken")
@@ -34,7 +37,6 @@ object AppModule {
         return context.getString(R.string.mapbox_access_token)
     }
 
-    //PASSO 2: Prover o SearchEngine
     @Provides
     @Singleton
     fun provideSearchEngine(
@@ -50,6 +52,7 @@ object AppModule {
             settings = settings
         )
     }
+
 
     @Provides
     @Singleton
@@ -81,4 +84,18 @@ object AppModule {
         recentEventDao: RecentEventDao
     ): RecentEventsRepository = RecentEventsRepository(eventDao, recentEventDao)
 
+
+
+    private const val BASE_URL = "http://10.0.2.2:8080/payment/"
+
+    @Provides @Singleton
+    fun provideStripeApi(): StripeApi =
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(StripeApi::class.java)
+
+    @Provides @Singleton
+    fun provideStripeRepository(api: StripeApi) = StripeRepository(api)
 }

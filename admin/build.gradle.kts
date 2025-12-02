@@ -44,6 +44,11 @@ android {
 }
 
 dependencies {
+
+
+    implementation(libs.coil.compose.v260)
+
+
     implementation(platform(libs.firebase.bom.v3222))
     implementation(libs.firebase.crashlytics.ndk)
     implementation(libs.google.firebase.analytics)
@@ -58,6 +63,7 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.material3)
     implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
+    implementation(libs.androidx.navigation.compose)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -33,6 +33,7 @@ dependencyResolutionManagement {
                 password = props.getProperty("MAPBOX_DOWNLOADS_TOKEN")
             }
         }
+        maven { url = uri("https://jitpack.io") }
     }
 }
 
