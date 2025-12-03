@@ -27,6 +27,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.caririfest.admin.R
 import com.caririfest.admin.ui.components.AdminDrawer
+import com.caririfest.admin.ui.screens.producer_account.AdminAccountScreen
 import com.caririfest.admin.ui.screens.producer_area.AdminHomeScreen
 import com.caririfest.admin.ui.screens.producer_creation.CreateEventScreen
 import com.caririfest.admin.ui.screens.producer_metric.AdminMetricScreen
@@ -81,6 +82,11 @@ fun AppNavigation() {
                             painter = painterResource(R.drawable.ic_account_circle_action),
                             contentDescription = null,
                             modifier = Modifier.size(32.dp)
+                                .clickable(
+                                    onClick = {
+                                        navController.navigate("adminAccountScreen")
+                                    }
+                                )
                         )
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
@@ -99,10 +105,10 @@ fun AppNavigation() {
                     innerPadding
                 )
             ) {
-
                 composable("adminScreen") { AdminHomeScreen(navController) }
                 composable("metricScreen") { AdminMetricScreen() }
                 composable("createEventScreen") { CreateEventScreen() }
+                composable("adminAccountScreen") { AdminAccountScreen() }
             }
         }
     }
