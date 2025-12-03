@@ -19,8 +19,12 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -55,6 +59,15 @@ fun CreateEventScreen() {
     var eventName by remember { mutableStateOf("") }
     var selectedImage by remember { mutableStateOf<Uri?>(null) }
 
+    var addressName by remember { mutableStateOf("") }
+    var localName by remember { mutableStateOf("") }
+    var cepLocal by remember { mutableStateOf("") }
+    var streetLocal by remember { mutableStateOf("") }
+    var numberLocal by remember { mutableStateOf("") }
+    var complementLocal by remember { mutableStateOf("") }
+    var neighborLocal by remember { mutableStateOf("") }
+    var city by remember { mutableStateOf("") }
+    var stateLocal by remember { mutableStateOf("") }
 
     // Launcher do novo Photo Picker (Android 13+ e fallback para versões antigas)
     val launcher = rememberLauncherForActivityResult(
@@ -196,16 +209,186 @@ fun CreateEventScreen() {
                     value = "Quando seu evento vai acontecer?"
                 )
 
-                DockedDatePicker(label = {Text(text = "Data de Início *")})
+                DockedDatePicker(label = { Text(text = "Data de Início *") })
                 Spacer(modifier = Modifier.height(16.dp))
-                DockedTimePicker(label = {Text(text = "Hora de Início *")})
+                DockedTimePicker(label = { Text(text = "Hora de Início *") })
                 Spacer(modifier = Modifier.height(46.dp))
-                DockedDatePicker(label = {Text(text = "Data de Término  *")})
+                DockedDatePicker(label = { Text(text = "Data de Término  *") })
                 Spacer(modifier = Modifier.height(16.dp))
-                DockedTimePicker(label = {Text(text = "Hora de Término  *")})
+                DockedTimePicker(label = { Text(text = "Hora de Término  *") })
                 Spacer(modifier = Modifier.height(6.dp))
                 Text(text = "Seu evento vai durar ")
+                Spacer(modifier = Modifier.height(8.dp))
             }
+        }
+        Card(
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 12.dp, vertical = 16.dp),
+            colors = CardDefaults.cardColors(
+                Color.White
+            ),
+            elevation = CardDefaults.cardElevation(
+                16.dp
+            )
+        ) {
+            Spacer(modifier = Modifier.height(8.dp))
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .statusBarsPadding(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                InfoRow(
+                    label = "3. Local e endereço",
+                    value = "Local onde seu evento vai acontecer"
+                )
+
+                OutlinedTextField(
+                    value = addressName,
+                    onValueChange = { addressName = it },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 12.dp),
+                    label = { Text("Informe o endereço ou o nome do local do evento *") }
+                )
+
+                Spacer(modifier = Modifier.height(16.dp))
+
+                if (addressName.isNotBlank()) {
+
+                    OutlinedTextField(
+                        value = localName,
+                        onValueChange = { localName = it },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 12.dp),
+                        label = { Text("Informe o endereço ou o nome do local do evento *") },
+                        maxLines = 100
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    OutlinedTextField(
+                        value = cepLocal,
+                        onValueChange = { cepLocal = it },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 12.dp),
+                        label = { Text("CEP") },
+                        maxLines = 8
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    OutlinedTextField(
+                        value = streetLocal,
+                        onValueChange = { streetLocal = it },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 12.dp),
+                        label = { Text("Av./Rua") },
+                        maxLines = 8
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    OutlinedTextField(
+                        value = numberLocal,
+                        onValueChange = { numberLocal = it },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 12.dp),
+                        label = { Text("Número") },
+                        maxLines = 8
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    OutlinedTextField(
+                        value = complementLocal,
+                        onValueChange = { complementLocal = it },
+                        label = { Text("Complemento") }
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    OutlinedTextField(
+                        value = neighborLocal,
+                        onValueChange = { neighborLocal = it },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 12.dp),
+                        label = { Text("Bairro") }
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    OutlinedTextField(
+                        value = city,
+                        onValueChange = { city = it },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 12.dp),
+                        label = { Text("Cidade") }
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+
+                    OutlinedTextField(
+                        value = stateLocal,
+                        onValueChange = { streetLocal = it },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 12.dp),
+                        label = { Text("Estado *") }
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                }
+            }
+        }
+        Card(
+            modifier =
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 12.dp, vertical = 16.dp),
+            colors = CardDefaults.cardColors(
+                Color.White
+            ),
+            elevation = CardDefaults.cardElevation(
+                16.dp
+            )
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .statusBarsPadding(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                InfoRow(
+                    label = "4. Ingressos",
+                    value = "Que tipo de ingresso você deseja criar?"
+                )
+
+                Row(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    OutlinedButton(
+                        onClick = { }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = null
+                        )
+                        Spacer(modifier = Modifier.padding(horizontal = 4.dp))
+                        Text("INGRESSO PAGO")
+                    }
+                    Spacer(modifier = Modifier.padding(horizontal = 8.dp))
+                    OutlinedButton(
+                        onClick = { }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = null
+                        )
+                        Spacer(modifier = Modifier.padding(horizontal = 2.dp))
+                        Text("INGRESSO GRATUITO")
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(16.dp))
         }
     }
 }
