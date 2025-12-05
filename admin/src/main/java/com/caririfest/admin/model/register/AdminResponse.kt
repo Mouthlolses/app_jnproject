@@ -1,4 +1,4 @@
-package com.caririfest.admin.model
+package com.caririfest.admin.model.register
 
 import kotlinx.serialization.Serializable
 

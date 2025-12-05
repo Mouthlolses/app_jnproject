@@ -38,7 +38,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.caririfest.admin.model.AdminCreateRequest
+import com.caririfest.admin.model.register.AdminCreateRequest
 
 
 @OptIn(ExperimentalMaterial3Api::class)

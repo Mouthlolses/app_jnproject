@@ -110,8 +110,6 @@ fun AppNavigation() {
                 composable("adminScreen") { AdminHomeScreen(navController) }
                 composable("metricScreen") { AdminMetricScreen() }
                 composable("createEventScreen") { CreateEventScreen() }
-                composable("adminAccountScreen") { AdminAccountScreen() }
-                composable("createAccountScreen"){ ProducerCreateAccountScreen() }
             }
         }
     }

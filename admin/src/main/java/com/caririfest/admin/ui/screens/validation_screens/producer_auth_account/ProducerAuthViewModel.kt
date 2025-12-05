@@ -1,9 +1,10 @@
-package com.caririfest.admin.ui.screens.validation_screens.producer_create_account
+package com.caririfest.admin.ui.screens.validation_screens.producer_auth_account
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.caririfest.admin.model.register.AdminCreateRequest
-import com.caririfest.admin.model.register.AdminResponse
+import com.caririfest.admin.datastore.AuthPreferences
+import com.caririfest.admin.model.login.LoginRequest
+import com.caririfest.admin.model.login.LoginResponse
 import com.caririfest.admin.repository.AdminsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -12,42 +13,44 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class ProducerCreateViewModel @Inject constructor(
-    private val repository: AdminsRepository
+class ProducerAuthViewModel @Inject constructor(
+    private val repository: AdminsRepository,
+    private val authPrefs: AuthPreferences
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UiSate())
-    val uiSate: StateFlow<UiSate> = _uiState
+    val uiState: StateFlow<UiSate> = _uiState
 
-
-    fun createAdmin(request: AdminCreateRequest) {
+    fun loginAdmin(request: LoginRequest) {
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoading = true)
             try {
-                val response = repository.createAdmin(request)
+                val response = repository.loginAdmin(request)
+
+                // SE LOGIN FOI SUCCESS:
+                authPrefs.setLoggedIn(true)
 
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
                     adminResponse = response,
-                    isSuccess = "Usuário Criado com Sucesso",
-                    isFailure = null
+                    isSuccess = "Autenticação Realizada",
+                    isFailure = "Autenticação Falhou"
                 )
-
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
-                    isFailure = e.message ?: "Erro inesperado",
-                    isSuccess = null
+                    isSuccess = null,
+                    isFailure = e.message ?: "Erro Inesperado",
                 )
             }
         }
     }
-}
 
+}
 
 data class UiSate(
     val isLoading: Boolean = false,
-    val adminResponse: AdminResponse? = null,
+    val adminResponse: LoginResponse? = null,
     val isSuccess: String? = null,
     val isFailure: String? = null
 )

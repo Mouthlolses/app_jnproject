@@ -51,6 +51,8 @@ dependencies {
 
     implementation(project(":core:network"))
 
+    implementation(libs.androidx.datastore.preferences)
+
     implementation(libs.coil.compose.v260)
 
     implementation(libs.retrofit)

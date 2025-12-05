@@ -34,6 +34,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.caririfest.admin.model.Event
 import com.caririfest.admin.navigation.AppNavigation
+import com.caririfest.admin.navigation.RootNavigation
 import com.caririfest.admin.network.createEvent
 import com.caririfest.admin.ui.theme.App_jnprojectTheme
 import com.google.firebase.FirebaseApp
@@ -46,7 +47,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         FirebaseApp.initializeApp(this)
         setContent {
-            App_jnprojectTheme { AppNavigation() }
+            App_jnprojectTheme { RootNavigation() }
         }
     }
 }
