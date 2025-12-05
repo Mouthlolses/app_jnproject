@@ -1,4 +1,4 @@
-package com.caririfest.admin.ui.screens.producer_account
+package com.caririfest.admin.ui.screens.appscreens.producer_account
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column

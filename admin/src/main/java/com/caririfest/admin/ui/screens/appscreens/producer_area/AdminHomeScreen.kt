@@ -1,4 +1,4 @@
-package com.caririfest.admin.ui.screens.producer_area
+package com.caririfest.admin.ui.screens.appscreens.producer_area
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -55,7 +55,7 @@ fun AdminHomeScreen(myNavController: NavController) {
                 InfoRowWithButton(
                     label = "Boa Tarde Matheus!",
                     value = "Já Publicou seu evento?",
-                    onClick = { myNavController.navigate("createEventScreen") }
+                    onClick = { myNavController.navigate("createAccountScreen") }
                 )
             }
             Spacer(modifier = Modifier.padding(top = 22.dp))

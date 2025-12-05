@@ -27,10 +27,12 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.caririfest.admin.R
 import com.caririfest.admin.ui.components.AdminDrawer
-import com.caririfest.admin.ui.screens.producer_account.AdminAccountScreen
-import com.caririfest.admin.ui.screens.producer_area.AdminHomeScreen
-import com.caririfest.admin.ui.screens.producer_creation.CreateEventScreen
-import com.caririfest.admin.ui.screens.producer_metric.AdminMetricScreen
+import com.caririfest.admin.ui.screens.appscreens.producer_account.AdminAccountScreen
+import com.caririfest.admin.ui.screens.appscreens.producer_area.AdminHomeScreen
+import com.caririfest.admin.ui.screens.appscreens.producer_creation.CreateEventScreen
+import com.caririfest.admin.ui.screens.appscreens.producer_metric.AdminMetricScreen
+import com.caririfest.admin.ui.screens.validation_screens.producer_create_account.ProducerCreateAccountScreen
+
 import kotlinx.coroutines.launch
 
 
@@ -100,7 +102,7 @@ fun AppNavigation() {
         ) { innerPadding ->
             NavHost(
                 navController,
-                startDestination = "adminScreen",
+                startDestination = "createAccountScreen",
                 modifier = Modifier.padding(
                     innerPadding
                 )
@@ -109,6 +111,7 @@ fun AppNavigation() {
                 composable("metricScreen") { AdminMetricScreen() }
                 composable("createEventScreen") { CreateEventScreen() }
                 composable("adminAccountScreen") { AdminAccountScreen() }
+                composable("createAccountScreen"){ ProducerCreateAccountScreen() }
             }
         }
     }

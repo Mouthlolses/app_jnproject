@@ -1,4 +1,4 @@
-package com.caririfest.admin.ui.screens.producer_creation
+package com.caririfest.admin.ui.screens.appscreens.producer_creation
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult

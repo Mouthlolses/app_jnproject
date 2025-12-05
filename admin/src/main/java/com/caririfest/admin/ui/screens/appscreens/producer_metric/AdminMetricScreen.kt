@@ -1,4 +1,4 @@
-package com.caririfest.admin.ui.screens.producer_metric
+package com.caririfest.admin.ui.screens.appscreens.producer_metric
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

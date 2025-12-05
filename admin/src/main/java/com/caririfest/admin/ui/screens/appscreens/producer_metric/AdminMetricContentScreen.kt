@@ -1,4 +1,4 @@
-package com.caririfest.admin.ui.screens.producer_area
+package com.caririfest.admin.ui.screens.appscreens.producer_metric
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,9 +13,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.caririfest.admin.ui.components.InfoRow
 
-
 @Composable
-fun AdminEventContentScreen() {
+fun AdminMetricContentScreen() {
 
     Column(
         modifier = Modifier.fillMaxWidth(),
@@ -25,7 +24,7 @@ fun AdminEventContentScreen() {
         Spacer(modifier = Modifier.height(18.dp))
         InfoRow(
             label = "Publique um evento pela primeira vez!",
-            value = "Você tem total autonomia para cadastrar, gerenciar e acompanhar todas as informações de seu evento.",
+            value = "Aqui você pode gerenciar e observar todas as métricas relacionadas ao seu evento, vamos lá!",
         )
         Spacer(modifier = Modifier.height(16.dp))
         Text(text = "Precisa de ajuda para criar?", color = Color.Blue)

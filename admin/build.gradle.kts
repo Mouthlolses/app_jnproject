@@ -4,6 +4,9 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
+    id("com.google.devtools.ksp")
+    id("com.google.dagger.hilt.android")
+
 }
 
 android {
@@ -46,8 +49,23 @@ android {
 dependencies {
 
 
+    implementation(project(":core:network"))
+
     implementation(libs.coil.compose.v260)
 
+    implementation(libs.retrofit)
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+
+    implementation(libs.converter.gson)
+
+    implementation(libs.gson)
+
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    ksp(libs.hilt.android.compiler)
 
     implementation(platform(libs.firebase.bom.v3222))
     implementation(libs.firebase.crashlytics.ndk)
