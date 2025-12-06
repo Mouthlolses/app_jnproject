@@ -55,7 +55,7 @@ fun AdminHomeScreen(myNavController: NavController) {
                 InfoRowWithButton(
                     label = "Boa Tarde Matheus!",
                     value = "Já Publicou seu evento?",
-                    onClick = { myNavController.navigate("createAccountScreen") }
+                    onClick = { myNavController.navigate("createEventScreen") }
                 )
             }
             Spacer(modifier = Modifier.padding(top = 22.dp))

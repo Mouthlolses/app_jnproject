@@ -102,7 +102,7 @@ fun AppNavigation() {
         ) { innerPadding ->
             NavHost(
                 navController,
-                startDestination = "createAccountScreen",
+                startDestination = "adminScreen",
                 modifier = Modifier.padding(
                     innerPadding
                 )

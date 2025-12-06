@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.Logout
 import androidx.compose.material.icons.outlined.Create
 import androidx.compose.material.icons.outlined.Home
+import androidx.compose.material.icons.outlined.Logout
 import androidx.compose.material.icons.outlined.Memory
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.HorizontalDivider
@@ -33,7 +35,7 @@ fun AdminDrawer(
     val items = listOf(
         DrawerItem("Início", Icons.Outlined.Home, route = "adminScreen"),
         DrawerItem("Métricas", Icons.Outlined.Memory, route = "metricScreen"),
-        DrawerItem("Criação", Icons.Outlined.Create, route = "createEventScreen")
+        DrawerItem("Sair", Icons.AutoMirrored.Outlined.Logout, route = "auth")
     )
 
     ModalNavigationDrawer(

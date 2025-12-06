@@ -2,11 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
-    id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
     id("com.google.devtools.ksp")
     id("com.google.dagger.hilt.android")
-
 }
 
 android {
@@ -28,6 +25,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
+            isShrinkResources = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -35,14 +33,17 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
-    kotlinOptions {
-        jvmTarget = "11"
+    kotlin {
+        jvmToolchain(21)
     }
     buildFeatures {
         compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.15"
     }
 }
 
@@ -69,10 +70,6 @@ dependencies {
     implementation(libs.androidx.hilt.navigation.compose)
     ksp(libs.hilt.android.compiler)
 
-    implementation(platform(libs.firebase.bom.v3222))
-    implementation(libs.firebase.crashlytics.ndk)
-    implementation(libs.google.firebase.analytics)
-    implementation(libs.google.firebase.firestore)
     implementation(libs.androidx.compose.material.icons.extended)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

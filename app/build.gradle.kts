@@ -11,7 +11,9 @@ plugins {
 
 android {
     namespace = "com.caririfest.app"
-    compileSdk = 36
+    compileSdk {
+        version = release(36)
+    }
 
     defaultConfig {
         applicationId = "com.caririfest.app_jnproject"
