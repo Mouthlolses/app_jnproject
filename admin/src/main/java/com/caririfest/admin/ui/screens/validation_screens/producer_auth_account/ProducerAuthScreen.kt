@@ -132,6 +132,7 @@ fun ProducerAuthScreen(
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
+
                     Icon(
                         imageVector = Icons.Outlined.Info,
                         contentDescription = null,
@@ -143,6 +144,7 @@ fun ProducerAuthScreen(
                         "Wrong Password"
                     )
                 }
+
                 Spacer(modifier = Modifier.width(38.dp))
 
                 TextButton(
@@ -188,7 +190,7 @@ fun ProducerAuthScreen(
                 Text("Não tem conta ainda?")
                 TextButton(
                     onClick = { navController.navigate("register") }
-                ) { Text("Sign up") }
+                ) { Text("Cadastre-se aqui") }
             }
         }
 

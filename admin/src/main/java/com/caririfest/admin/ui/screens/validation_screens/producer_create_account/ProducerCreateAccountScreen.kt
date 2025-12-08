@@ -1,12 +1,15 @@
 package com.caririfest.admin.ui.screens.validation_screens.producer_create_account
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Badge
 import androidx.compose.material.icons.filled.Email
@@ -15,7 +18,7 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Button
-import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FabPosition
@@ -24,6 +27,7 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
@@ -33,10 +37,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.caririfest.admin.model.register.AdminCreateRequest
 
@@ -55,17 +62,36 @@ fun ProducerCreateAccountScreen(
     var adminEmail by remember { mutableStateOf("") }
     var adminEmailConfirm by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    var passwordConfirm by remember { mutableStateOf("") }
 
     var showPassword by remember { mutableStateOf(false) }
+    var showPasswordConfirm by remember { mutableStateOf(false) }
 
 
     Scaffold(
         topBar = {
-            CenterAlignedTopAppBar(
-                title = { Text("Crie sua conta") },
+            TopAppBar(
+                title = {
+                    Text("Crie sua conta")
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    Color.Gray
-                )
+                    containerColor = Color.Transparent,
+                    scrolledContainerColor = Color.Transparent,
+                    navigationIconContentColor = Color.Transparent,
+                    titleContentColor = Color.DarkGray,
+                    actionIconContentColor = Color.Transparent,
+                    subtitleContentColor = Color.Black,
+                ),
+                modifier = Modifier
+                    .clip(RoundedCornerShape(bottomStart = 16.dp, bottomEnd = 16.dp))
+                    .background(
+                        Brush.verticalGradient(
+                            colors = listOf(
+                                Color(0xFFFFEA00),
+                                Color(0xFFFF9800)
+                            )
+                        )
+                    )
             )
         },
         floatingActionButton = {
@@ -81,14 +107,25 @@ fun ProducerCreateAccountScreen(
                             password
                         )
                     )
-                }
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 26.dp),
+                contentPadding = PaddingValues(12.dp),
+                colors = ButtonDefaults.buttonColors(
+                    Color(0xFFFF9800),
+                    contentColor = Color.White
+                ),
+                elevation = ButtonDefaults.buttonElevation(
+                    4.dp
+                )
             ) {
                 if (uiState.isLoading) {
                     CircularProgressIndicator(
                         color = Color.White
                     )
                 } else {
-                    Text(text = "Criar Conta")
+                    Text(text = "Criar Conta", fontSize = 18.sp)
                 }
             }
         },
@@ -121,7 +158,8 @@ fun ProducerCreateAccountScreen(
                             imageVector = Icons.Default.Person,
                             contentDescription = "name"
                         )
-                    }
+                    },
+                    shape = RoundedCornerShape(18.dp)
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -132,7 +170,8 @@ fun ProducerCreateAccountScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
-                    label = { Text("Sobrenome") }
+                    label = { Text("Sobrenome") },
+                    shape = RoundedCornerShape(18.dp)
 
                 )
 
@@ -150,7 +189,8 @@ fun ProducerCreateAccountScreen(
                             imageVector = Icons.Default.Badge,
                             contentDescription = "document"
                         )
-                    }
+                    },
+                    shape = RoundedCornerShape(18.dp)
 
                 )
 
@@ -168,7 +208,8 @@ fun ProducerCreateAccountScreen(
                             imageVector = Icons.Default.Email,
                             contentDescription = "email"
                         )
-                    }
+                    },
+                    shape = RoundedCornerShape(18.dp)
 
                 )
 
@@ -181,7 +222,8 @@ fun ProducerCreateAccountScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
-                    label = { Text("Confirme seu e-mail") }
+                    label = { Text("Confirme seu e-mail") },
+                    shape = RoundedCornerShape(18.dp)
 
                 )
 
@@ -212,9 +254,40 @@ fun ProducerCreateAccountScreen(
                     visualTransformation = if (showPassword)
                         VisualTransformation.None
                     else
-                        PasswordVisualTransformation()
+                        PasswordVisualTransformation(),
+                    shape = RoundedCornerShape(18.dp)
                 )
+
                 Spacer(modifier = Modifier.height(16.dp))
+
+                OutlinedTextField(
+                    value = passwordConfirm,
+                    onValueChange = { passwordConfirm = it },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                    label = { Text("Confirme sua senha") },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Lock,
+                            contentDescription = "passwordConfirm"
+                        )
+                    },
+                    trailingIcon = {
+                        IconButton(onClick = { showPasswordConfirm = !showPasswordConfirm }) {
+                            Icon(
+                                imageVector = if (showPasswordConfirm) Icons.Default.Visibility
+                                else Icons.Default.VisibilityOff,
+                                contentDescription = "password"
+                            )
+                        }
+                    },
+                    visualTransformation = if (showPasswordConfirm)
+                        VisualTransformation.None
+                    else
+                        PasswordVisualTransformation(),
+                    shape = RoundedCornerShape(18.dp)
+                )
 
             }
 
