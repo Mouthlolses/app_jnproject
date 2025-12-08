@@ -190,7 +190,7 @@ fun ProducerAuthScreen(
                 Text("Não tem conta ainda?")
                 TextButton(
                     onClick = { navController.navigate("register") }
-                ) { Text("Cadastre-se aqui") }
+                ) { Text("Cadastre-se") }
             }
         }
 
