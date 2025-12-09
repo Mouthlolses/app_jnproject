@@ -26,6 +26,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -90,7 +91,10 @@ fun ProducerAuthScreen(
                         contentDescription = "email"
                     )
                 },
-                shape = RoundedCornerShape(18.dp)
+                shape = RoundedCornerShape(18.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color(0xFFFF9800)
+                )
             )
             Spacer(modifier = Modifier.height(16.dp))
             OutlinedTextField(
@@ -119,7 +123,10 @@ fun ProducerAuthScreen(
                 visualTransformation = if (showPassword)
                     VisualTransformation.None
                 else
-                    PasswordVisualTransformation()
+                    PasswordVisualTransformation(),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = Color(0xFFFF9800)
+                )
             )
             Row(
                 modifier = Modifier
@@ -128,11 +135,9 @@ fun ProducerAuthScreen(
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-
                 Row(
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-
                     Icon(
                         imageVector = Icons.Outlined.Info,
                         contentDescription = null,
@@ -172,7 +177,7 @@ fun ProducerAuthScreen(
                 ),
                 elevation = ButtonDefaults.buttonElevation(
                     4.dp
-                )
+                ),
             ) {
                 if (uiState.isLoading) {
                     CircularProgressIndicator(color = Color.White)

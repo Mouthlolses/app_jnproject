@@ -21,6 +21,27 @@ class ProducerAuthViewModel @Inject constructor(
     private val _uiState = MutableStateFlow(UiSate())
     val uiState: StateFlow<UiSate> = _uiState
 
+
+    init {
+        viewModelScope.launch {
+            authPrefs.adminName.collect { name ->
+                _uiState.value = _uiState.value.copy(
+                    adminName = name ?: ""
+                )
+            }
+        }
+    }
+
+    init {
+        viewModelScope.launch {
+            authPrefs.adminEmail.collect { email ->
+                _uiState.value = _uiState.value.copy(
+                    adminEmail = email ?: ""
+                )
+            }
+        }
+    }
+
     fun loginAdmin(request: LoginRequest) {
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isLoading = true)
@@ -29,12 +50,14 @@ class ProducerAuthViewModel @Inject constructor(
 
                 // SE LOGIN FOI SUCCESS:
                 authPrefs.setLoggedIn(true)
+                authPrefs.saveAdminName(response.admin.adminName)
+                authPrefs.saveAdminEmail(response.admin.adminEmail)
 
                 _uiState.value = _uiState.value.copy(
                     isLoading = false,
                     adminResponse = response,
                     isSuccess = "Autenticação Realizada",
-                    isFailure = "Autenticação Falhou"
+                    isFailure = null
                 )
             } catch (e: Exception) {
                 _uiState.value = _uiState.value.copy(
@@ -46,11 +69,23 @@ class ProducerAuthViewModel @Inject constructor(
         }
     }
 
+    fun logoutAdmin() {
+        viewModelScope.launch {
+            authPrefs.clearSession()
+
+            _uiState.value = _uiState.value.copy(
+                isSuccess = "Logout Realizado"
+            )
+        }
+    }
+
 }
 
 data class UiSate(
     val isLoading: Boolean = false,
     val adminResponse: LoginResponse? = null,
+    val adminName: String = "",
+    val adminEmail: String = "",
     val isSuccess: String? = null,
     val isFailure: String? = null
 )

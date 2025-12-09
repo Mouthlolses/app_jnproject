@@ -25,6 +25,7 @@ import androidx.compose.material3.FabPosition
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -159,7 +160,10 @@ fun ProducerCreateAccountScreen(
                             contentDescription = "name"
                         )
                     },
-                    shape = RoundedCornerShape(18.dp)
+                    shape = RoundedCornerShape(18.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color(0xFFFF9800)
+                    )
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -171,8 +175,10 @@ fun ProducerCreateAccountScreen(
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
                     label = { Text("Sobrenome") },
-                    shape = RoundedCornerShape(18.dp)
-
+                    shape = RoundedCornerShape(18.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color(0xFFFF9800)
+                    )
                 )
 
                 Spacer(modifier = Modifier.height(26.dp))
@@ -190,7 +196,10 @@ fun ProducerCreateAccountScreen(
                             contentDescription = "document"
                         )
                     },
-                    shape = RoundedCornerShape(18.dp)
+                    shape = RoundedCornerShape(18.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color(0xFFFF9800)
+                    )
 
                 )
 
@@ -209,7 +218,10 @@ fun ProducerCreateAccountScreen(
                             contentDescription = "email"
                         )
                     },
-                    shape = RoundedCornerShape(18.dp)
+                    shape = RoundedCornerShape(18.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color(0xFFFF9800)
+                    )
 
                 )
 
@@ -223,7 +235,10 @@ fun ProducerCreateAccountScreen(
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
                     label = { Text("Confirme seu e-mail") },
-                    shape = RoundedCornerShape(18.dp)
+                    shape = RoundedCornerShape(18.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color(0xFFFF9800)
+                    )
 
                 )
 
@@ -255,7 +270,10 @@ fun ProducerCreateAccountScreen(
                         VisualTransformation.None
                     else
                         PasswordVisualTransformation(),
-                    shape = RoundedCornerShape(18.dp)
+                    shape = RoundedCornerShape(18.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color(0xFFFF9800)
+                    )
                 )
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -266,13 +284,8 @@ fun ProducerCreateAccountScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
+                    enabled = false,
                     label = { Text("Confirme sua senha") },
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Default.Lock,
-                            contentDescription = "passwordConfirm"
-                        )
-                    },
                     trailingIcon = {
                         IconButton(onClick = { showPasswordConfirm = !showPasswordConfirm }) {
                             Icon(
@@ -286,7 +299,10 @@ fun ProducerCreateAccountScreen(
                         VisualTransformation.None
                     else
                         PasswordVisualTransformation(),
-                    shape = RoundedCornerShape(18.dp)
+                    shape = RoundedCornerShape(18.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color(0xFFFF9800)
+                    )
                 )
 
             }

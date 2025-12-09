@@ -7,7 +7,6 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.caririfest.admin.datastore.AuthPreferences
 import com.caririfest.admin.ui.screens.validation_screens.producer_auth_account.AuthStateViewModel
 import com.caririfest.admin.ui.screens.validation_screens.producer_auth_account.ProducerAuthViewModel
 
@@ -17,6 +16,8 @@ fun RootNavigation() {
 
     val viewModel: AuthStateViewModel = hiltViewModel()
     val isLoggedIn by viewModel.isLoggedIn.collectAsState(initial = false)
+
+    val authViewModel: ProducerAuthViewModel = hiltViewModel()
 
     val navController = rememberNavController()
 
@@ -36,7 +37,14 @@ fun RootNavigation() {
         }
 
         composable("app") {
-            AppNavigation()
+            AppNavigation(
+                onLogout = {
+                    authViewModel.logoutAdmin()
+                    navController.navigate("auth") {
+                        popUpTo("app") { inclusive = true }
+                    }
+                }
+            )
         }
     }
 }

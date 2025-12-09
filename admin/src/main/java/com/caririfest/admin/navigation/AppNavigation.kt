@@ -20,7 +20,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -31,15 +30,13 @@ import com.caririfest.admin.ui.screens.appscreens.producer_account.AdminAccountS
 import com.caririfest.admin.ui.screens.appscreens.producer_area.AdminHomeScreen
 import com.caririfest.admin.ui.screens.appscreens.producer_creation.CreateEventScreen
 import com.caririfest.admin.ui.screens.appscreens.producer_metric.AdminMetricScreen
-import com.caririfest.admin.ui.screens.validation_screens.producer_create_account.ProducerCreateAccountScreen
-
 import kotlinx.coroutines.launch
 
 
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(showBackground = true)
 @Composable
-fun AppNavigation() {
+fun AppNavigation(onLogout: () -> Unit) {
+
     val navController = rememberNavController()
     val drawerState = rememberDrawerState(DrawerValue.Closed)
     val scope = rememberCoroutineScope()
@@ -49,11 +46,16 @@ fun AppNavigation() {
         drawerState = drawerState,
         selectedItem = selected,
         onItemClick = { route ->
-            selected = route
-            navController.navigate(route) {
-                launchSingleTop = true
-            }
+
             scope.launch { drawerState.close() }
+
+            if (route == "auth") {
+                onLogout()
+                return@AdminDrawer
+            }
+
+            navController.navigate(route) { launchSingleTop = true }
+
         }
     ) {
         Scaffold(
@@ -83,7 +85,8 @@ fun AppNavigation() {
                         Icon(
                             painter = painterResource(R.drawable.ic_account_circle_action),
                             contentDescription = null,
-                            modifier = Modifier.size(32.dp)
+                            modifier = Modifier
+                                .size(32.dp)
                                 .clickable(
                                     onClick = {
                                         navController.navigate("adminAccountScreen")
@@ -110,6 +113,7 @@ fun AppNavigation() {
                 composable("adminScreen") { AdminHomeScreen(navController) }
                 composable("metricScreen") { AdminMetricScreen() }
                 composable("createEventScreen") { CreateEventScreen() }
+                composable("adminAccountScreen") { AdminAccountScreen() }
             }
         }
     }

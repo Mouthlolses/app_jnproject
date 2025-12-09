@@ -9,17 +9,23 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.caririfest.admin.R
+import com.caririfest.admin.ui.screens.validation_screens.producer_auth_account.ProducerAuthViewModel
 
-@Preview(showBackground = true)
 @Composable
 fun AdminAccountScreen() {
+
+    val producerAuthViewModel: ProducerAuthViewModel = hiltViewModel()
+
+    val uiState by producerAuthViewModel.uiState.collectAsState()
 
     Card(
         modifier = Modifier
@@ -43,8 +49,13 @@ fun AdminAccountScreen() {
             )
             Spacer(modifier = Modifier.padding(vertical = 12.dp))
             Text(
-                text = "Card !"
+                text = uiState.adminName
             )
+            Spacer(modifier = Modifier.padding(vertical = 12.dp))
+            Text(
+                text = uiState.adminEmail
+            )
+            Spacer(modifier = Modifier.padding(vertical = 18.dp))
         }
     }
 }
