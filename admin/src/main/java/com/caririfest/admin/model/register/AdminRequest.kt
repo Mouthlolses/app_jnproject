@@ -1,8 +1,5 @@
 package com.caririfest.admin.model.register
 
-import kotlinx.serialization.Serializable
-
-@Serializable
 data class AdminCreateRequest(
     val adminName: String,
     val adminLastName: String,
