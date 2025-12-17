@@ -1,5 +1,6 @@
 package com.caririfest.admin.ui.screens.validation_screens.producer_auth_account
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,6 +31,7 @@ import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -38,6 +40,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -47,6 +50,7 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.caririfest.admin.R
 import com.caririfest.admin.model.login.LoginRequest
+import kotlinx.coroutines.delay
 
 @Composable
 fun ProducerAuthScreen(
@@ -55,6 +59,8 @@ fun ProducerAuthScreen(
 ) {
 
     val uiState by producerAuthViewModel.uiState.collectAsState()
+
+    val context = LocalContext.current
 
     var authAdminEmail by remember { mutableStateOf("") }
     var authAdminPassword by remember { mutableStateOf("") }
@@ -160,12 +166,16 @@ fun ProducerAuthScreen(
 
             Button(
                 onClick = {
-                    producerAuthViewModel.loginAdmin(
-                        request = LoginRequest(
-                            email = authAdminEmail,
-                            password = authAdminPassword
+                    if (authAdminEmail.isBlank() || authAdminPassword.isEmpty()) {
+                        Toast.makeText(context,"Preencha os campos", Toast.LENGTH_SHORT).show()
+                    } else {
+                        producerAuthViewModel.loginAdmin(
+                            request = LoginRequest(
+                                email = authAdminEmail,
+                                password = authAdminPassword
+                            )
                         )
-                    )
+                    }
                 },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -199,19 +209,31 @@ fun ProducerAuthScreen(
             }
         }
 
-        uiState.isSuccess?.let {
+        uiState.isFailure?.let { errorMsg ->
+            LaunchedEffect(errorMsg) {
+                delay(2500)
+                producerAuthViewModel.clearMessage()
+            }
             Text(
-                text = it,
-                color = Color.Green,
-                modifier = Modifier.align(Alignment.BottomCenter)
+                text = errorMsg,
+                color = Color.Red,
+                modifier = Modifier
+                    .align(Alignment.Center)
+                    .padding(16.dp)
             )
         }
 
-        uiState.isFailure?.let {
+        uiState.isSuccess?.let { successMsg ->
+            LaunchedEffect(successMsg) {
+                delay(2500)
+                producerAuthViewModel.clearMessage()
+            }
             Text(
-                text = it,
-                color = Color.Red,
-                modifier = Modifier.align(Alignment.Center)
+                text = successMsg,
+                color = Color.Green,
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .padding(16.dp)
             )
         }
     }

@@ -4,14 +4,13 @@ accompanistPermissions = "0.37.3"
 agp = "8.13.1"
 androidNdk27 = "11.15.0"
 androidNdk27Version = "3.12.0"
-androidSdk = "12.2.0"
-animation = "1.9.5"
+androidSdk = "12.3.0"
+animation = "1.10.0"
 autofillNdk27 = "2.14.0"
-coilCompose = "2.7.0"
 converterGson = "3.0.0"
 datastorePreferences = "1.2.0"
 discoverNdk27 = "2.14.0"
-firebaseBomVersion = "34.6.0"
+firebaseBomVersion = "34.7.0"
 gson = "2.13.2"
 hiltAndroid = "2.57.2"
 hiltAndroidCompiler = "2.57.2"
@@ -24,7 +23,6 @@ espressoCore = "3.7.0"
 kotlinxSerializationJson = "1.9.0"
 lifecycleRuntimeKtx = "2.10.0"
 activityCompose = "1.12.1"
-composeBom = "2025.11.01"
 coil = "2.7.0"
 loggingInterceptor = "5.3.2"
 mapboxSearchAndroidNdk27 = "2.14.0"
@@ -38,11 +36,10 @@ retrofit = "3.0.0"
 retrofit2KotlinxSerializationConverter = "1.0.0"
 room = "2.8.4"
 profile = "1.4.1"
-foundation = "1.9.5"
-material3 = "1.5.0-alpha09"
+foundation = "1.10.0"
 appcompat = "1.7.1"
 material = "1.13.0"
-stripeAndroid = "22.2.0"
+stripeAndroid = "22.4.0"
 workRuntimeKtx = "2.11.0"
 places = "5.1.1"
 
@@ -59,13 +56,11 @@ androidx-work-multiprocess = { module = "androidx.work:work-multiprocess", versi
 androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx" }
 androidx-work-testing = { module = "androidx.work:work-testing", version.ref = "workRuntimeKtx" }
 autofill-ndk27 = { module = "com.mapbox.search:autofill-ndk27", version.ref = "autofillNdk27" }
-coil-compose-v260 = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 discover-ndk27 = { module = "com.mapbox.search:discover-ndk27", version.ref = "discoverNdk27" }
 firebase-bom-v3222 = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBomVersion" }
 firebase-crashlytics-ndk = { module = "com.google.firebase:firebase-crashlytics-ndk" }
 google-firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
-google-firebase-firestore = { module = "com.google.firebase:firebase-firestore" }
 gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroid" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroidCompiler" }
