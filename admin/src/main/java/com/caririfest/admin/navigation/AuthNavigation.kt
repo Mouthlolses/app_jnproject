@@ -6,6 +6,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.caririfest.admin.ui.screens.validation_screens.producer_auth_account.ProducerAuthScreen
 import com.caririfest.admin.ui.screens.validation_screens.producer_create_account.ProducerCreateAccountScreen
+import com.caririfest.admin.ui.screens.validation_screens.producer_forgot_password_account.ProducerForgotPasswordScreen
 
 @Composable
 fun AuthNavigation(onAuthSuccess: () -> Unit) {
@@ -24,6 +25,10 @@ fun AuthNavigation(onAuthSuccess: () -> Unit) {
 
         composable("register") {
             ProducerCreateAccountScreen()
+        }
+
+        composable("forgotPassword"){
+            ProducerForgotPasswordScreen()
         }
     }
 }

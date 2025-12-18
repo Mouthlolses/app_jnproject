@@ -9,6 +9,7 @@ import com.caririfest.admin.repository.AdminsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,7 +21,7 @@ class ProducerAuthViewModel @Inject constructor(
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(UiSate())
-    val uiState: StateFlow<UiSate> = _uiState
+    val uiState: StateFlow<UiSate> = _uiState.asStateFlow()
 
 
     init {

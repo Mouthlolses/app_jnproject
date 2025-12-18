@@ -26,6 +26,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
@@ -44,6 +45,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
@@ -138,28 +140,33 @@ fun ProducerAuthScreen(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Row(
+                    modifier = Modifier.weight(1f),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Icon(
-                        imageVector = Icons.Outlined.Info,
-                        contentDescription = null,
-                        tint = Color.Gray,
-                        modifier = Modifier.size(16.dp)
-                    )
-                    Spacer(modifier = Modifier.width(4.dp))
-                    Text(
-                        "Wrong Password"
-                    )
+                    uiState.isFailure?.let { errorMsg ->
+                        Icon(
+                            imageVector = Icons.Outlined.Info,
+                            contentDescription = null,
+                            tint = Color.Gray,
+                            modifier = Modifier.size(16.dp)
+                        )
+                        Spacer(modifier = Modifier.width(4.dp))
+                        Text(
+                            errorMsg,
+                            maxLines = 2,
+                            overflow = TextOverflow.Ellipsis,
+                            style = MaterialTheme.typography.bodyMedium
+                        )
+                    }
                 }
 
                 Spacer(modifier = Modifier.width(38.dp))
 
                 TextButton(
-                    onClick = {},
+                    onClick = { navController.navigate("forgotPassword")},
                 ) { Text("Esqueceu sua senha?") }
             }
             Spacer(modifier = Modifier.height(26.dp))
@@ -167,7 +174,7 @@ fun ProducerAuthScreen(
             Button(
                 onClick = {
                     if (authAdminEmail.isBlank() || authAdminPassword.isEmpty()) {
-                        Toast.makeText(context,"Preencha os campos", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context, "Preencha os campos", Toast.LENGTH_SHORT).show()
                     } else {
                         producerAuthViewModel.loginAdmin(
                             request = LoginRequest(
@@ -211,30 +218,9 @@ fun ProducerAuthScreen(
 
         uiState.isFailure?.let { errorMsg ->
             LaunchedEffect(errorMsg) {
-                delay(2500)
+                delay(4500)
                 producerAuthViewModel.clearMessage()
             }
-            Text(
-                text = errorMsg,
-                color = Color.Red,
-                modifier = Modifier
-                    .align(Alignment.Center)
-                    .padding(16.dp)
-            )
-        }
-
-        uiState.isSuccess?.let { successMsg ->
-            LaunchedEffect(successMsg) {
-                delay(2500)
-                producerAuthViewModel.clearMessage()
-            }
-            Text(
-                text = successMsg,
-                color = Color.Green,
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(16.dp)
-            )
         }
     }
 }
