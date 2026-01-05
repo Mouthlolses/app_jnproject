@@ -22,10 +22,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.caririfest.app_jnproject" />
-                  <option name="mobileSdkAppId" value="1:342538459088:android:f3b92aabc7a3c7de448bd5" />
-                  <option name="projectId" value="eventapp-d6adb" />
-                  <option name="projectNumber" value="342538459088" />
+                  <option name="appId" value="PLACEHOLDER" />
+                  <option name="mobileSdkAppId" value="" />
+                  <option name="projectId" value="" />
+                  <option name="projectNumber" value="" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

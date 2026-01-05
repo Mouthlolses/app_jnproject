@@ -83,7 +83,7 @@ fun AppNavigation(onLogout: () -> Unit) {
                     },
                     actions = {
                         Icon(
-                            painter = painterResource(R.drawable.ic_account_circle_action),
+                            painter = painterResource(R.drawable.ic_action_account_circle),
                             contentDescription = null,
                             modifier = Modifier
                                 .size(32.dp)

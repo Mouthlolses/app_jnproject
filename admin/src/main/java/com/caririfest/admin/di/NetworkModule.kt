@@ -15,7 +15,11 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
 
-    private const val ADMIN_URL = "https://caririfestserver-production-b05f.up.railway.app/"
+
+    private const val ADMIN_URL = "http://10.0.2.2:8080/" //Emulador
+
+    //private const val ADMIN_URL = "http://192.168.0.7:8080/"
+
 
     private val logging = HttpLoggingInterceptor().apply {
         level = HttpLoggingInterceptor.Level.BODY

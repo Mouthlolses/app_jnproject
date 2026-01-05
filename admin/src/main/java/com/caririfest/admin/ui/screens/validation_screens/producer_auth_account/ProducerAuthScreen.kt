@@ -1,6 +1,5 @@
 package com.caririfest.admin.ui.screens.validation_screens.producer_auth_account
 
-import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -29,6 +28,10 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
@@ -37,6 +40,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -53,6 +57,7 @@ import androidx.navigation.NavController
 import com.caririfest.admin.R
 import com.caririfest.admin.model.login.LoginRequest
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun ProducerAuthScreen(
@@ -63,163 +68,191 @@ fun ProducerAuthScreen(
     val uiState by producerAuthViewModel.uiState.collectAsState()
 
     val context = LocalContext.current
+    val scope = rememberCoroutineScope()
 
     var authAdminEmail by remember { mutableStateOf("") }
     var authAdminPassword by remember { mutableStateOf("") }
 
     var showPassword by remember { mutableStateOf(false) }
+    val snackBarHostState = remember { SnackbarHostState() }
 
-
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-    ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize(),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Image(
-                painter = painterResource(R.drawable.caririfestlogo1),
-                contentDescription = "logo_image",
-                modifier = Modifier.height(160.dp)
-            )
-            Spacer(modifier = Modifier.padding(vertical = 28.dp))
-            OutlinedTextField(
-                value = authAdminEmail,
-                onValueChange = { authAdminEmail = it },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                label = { Text(text = "E-mail") },
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Email,
-                        contentDescription = "email"
-                    )
-                },
-                shape = RoundedCornerShape(18.dp),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = Color(0xFFFF9800)
-                )
-            )
-            Spacer(modifier = Modifier.height(16.dp))
-            OutlinedTextField(
-                value = authAdminPassword,
-                onValueChange = { authAdminPassword = it },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                label = { Text(text = "Senha") },
-                leadingIcon = {
-                    Icon(
-                        imageVector = Icons.Default.Lock,
-                        contentDescription = "email"
-                    )
-                },
-                trailingIcon = {
-                    IconButton(onClick = { showPassword = !showPassword }) {
-                        Icon(
-                            imageVector = if (showPassword) Icons.Default.Visibility
-                            else Icons.Default.VisibilityOff,
-                            contentDescription = "password"
-                        )
-                    }
-                },
-                shape = RoundedCornerShape(18.dp),
-                visualTransformation = if (showPassword)
-                    VisualTransformation.None
-                else
-                    PasswordVisualTransformation(),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = Color(0xFFFF9800)
-                )
-            )
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Row(
-                    modifier = Modifier.weight(1f),
-                    verticalAlignment = Alignment.CenterVertically
+    Scaffold(
+        snackbarHost = {
+            SnackbarHost(
+                hostState = snackBarHostState
+            ) { data ->
+                Snackbar(
+                    modifier = Modifier
+                        .padding(start = 8.dp, end = 8.dp),
                 ) {
-                    uiState.isFailure?.let { errorMsg ->
+                    Row(
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
                         Icon(
-                            imageVector = Icons.Outlined.Info,
-                            contentDescription = null,
-                            tint = Color.Gray,
-                            modifier = Modifier.size(16.dp)
+                            painter = painterResource(R.drawable.ic_error),
+                            contentDescription = null
                         )
-                        Spacer(modifier = Modifier.width(4.dp))
-                        Text(
-                            errorMsg,
-                            maxLines = 2,
-                            overflow = TextOverflow.Ellipsis,
-                            style = MaterialTheme.typography.bodyMedium
-                        )
+                        Spacer(Modifier.width(8.dp))
+                        Text(data.visuals.message)
                     }
                 }
-
-                Spacer(modifier = Modifier.width(38.dp))
-
-                TextButton(
-                    onClick = { navController.navigate("forgotPassword")},
-                ) { Text("Esqueceu sua senha?") }
-            }
-            Spacer(modifier = Modifier.height(26.dp))
-
-            Button(
-                onClick = {
-                    if (authAdminEmail.isBlank() || authAdminPassword.isEmpty()) {
-                        Toast.makeText(context, "Preencha os campos", Toast.LENGTH_SHORT).show()
-                    } else {
-                        producerAuthViewModel.loginAdmin(
-                            request = LoginRequest(
-                                email = authAdminEmail,
-                                password = authAdminPassword
-                            )
-                        )
-                    }
-                },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 26.dp),
-                contentPadding = PaddingValues(12.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color(0xFFFF9800),
-                    contentColor = Color.White
-                ),
-                elevation = ButtonDefaults.buttonElevation(
-                    4.dp
-                ),
-            ) {
-                if (uiState.isLoading) {
-                    CircularProgressIndicator(color = Color.White)
-                } else {
-                    Text("Entrar", fontSize = 18.sp)
-                }
-            }
-
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text("Não tem conta ainda?")
-                TextButton(
-                    onClick = { navController.navigate("register") }
-                ) { Text("Cadastre-se") }
             }
         }
+    ) { innerPadding ->
+        Box(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize()
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxSize(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Image(
+                    painter = painterResource(R.drawable.caririfestlogo1),
+                    contentDescription = "logo_image",
+                    modifier = Modifier.height(160.dp)
+                )
+                Spacer(modifier = Modifier.padding(vertical = 28.dp))
+                OutlinedTextField(
+                    value = authAdminEmail,
+                    onValueChange = { authAdminEmail = it },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                    label = { Text(text = "Email") },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Email,
+                            contentDescription = "email"
+                        )
+                    },
+                    shape = RoundedCornerShape(18.dp),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color(0xFFFF9800)
+                    )
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                OutlinedTextField(
+                    value = authAdminPassword,
+                    onValueChange = { authAdminPassword = it },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                    label = { Text(text = "Senha") },
+                    leadingIcon = {
+                        Icon(
+                            imageVector = Icons.Default.Lock,
+                            contentDescription = "email"
+                        )
+                    },
+                    trailingIcon = {
+                        IconButton(onClick = { showPassword = !showPassword }) {
+                            Icon(
+                                imageVector = if (showPassword) Icons.Default.Visibility
+                                else Icons.Default.VisibilityOff,
+                                contentDescription = "password"
+                            )
+                        }
+                    },
+                    shape = RoundedCornerShape(18.dp),
+                    visualTransformation = if (showPassword)
+                        VisualTransformation.None
+                    else
+                        PasswordVisualTransformation(),
+                    colors = OutlinedTextFieldDefaults.colors(
+                        focusedBorderColor = Color(0xFFFF9800)
+                    )
+                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 16.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Row(
+                        modifier = Modifier.weight(1f),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        uiState.isFailure?.let { errorMsg ->
+                            Icon(
+                                imageVector = Icons.Outlined.Info,
+                                contentDescription = null,
+                                tint = Color.Gray,
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Spacer(modifier = Modifier.width(4.dp))
+                            Text(
+                                errorMsg,
+                                maxLines = 2,
+                                overflow = TextOverflow.Ellipsis,
+                                style = MaterialTheme.typography.bodyMedium
+                            )
+                        }
+                    }
 
-        uiState.isFailure?.let { errorMsg ->
-            LaunchedEffect(errorMsg) {
-                delay(4500)
-                producerAuthViewModel.clearMessage()
+                    Spacer(modifier = Modifier.width(38.dp))
+
+                    TextButton(
+                        onClick = { navController.navigate("forgotPassword") },
+                    ) { Text("Esqueceu sua senha?") }
+                }
+                Spacer(modifier = Modifier.height(26.dp))
+
+                Button(
+                    onClick = {
+                        if (authAdminEmail.isBlank() || authAdminPassword.isEmpty()) {
+                            scope.launch {
+                                snackBarHostState.showSnackbar("Preencha os campos")
+                            }
+                        } else {
+                            producerAuthViewModel.loginAdmin(
+                                request = LoginRequest(
+                                    email = authAdminEmail,
+                                    password = authAdminPassword
+                                )
+                            )
+                        }
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 26.dp),
+                    contentPadding = PaddingValues(12.dp),
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = Color(0xFFFF9800),
+                        contentColor = Color.White
+                    ),
+                    elevation = ButtonDefaults.buttonElevation(
+                        4.dp
+                    ),
+                ) {
+                    if (uiState.isLoading) {
+                        CircularProgressIndicator(color = Color.White)
+                    } else {
+                        Text("Entrar", fontSize = 18.sp)
+                    }
+                }
+
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Text("Não tem conta ainda?")
+                    TextButton(
+                        onClick = { navController.navigate("register") }
+                    ) { Text("Cadastre-se") }
+                }
+            }
+
+            uiState.isFailure?.let { errorMsg ->
+                LaunchedEffect(errorMsg) {
+                    delay(4500)
+                    producerAuthViewModel.clearMessage()
+                }
             }
         }
     }
