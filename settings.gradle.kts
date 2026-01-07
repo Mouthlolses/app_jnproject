@@ -1,8 +1,5 @@
 import java.util.Properties
 
-include(":admin")
-
-
 pluginManagement {
     repositories {
         google {
@@ -37,7 +34,8 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "App_jnproject"
+rootProject.name = "CaririFest"
 include(":app")
+include(":admin")
 include(":core:network")
 include(":core:data")
