@@ -4,6 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -16,14 +17,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -174,76 +180,72 @@ fun OnBoardingScreeLayout(
 ) {
     Box(
         modifier = Modifier
-            .fillMaxSize()
+            .fillMaxSize(),
+        contentAlignment = Alignment.Center
     ) {
-        Column(
+        Card(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(bottom = 75.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+                .padding(horizontal = 18.dp)
+                .padding(top = 12.dp ,bottom = 150.dp)
+                .wrapContentHeight()
+                .offset(y = (-1).dp),
+            shape = RoundedCornerShape(24.dp),
+            colors = CardDefaults.cardColors(
+                Color(0xFFFDF4EE)
+            ),
+            elevation = CardDefaults.cardElevation(defaultElevation = 12.dp),
+            border = BorderStroke(1.dp,Color.Gray.copy(alpha = 0.35f))
         ) {
-            Box(
-                contentAlignment = Alignment.Center
-            ) {
-                Image(
-                    painter = painterResource(image),
-                    contentDescription = stringResource(R.string.backgroundImageOnbDescription),
-                    modifier = Modifier
-                        .width(300.dp)
-                        .height(300.dp),
-                    contentScale = ContentScale.Crop
-                )
-                Image(
-                    painter = painterResource(image2),
-                    contentDescription = stringResource(R.string.imageOnbDescription),
-                    modifier = Modifier
-                        .padding(top = 100.dp)
-                        .width(200.dp)
-                        .height(300.dp),
-                    contentScale = ContentScale.Crop
-                )
-            }
-
-            Spacer(modifier = Modifier.height(50.dp))
-
             Column(
-                verticalArrangement = Arrangement.Center,
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(bottom = 75.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    text = stringResource(title),
-                    modifier = Modifier
-                        .padding(8.dp),
-                    textAlign = TextAlign.Center,
-                    fontSize = 26.sp,
-                    fontFamily = poppinsFamily,
-                    fontWeight = FontWeight.Bold,
-                    color = Color.Black
-                )
+                Box(
+                    contentAlignment = Alignment.Center
+                ) {
+                    Image(
+                        painter = painterResource(image),
+                        contentDescription = stringResource(R.string.backgroundImageOnbDescription),
+                        modifier = Modifier
+                            .width(300.dp)
+                            .height(300.dp),
+                        contentScale = ContentScale.Crop
+                    )
+                    Image(
+                        painter = painterResource(image2),
+                        contentDescription = stringResource(R.string.imageOnbDescription),
+                        modifier = Modifier
+                            .padding(top = 100.dp)
+                            .width(200.dp)
+                            .height(300.dp),
+                        contentScale = ContentScale.Crop
+                    )
+                }
+
+                Spacer(modifier = Modifier.height(50.dp))
+
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = stringResource(title),
+                        modifier = Modifier
+                            .padding(8.dp),
+                        textAlign = TextAlign.Center,
+                        fontSize = 26.sp,
+                        fontFamily = poppinsFamily,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Black
+                    )
+                }
             }
         }
     }
 }
 
-
-@Preview(
-    name = "api33",
-    showBackground = true,
-    showSystemUi = true,
-    apiLevel = 33
-)
-@Preview(
-    name = "api34",
-    showBackground = true,
-    showSystemUi = true,
-    apiLevel = 34
-)
-@Preview(
-    name = "api35",
-    showBackground = true,
-    showSystemUi = true,
-    apiLevel = 35
-)
 @Preview(
     name = "api36",
     showBackground = true,
