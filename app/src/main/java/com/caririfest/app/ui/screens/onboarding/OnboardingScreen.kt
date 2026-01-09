@@ -22,7 +22,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.shape.CircleShape
@@ -187,7 +186,6 @@ fun OnBoardingScreeLayout(
             modifier = Modifier
                 .padding(horizontal = 18.dp)
                 .padding(top = 12.dp ,bottom = 150.dp)
-                .wrapContentHeight()
                 .offset(y = (-1).dp),
             shape = RoundedCornerShape(24.dp),
             colors = CardDefaults.cardColors(
@@ -199,7 +197,7 @@ fun OnBoardingScreeLayout(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(bottom = 75.dp),
+                    .padding(bottom = 10.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Box(
@@ -250,7 +248,14 @@ fun OnBoardingScreeLayout(
     name = "api36",
     showBackground = true,
     showSystemUi = true,
-    apiLevel = 36
+    apiLevel = 36,
+    fontScale = 1.5f
+)
+@Preview(
+    name = "api",
+    showBackground = true,
+    showSystemUi = true,
+    device = Devices.PHONE
 )
 @Preview(
     name = "pixel_5",

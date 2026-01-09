@@ -10,17 +10,22 @@ import com.caririfest.network.model.EventFields
 import com.caririfest.network.model.FirestoreBoolean
 import com.caririfest.network.model.FirestoreString
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class NewsViewModel @Inject constructor(
-    repository: EventsRepository,
+    private val repository: EventsRepository,
 ) : ViewModel() {
+
+    private val _isRefreshing = MutableStateFlow(false)
+    val isRefreshing: StateFlow<Boolean> = _isRefreshing
 
     val events: StateFlow<FetchEventsUiState> =
         repository.getEventsFlow()

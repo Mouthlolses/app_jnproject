@@ -50,4 +50,6 @@ class EventsRepository(
             throw e
         }
     }
+
+    suspend fun refreshEvents() = refreshEventsIfNeeded()
 }
