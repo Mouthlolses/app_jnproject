@@ -223,7 +223,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                 shape = RoundedCornerShape(36.dp)
             ),
         tonalElevation = 10.dp,
-        containerColor = Color(0xFF8A8A89),
+        containerColor = Color.Black,
     ) {
         items.forEach { item ->
             val selected = currentRoute == item.route
@@ -267,7 +267,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                     }
                 },
                 colors = NavigationBarItemDefaults.colors(
-                    indicatorColor = Color.Transparent
+                    indicatorColor = Color.White.copy(alpha = 0.3f)
                 )
             )
         }
